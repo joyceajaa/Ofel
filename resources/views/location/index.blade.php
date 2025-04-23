@@ -41,7 +41,7 @@
 
       @include('layouts.navbar')
 
-      <a class="btn-getstarted" href="index.html#book-a-table">Book a Table</a>
+
     </div>
   </header>
 
@@ -55,9 +55,9 @@
           <div class="col-lg-6">
             <h2 class="section-title" data-aos="fade-up">Visit Us</h2>
             <p class="location-description" data-aos="fade-up" data-aos-delay="100">
-              Come visit us and enjoy a delicious meal at our restaurant. We are located at the heart of the city, making it easy for you to stop by.
+                Kunjungi kami dan nikmati hidangan lezat di Toko kami.Kami berlokasi dekat dengan kota.
               <br><br>
-              <strong>Address:</strong> A108 Adam Street, New York, NY 535022
+              <strong>Address:</strong> Uma Rihit Onan Raja, Balige III
             </p>
           </div>
           <div class="col-lg-6">
@@ -79,8 +79,8 @@
           <i class="bi bi-geo-alt icon"></i>
           <div class="address">
             <h4>Address</h4>
-            <p>A108 Adam Street</p>
-            <p>New York, NY 535022</p>
+            <p>Uma Rihit</p>
+            <p>Onan Raja, Balige III</p>
           </div>
         </div>
 
@@ -89,8 +89,8 @@
           <div>
             <h4>Contact</h4>
             <p>
-              <strong>Phone:</strong> <span>+1 5589 55488 55</span><br>
-              <strong>Email:</strong> <span>info@example.com</span><br>
+              <strong>Phone:</strong> <span>+62 819 1259 1669</span><br>
+              <strong>Instagram:</strong> <span>@ofelkitchen.id</span><br>
             </p>
           </div>
         </div>
@@ -100,7 +100,7 @@
           <div>
             <h4>Opening Hours</h4>
             <p>
-              <strong>Mon-Sat:</strong> <span>11AM - 11PM</span><br>
+              <strong>Mon-Sat:</strong> <span>08AM - 11PM</span><br>
               <strong>Sunday</strong>: <span>Closed</span>
             </p>
           </div>

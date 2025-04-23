@@ -44,8 +44,6 @@
 
       @include('layouts.navbar')
 
-      <a class="btn-getstarted" href="index.html#book-a-table">Book a Table</a>
-
     </div>
   </header>
 
@@ -57,11 +55,10 @@
       <div class="container">
         <div class="row gy-4 justify-content-center justify-content-lg-between">
           <div class="col-lg-5 order-2 order-lg-1 d-flex flex-column justify-content-center">
-            <h1 data-aos="fade-up">Enjoy Your Healthy<br>Delicious Food</h1>
-            <p data-aos="fade-up" data-aos-delay="100">We are team of talented designers making websites with Bootstrap</p>
+            <h1> <data-aos="fade-up">Celebrate Special Moment With Us<br></h1>
+
+            <p>Setiap kue punya cerita, setiap gigitan membawa kebahagiaan, Rasakan kelezatan istimewa yang diciptakan dengan cerita, hanya di Ofel Kitchen</p>
             <div class="d-flex" data-aos="fade-up" data-aos-delay="200">
-              <a href="#book-a-table" class="btn-get-started">Booka a Table</a>
-              <a href="https://www.youtube.com/watch?v=Y7f98aduVJ8" class="glightbox btn-watch-video d-flex align-items-center"><i class="bi bi-play-circle"></i><span>Watch Video</span></a>
             </div>
           </div>
           <div class="col-lg-5 order-1 order-lg-2 hero-img" data-aos="zoom-out">
@@ -74,7 +71,6 @@
 
 
 
-
     <!-- Contact Section -->
     <section id="contact" class="contact section">
 
@@ -83,103 +79,98 @@
         <h2>Contact</h2>
         <p><span>Need Help?</span> <span class="description-title">Contact Us</span></p>
       </div><!-- End Section Title -->
-    
+
       <div class="container" data-aos="fade-up" data-aos-delay="100">
-    
+
         <div class="row gy-5">
-    
+
           <!-- Left: Info -->
           <div class="col-lg-5">
             <div class="info-item d-flex mb-4">
               <i class="icon bi bi-geo-alt flex-shrink-0"></i>
               <div>
                 <h4>Address</h4>
-                <p>A108 Adam Street, New York, NY 535022</p>
+                <p>Uma Rihit Onan Raja, Balige III</p>
               </div>
             </div>
-    
+
             <div class="info-item d-flex mb-4">
               <i class="icon bi bi-telephone flex-shrink-0"></i>
               <div>
                 <h4>Call Us</h4>
-                <p>+1 5589 55488 55</p>
+                <p>+62 819 1259 1669</p>
               </div>
             </div>
-    
+
             <div class="info-item d-flex mb-4">
               <i class="icon bi bi-envelope flex-shrink-0"></i>
               <div>
                 <h4>Email Us</h4>
-                <p>info@example.com</p>
+                <p>ofelkitchen@gmail.com</p>
               </div>
             </div>
-    
+
             <div class="info-item d-flex">
               <i class="icon bi bi-clock flex-shrink-0"></i>
               <div>
                 <h4>Opening Hours</h4>
-                <p><strong>Mon-Sat:</strong> 11AM - 23PM<br><strong>Sunday:</strong> Closed</p>
+                <p><strong>Mon-Sat:</strong> 08AM - 23PM<br><strong>Sunday:</strong> Closed</p>
               </div>
             </div>
           </div>
-    
+
           <!-- Right: Contact Form -->
           <div class="col-lg-7">
             <form action="forms/contact.php" method="post" class="php-email-form">
               <div class="row gy-4">
-    
+
                 <div class="col-md-6">
                   <input type="text" name="name" class="form-control" placeholder="Your Name" required>
                 </div>
-    
+
                 <div class="col-md-6">
                   <input type="email" name="email" class="form-control" placeholder="Your Email" required>
                 </div>
-    
+
                 <div class="col-md-12">
                   <input type="text" name="subject" class="form-control" placeholder="Subject" required>
                 </div>
-    
+
                 <div class="col-md-12">
                   <textarea name="message" class="form-control" rows="6" placeholder="Message" required></textarea>
                 </div>
-    
+
                 <div class="col-md-12 text-center">
                   <div class="loading">Loading</div>
                   <div class="error-message"></div>
                   <div class="sent-message">Your message has been sent. Thank you!</div>
                   <button type="submit">Send Message</button>
                 </div>
-    
+
               </div>
             </form>
           </div>
-    
+
         </div>
-    
-        <!-- Google Maps -->
-        <div class="mt-5">
-          <iframe style="width: 100%; height: 400px;" src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12097.433213460943!2d-74.0062269!3d40.7101282!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xb89d1fe6bc499443!2sDowntown+Conference+Center!5e0!3m2!1smk!2sbg!4v1539943755621" frameborder="0" allowfullscreen></iframe>
-        </div>
-    
+
+
       </div>
     </section>
 
   </main>
 
   <footer id="footer" class="footer dark-background">
-
+<!-- Footer -->
+<footer id="footer" class="footer dark-background py-5">
     <div class="container">
       <div class="row gy-3">
         <div class="col-lg-3 col-md-6 d-flex">
           <i class="bi bi-geo-alt icon"></i>
           <div class="address">
             <h4>Address</h4>
-            <p>A108 Adam Street</p>
-            <p>New York, NY 535022</p>
-            <p></p>
+            <p>Uma Rihit</p>
+            <p>Onan Raja, Balige III</p>
           </div>
-
         </div>
 
         <div class="col-lg-3 col-md-6 d-flex">
@@ -187,8 +178,8 @@
           <div>
             <h4>Contact</h4>
             <p>
-              <strong>Phone:</strong> <span>+1 5589 55488 55</span><br>
-              <strong>Email:</strong> <span>info@example.com</span><br>
+              <strong>Phone:</strong> <span>+62 819 1259 1669</span><br>
+              <strong>Instagram:</strong> <span>@ofelkitchen.id</span><br>
             </p>
           </div>
         </div>
@@ -198,11 +189,12 @@
           <div>
             <h4>Opening Hours</h4>
             <p>
-              <strong>Mon-Sat:</strong> <span>11AM - 23PM</span><br>
+              <strong>Mon-Sat:</strong> <span>08AM - 11PM</span><br>
               <strong>Sunday</strong>: <span>Closed</span>
             </p>
           </div>
         </div>
+
 
         <div class="col-lg-3 col-md-6">
           <h4>Follow Us</h4>

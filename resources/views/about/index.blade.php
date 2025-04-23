@@ -49,8 +49,6 @@
 
       @include('layouts.navbar')
 
-      <a class="btn-getstarted" href="index.html#book-a-table">Book a Table</a>
-
     </div>
   </header>
 
@@ -70,17 +68,17 @@
     <div class="row gy-4 align-items-center">
 
       <div class="col-lg-6 content">
-        <h3>We bring homemade taste with premium quality ingredients</h3>
+        <h3>Kami Menghadirkan Cita Rasa Rumahan Dengan Bahan-Bahan Premium</h3>
         <p class="fst-italic">
-          Ofel Kitchen is more than just a restaurant—it's a culinary experience inspired by the warmth of home-cooked meals and the richness of local flavors.
+            Ofel berdiri November 2020. Menjual cake online melalui media sosial. Usaha ini home made dan berlokasi di onan raja balige 3. Sampai hari ini ofel masih terus belajar memberikannya pelayanan terbaik kepada customer. Total produk yg sudah terjual sudah lebih dari 10k++. Pelanggan ofel berasal dari banyak daerah di Indonesia bahkan dari luar negeri Costumer dari jauh pesan cake untuk diantarkan kepada keluarga di kampung (balige)
         </p>
         <ul>
-          <li><i class="bi bi-check-circle"></i> Fresh ingredients sourced locally and prepared daily.</li>
-          <li><i class="bi bi-check-circle"></i> Friendly and cozy atmosphere, perfect for families and friends.</li>
-          <li><i class="bi bi-check-circle"></i> A wide variety of dishes for all tastes and preferences.</li>
+          <li><i class="bi bi-check-circle"></i>Bahan-bahan segar lokal yang diolah setiap hari dengan standar tinggi.</li>
+          <li><i class="bi bi-check-circle"></i>Menu beragam yang dirancang untuk memuaskan selera setiap pelanggan.</li>
+
         </ul>
         <p>
-          Since opening our doors, we have aimed to serve food that makes people feel at home. Our chefs are passionate, our staff is welcoming, and our menu is made to impress.
+            Sejak pertama kali kami membuka pintu, misi kami jelas yaitu menyajikan makanan yang tidak hanya mengenyangkan, tetapi juga menghadirkan rasa "pulang" di setiap suapan. Tim dapur kami yang penuh semangat dan staf yang ramah siap memberikan pengalaman bersantap terbaik untuk Anda.
         </p>
       </div>
 
@@ -96,8 +94,13 @@
         <div class="icon-box d-flex">
           <i class="bi bi-bullseye flex-shrink-0"></i>
           <div>
-            <h4>Our Vision</h4>
-            <p>To be the leading home-style restaurant that people think of first when they crave comfort and flavor.</p>
+            <h4>How To Order?</h4>
+            <ul>
+                <li>Chat admin sesuai dengan kebutuhan, dan menginformasikan rencana tanggal yang diinginkan</li>
+                <li>Apabila tanggal yang diinginkan tersedia, proses diskusi design akan dilanjutkan dan detail harga akan disampaikan oleh admin</li>
+                <li>Setelah customer setuju dengan penawaran yang diberikan, form order akan di share oleh admin</li>
+                <li>Setelah form order diisi, admin akan merekap dan mentotalkannya</li>
+                <li>Pesanan akan diproses apabila customer sudah melakukan pembayaran melalui bank transfer</li>
           </div>
         </div>
       </div>
@@ -106,8 +109,8 @@
         <div class="icon-box d-flex">
           <i class="bi bi-award flex-shrink-0"></i>
           <div>
-            <h4>Our Mission</h4>
-            <p>Deliver exceptional dining experiences through heartfelt service, consistent quality, and a touch of home in every dish.</p>
+            <h4>Our Vision</h4>
+            <p>Menyajikan pengalaman bersantap yang istimewa melalui pelayanan sepenuh hati, kualitas yang konsisten, dan sentuhan kehangatan rumah di setiap hidangan.</p>
           </div>
         </div>
       </div>
@@ -122,17 +125,17 @@
 
   <footer id="footer" class="footer dark-background">
 
+    <!-- Footer -->
+<footer id="footer" class="footer dark-background py-5">
     <div class="container">
       <div class="row gy-3">
         <div class="col-lg-3 col-md-6 d-flex">
           <i class="bi bi-geo-alt icon"></i>
           <div class="address">
             <h4>Address</h4>
-            <p>A108 Adam Street</p>
-            <p>New York, NY 535022</p>
-            <p></p>
+            <p>Uma Rihit</p>
+            <p>Onan Raja, Balige III</p>
           </div>
-
         </div>
 
         <div class="col-lg-3 col-md-6 d-flex">
@@ -140,8 +143,8 @@
           <div>
             <h4>Contact</h4>
             <p>
-              <strong>Phone:</strong> <span>+1 5589 55488 55</span><br>
-              <strong>Email:</strong> <span>info@example.com</span><br>
+              <strong>Phone:</strong> <span>+62 819 1259 1669</span><br>
+              <strong>Instagram:</strong> <span>@ofelkitchen.id</span><br>
             </p>
           </div>
         </div>
@@ -151,11 +154,12 @@
           <div>
             <h4>Opening Hours</h4>
             <p>
-              <strong>Mon-Sat:</strong> <span>11AM - 23PM</span><br>
+              <strong>Mon-Sat:</strong> <span>08AM - 11PM</span><br>
               <strong>Sunday</strong>: <span>Closed</span>
             </p>
           </div>
         </div>
+
 
         <div class="col-lg-3 col-md-6">
           <h4>Follow Us</h4>
