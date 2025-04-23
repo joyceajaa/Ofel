@@ -52,6 +52,11 @@
         <div class="container section-title" data-aos="fade-up">
             <h2>Our Menu</h2>
             <p><span>Check Our</span> <span class="description-title">Ofel Kitchen Menu</span></p>
+            @guest
+              <div class="alert alert-warning mt-2" role="alert">
+                Please <a href="{{ route('login') }}">login</a> to order via WhatsApp.
+              </div>
+            @endguest
         </div>
 
         <div class="container">
@@ -72,6 +77,17 @@
                                 <p class="price">
                                     Rp {{ number_format($menu->price, 2) }}
                                 </p>
+
+                                <!-- Tombol WhatsApp (Hanya Tampil Jika Login) -->
+                                @auth
+                                    <a
+                                        href="https://wa.me/6281260287468?text={{ urlencode('Halo, saya ingin pesan menu: ' . $menu->name . ' dengan harga Rp ' . number_format($menu->price, 2)) }}"
+                                        class="btn btn-success mt-2"
+                                        target="_blank">
+                                        Pesan via WhatsApp
+                                    </a>
+
+                                @endauth
                             </div>
                         </div>
                     </div>
@@ -83,7 +99,6 @@
   </main>
 
   <footer id="footer" class="footer dark-background">
-    <!-- ... (konten footer tetap sama) ... -->
     <div class="container">
         <div class="row gy-3">
             <div class="col-lg-3 col-md-6 d-flex">

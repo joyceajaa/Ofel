@@ -47,7 +47,7 @@
 
       @include('layouts.navbar')
 
-      <a class="btn-getstarted" href="index.html#book-a-table">Book a Table</a>
+      <a></a>
 
     </div>
   </header>
@@ -62,7 +62,7 @@
             <h1 data-aos="fade-up">Celebrate Special Moment With Us</h1>
             <p data-aos="fade-up" data-aos-delay="100">Setiap kue punya cerita, setiap gigitan membawa kebahagiaan, Rasakan kelezatan istimewa yang diciptakan dengan cerita, hanya di Ofel Kitchen</p>
             <div class="d-flex" data-aos="fade-up" data-aos-delay="200">
-              <a href="#book-a-table" class="btn-get-started">Book a Table</a>
+              <a></a>
               <a href="https://www.youtube.com/watch?v=Y7f98aduVJ8" class="glightbox btn-watch-video d-flex align-items-center"><i class="bi bi-play-circle"></i><span>Watch Video</span></a>
             </div>
           </div>

@@ -9,6 +9,7 @@ use App\Http\Controllers\Admin\MenuController as AdminMenuController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\MenuController as PublicMenuController;
 use App\Http\Controllers\MenuController;
+use App\Http\Controllers\FeedbackController; // Tambahkan ini
 
 /*
 |--------------------------------------------------------------------------
@@ -84,9 +85,14 @@ Route::get('/location', function () {
     return view('location.index');
 })->name('location');
 
-Route::get('/feedback', function () {
-    return view('feedback.index');
-})->name('feedback');
+// Rute feedback
+Route::get('/feedback', [FeedbackController::class, 'index'])->name('feedback');
+
+Route::middleware(['auth'])->group(function () {
+    Route::get('/feedback/create', [FeedbackController::class, 'create'])->name('feedback.create');
+    Route::post('/feedback', [FeedbackController::class, 'store'])->name('feedback.store');
+});
+
 
 Route::get('/contact', function () {
     return view('contact.index');

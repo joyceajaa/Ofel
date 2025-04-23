@@ -6,7 +6,6 @@
     <title>Login | Ofel Kitchen</title>
     <link rel="stylesheet" href="{{ URL::asset('assets/css/main.css') }}">
     <style>
-        /* Fallback style if main.css is missing */
         body {
             font-family: 'Arial', sans-serif;
             background-image: url('{{ asset('assets/img/login.png') }}');
@@ -32,7 +31,7 @@
         }
 
         .logo-container img {
-            width: 150px; /* Adjust the size of the logo */
+            width: 150px;
             height: auto;
         }
 

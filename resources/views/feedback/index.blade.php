@@ -7,7 +7,7 @@
   <title>Feedback - Ofel Kitchen</title>
   <link href="{{URL:: asset('assets/img/favicon.png')}}" rel="icon">
   <link href="{{URL:: asset('assets/img/apple-touch-icon.png')}}" rel="apple-touch-icon">
-  
+
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
 
@@ -151,20 +151,49 @@
         font-size: 14px;
       }
     }
+
+    /* Feedback List Styling */
+    .feedback-list {
+        margin-top: 30px;
+    }
+
+    .feedback-item {
+        border-bottom: 1px solid #eee;
+        padding: 20px 0;
+    }
+
+    .feedback-item:last-child {
+        border-bottom: none;
+    }
+
+    .feedback-name {
+        font-weight: 600;
+        color: #333;
+    }
+
+    .feedback-email {
+        color: #777;
+        font-size: 14px;
+    }
+
+    .feedback-message {
+        margin-top: 10px;
+        color: #555;
+    }
   </style>
 </head>
 
 <body>
   <header id="header" class="header d-flex align-items-center sticky-top">
     <div class="container position-relative d-flex align-items-center justify-content-between">
-      <a href="index.html" class="logo d-flex align-items-center me-auto me-xl-0" style="gap: 10px;">
-        <img src="assets/img/ofelkitchen.png" alt="Ofel Kitchen Logo" style="max-width: 120px; height: auto; object-fit: contain;">
+      <a href="/" class="logo d-flex align-items-center me-auto me-xl-0" style="gap: 10px;">
+        <img src="{{ asset('assets/img/ofelkitchen.png') }}" alt="Ofel Kitchen Logo" style="max-width: 120px; height: auto; object-fit: contain;">
         <h1 class="sitename" style="margin-bottom: 0;">Ofel Kitchen</h1>
         <span>.</span>
       </a>
       @include('layouts.navbar')
 
-      <a class="btn-getstarted" href="index.html#book-a-table">Book a Table</a>
+      <a class="btn-getstarted" href="#book-a-table">Book a Table</a>
     </div>
   </header>
 
@@ -175,25 +204,37 @@
         <div class="row justify-content-center">
           <div class="col-lg-8">
             <div class="feedback-card" data-aos="fade-up">
-              <h2>We'd Love Your Feedback</h2>
-              <p>Help us improve by sharing your thoughts on your experience!</p>
+              <h2>Customer Feedback</h2>
+              <p>What our customers are saying about us!</p>
 
-              <form action="#" method="post">
-                <div class="row gy-4">
-                  <div class="col-md-6">
-                    <input type="text" name="name" class="form-control" placeholder="Your Name" required>
-                  </div>
-                  <div class="col-md-6">
-                    <input type="email" name="email" class="form-control" placeholder="Your Email" required>
-                  </div>
-                  <div class="col-12">
-                    <textarea name="message" class="form-control" rows="5" placeholder="Your Feedback" required></textarea>
-                  </div>
-                  <div class="col-12 text-center">
-                    <button type="submit" class="btn-submit">Submit Feedback</button>
-                  </div>
+              <div class="feedback-list">
+                  @if($feedbacks->isEmpty())
+                      <p>No feedback yet.</p>
+                  @else
+                      @foreach($feedbacks as $feedback)
+                          <div class="feedback-item">
+                              <h3 class="feedback-name">{{ $feedback->name }}</h3>
+                              <p class="feedback-email">{{ $feedback->email }}</p>
+                              <p class="feedback-message">{{ $feedback->message }}</p>
+                              <small>Received on: {{ $feedback->created_at->format('Y-m-d H:i') }}</small>
+                          </div>
+                      @endforeach
+                      <!-- Pagination Links -->
+                      <div class="mt-4">
+                          {{ $feedbacks->links() }}
+                      </div>
+                  @endif
+              </div>
+
+              @auth
+                <div class="text-center mt-4">
+                  <a href="{{ route('feedback.create') }}" class="btn-submit">Submit Your Feedback</a>
                 </div>
-              </form>
+              @else
+                <div class="text-center mt-4">
+                  <p>Please <a href="{{ route('login') }}">login</a> to submit your feedback.</p>
+                </div>
+              @endauth
             </div>
           </div>
         </div>

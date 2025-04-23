@@ -72,15 +72,15 @@
       <div class="col-lg-6 content">
         <h3>We bring homemade taste with premium quality ingredients</h3>
         <p class="fst-italic">
-            Ofel Kitchen adalah sebuah tempat yang menciptakan pengalaman kuliner yang menyatukan kehangatan masakan rumahan dan kualitas bahan terbaik. Kami percaya bahwa setiap hidangan adalah cerita, dan setiap cerita dimulai dari dapur yang penuh cinta.
+          Ofel Kitchen is more than just a restaurant—it's a culinary experience inspired by the warmth of home-cooked meals and the richness of local flavors.
         </p>
         <ul>
-          <li><i class="bi bi-check-circle"></i>Bahan-bahan segar lokal yang diolah setiap hari dengan standar tinggi.</li>
-          <li><i class="bi bi-check-circle"></i>Menu beragam yang dirancang untuk memuaskan selera setiap pelanggan.</li>
-
+          <li><i class="bi bi-check-circle"></i> Fresh ingredients sourced locally and prepared daily.</li>
+          <li><i class="bi bi-check-circle"></i> Friendly and cozy atmosphere, perfect for families and friends.</li>
+          <li><i class="bi bi-check-circle"></i> A wide variety of dishes for all tastes and preferences.</li>
         </ul>
         <p>
-            Sejak pertama kali kami membuka pintu, misi kami jelas yaitu menyajikan makanan yang tidak hanya mengenyangkan, tetapi juga menghadirkan rasa "pulang" di setiap suapan. Tim dapur kami yang penuh semangat dan staf yang ramah siap memberikan pengalaman bersantap terbaik untuk Anda.
+          Since opening our doors, we have aimed to serve food that makes people feel at home. Our chefs are passionate, our staff is welcoming, and our menu is made to impress.
         </p>
       </div>
 
@@ -96,15 +96,8 @@
         <div class="icon-box d-flex">
           <i class="bi bi-bullseye flex-shrink-0"></i>
           <div>
-            <h4>How To Order?</h4>
-            <ul>
-                <li>Lihat Menu – Jelajahi berbagai pilihan makanan kami melalui halaman Menu..</li>
-                <li>Pilih Pesanan – Tentukan hidangan favorit yang ingin Anda nikmati.</li>
-                <li>Klik Tombol WhatsApp – Otomatis terhubung ke chat dengan format pemesanan yang sudah disiapkan.</li>
-                <li>Konfirmasi & Kirim Pesan– Kirimkan pesanan Anda, tim kami akan segera merespons.</li>
-                <li>Tunggu Pesanan Tiba – Nikmati hidangan Ofel Kitchen di rumah Anda!
-
-                </li>
+            <h4>Our Vision</h4>
+            <p>To be the leading home-style restaurant that people think of first when they crave comfort and flavor.</p>
           </div>
         </div>
       </div>
@@ -113,8 +106,8 @@
         <div class="icon-box d-flex">
           <i class="bi bi-award flex-shrink-0"></i>
           <div>
-            <h4>Our Vision</h4>
-            <p>Menyajikan pengalaman bersantap yang istimewa melalui pelayanan sepenuh hati, kualitas yang konsisten, dan sentuhan kehangatan rumah di setiap hidangan.</p>
+            <h4>Our Mission</h4>
+            <p>Deliver exceptional dining experiences through heartfelt service, consistent quality, and a touch of home in every dish.</p>
           </div>
         </div>
       </div>

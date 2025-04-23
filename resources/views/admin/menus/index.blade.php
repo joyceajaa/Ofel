@@ -1,142 +1,296 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
+
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
     <title>Manage Menus - {{ config('app.name', 'Laravel') }}</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom fonts for this template-->
+    <link href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
 
-    <style>
-        body { font-family: sans-serif; margin: 0; background-color: #f4f6f9; color: #333; }
-        .admin-container { max-width: 1200px; margin: 20px auto; padding: 20px; background-color: #fff; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-        .success-message { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; padding: .75rem 1.25rem; margin-bottom: 1rem; border-radius: .25rem; }
-        .admin-content h1, .admin-content h2 { color: #444; }
-        .admin-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 20px; }
-        .admin-card { background-color: #e9ecef; padding: 20px; border-radius: 5px; text-align: center; }
-        .admin-card h3 { margin-top: 0; }
+    <!-- Custom styles for this template-->
+    <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
 
-        .navmenu { background-color: #343a40; padding: 0; }
-        .navmenu ul { list-style: none; padding: 0 15px; margin: 0; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; min-height: 60px; }
-        .navmenu ul li { margin: 5px 10px; }
-        .navmenu ul li a { color: rgba(255, 255, 255, 0.75); text-decoration: none; padding: 10px 15px; display: block; border-radius: 4px; transition: background-color 0.3s, color 0.3s; }
-        .navmenu ul li a:hover { background-color: #495057; color: #fff; }
-        .navmenu ul li a.active { color: #fff; background-color: #007bff; }
-        .navmenu ul li span {
-            color: #adb5bd;
-            padding: 10px 15px;
-            display: block;
-        }
-        .navmenu ul li form a {
-             color: rgba(255, 255, 255, 0.75);
-        }
-         .navmenu ul li form a:hover {
-             background-color: #dc3545;
-             color: #fff;
-         }
-        .mobile-nav-toggle { display: none; color: white; font-size: 28px; cursor: pointer; padding: 0 15px; }
-        @media (max-width: 991px) {
-        }
-    </style>
 </head>
-<body class="antialiased">
 
-    <nav id="navmenu" class="navmenu">
-        <ul>
-            <li><a href="{{ route('welcome') }}" class="{{ request()->routeIs('welcome') ? 'active' : '' }}">Home</a></li>
-            <li><a href="{{ route('admin.menus.index') }}" class="{{ request()->routeIs('admin.menus.*') ? 'active' : '' }}">Manage Menus</a></li>
-            <li><a href="{{ route('about') }}" class="{{ request()->routeIs('about') ? 'active' : '' }}">About Us</a></li>
-            <li><a href="{{ route('location') }}" class="{{ request()->routeIs('location') ? 'active' : '' }}">Location</a></li>
-            <li><a href="{{ route('feedback') }}" class="{{ request()->routeIs('feedback') ? 'active' : '' }}">Feedback</a></li>
-            <li><a href="{{ route('contact') }}" class="{{ request()->routeIs('contact') ? 'active' : '' }}">Contact</a></li>
+<body id="page-top">
 
-            @guest
-                <li><a href="{{ route('login') }}" class="{{ request()->routeIs('login') ? 'active' : '' }}">Login</a></li>
-                <li><a href="{{ route('register') }}" class="{{ request()->routeIs('register') ? 'active' : '' }}">Registrasi</a></li>
-            @endguest
+    <!-- Page Wrapper -->
+    <div id="wrapper">
 
-            @auth
-                @if (Auth::user()->is_admin)
-                    <li><a href="{{ route('admin.dashboard') }}" class="{{ request()->routeIs('admin.*') ? 'active' : '' }}">Admin Dashboard</a></li>
+        <!-- Sidebar (Sama seperti di kode dashboard, pastikan menu sudah sesuai)-->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
-                @else
-                    <li><span>Halo, {{ Str::limit(Auth::user()->name, 15) }}</span></li>
-                @endif
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('admin.dashboard') }}">
+                <div class="sidebar-brand-icon rotate-n-15">
+                    <i class="fas fa-laugh-wink"></i>
+                </div>
+                <div class="sidebar-brand-text mx-3">{{ config('app.name', 'Laravel') }}</div>
+            </a>
 
-                <li>
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+
+            <!-- Nav Item - Dashboard -->
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('admin.dashboard') }}">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Dashboard</span></a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider">
+
+            <!-- Heading -->
+            <div class="sidebar-heading">
+                Menu
+            </div>
+
+            <!-- Nav Items - Pages -->
+            <li class="nav-item active">
+                <a class="nav-link" href="{{ route('admin.menus.index') }}">
+                    <i class="fas fa-fw fa-utensils"></i>
+                    <span>Manage Menus</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('admin.about') }}">
+                    <i class="fas fa-fw fa-info-circle"></i>
+                    <span>Manage About Us</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('admin.location') }}">
+                    <i class="fas fa-fw fa-map-marker-alt"></i>
+                    <span>Manage Location</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('admin.feedback') }}">
+                    <i class="fas fa-fw fa-comment"></i>
+                    <span>Manage Feedback</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ route('admin.contact') }}">
+                    <i class="fas fa-fw fa-envelope"></i>
+                    <span>Manage Contact</span>
+                </a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
+
+            <!-- Sidebar Toggler (Sidebar) -->
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
+            </div>
+
+        </ul>
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar (Sama seperti di kode dashboard) -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                    <!-- Sidebar Toggle (Topbar) -->
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                        <i class="fa fa-bars"></i>
+                    </button>
+
+                    <!-- Topbar Navbar -->
+                    <ul class="navbar-nav ml-auto">
+
+                        <!-- Nav Item - User Information -->
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">{{ Auth::user()->name }}</span>
+                                <img class="img-profile rounded-circle"
+                                    src="{{ asset('img/undraw_profile.svg') }}">
+                            </a>
+                            <!-- Dropdown - User Information -->
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="userDropdown">
+                                <a class="dropdown-item" href="#">
+                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Profile
+                                </a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
+                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
+                                    Logout
+                                </a>
+                            </div>
+                        </li>
+
+                    </ul>
+
+                </nav>
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <h1 class="h3 mb-2 text-gray-800">Manage Menus</h1>
+                    <p class="mb-4">Kelola daftar menu Anda di sini.</p>
+
+                    <!-- DataTales Example -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Daftar Menu</h6>
+                        </div>
+                        <div class="card-body">
+
+                            @if (session('success'))
+                                <div class="alert alert-success">
+                                    {{ session('success') }}
+                                </div>
+                            @endif
+
+                            <div class="mb-3">
+                                <a href="{{ route('admin.menus.create') }}" class="btn btn-primary">Tambah Menu Baru</a>
+                            </div>
+
+                            <div class="table-responsive">
+                                @if ($menus->isEmpty())
+                                    <p>Belum ada menu yang ditambahkan.</p>
+                                @else
+                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Nama</th>
+                                                <th>Gambar</th>
+                                                <th>Harga</th>
+                                                <th>Deskripsi</th>
+                                                <th>Aksi</th>
+                                            </tr>
+                                        </thead>
+                                        <tfoot>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Nama</th>
+                                                <th>Gambar</th>
+                                                <th>Harga</th>
+                                                <th>Deskripsi</th>
+                                                <th>Aksi</th>
+                                            </tr>
+                                        </tfoot>
+                                        <tbody>
+                                            @foreach ($menus as $menu)
+                                                <tr>
+                                                    <td>{{ $loop->iteration }}</td>
+                                                    <td>{{ $menu->name }}</td>
+                                                    <td>
+                                                        @if ($menu->image)
+                                                            <img src="{{ asset('storage/' . $menu->image) }}" alt="{{ $menu->name }}" width="50">
+                                                        @else
+                                                            Tidak Ada Gambar
+                                                        @endif
+                                                    </td>
+                                                    <td>{{ number_format($menu->price, 0, ',', '.') }}</td>
+                                                    <td>{{ Str::limit($menu->description, 50) }}</td>
+                                                    <td>
+                                                        <a href="{{ route('admin.menus.edit', $menu->id) }}" class="btn btn-sm btn-warning">Edit</a>
+                                                        <form action="{{ route('admin.menus.destroy', $menu->id) }}" method="POST" style="display: inline-block;">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus menu ini?')">Hapus</button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                @endif
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <!-- /.container-fluid -->
+
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer (Sama seperti di kode dashboard) -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright © Your Website {{ date('Y') }}</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+
+        </div>
+        <!-- End of Content Wrapper -->
+
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal (Sama seperti di kode dashboard) -->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                    <a class="btn btn-primary" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                         @csrf
                     </form>
-                    <a href="{{ route('logout') }}"
-                       onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                       Logout
-                    </a>
-                </li>
-            @endauth
-        </ul>
-        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
-    </nav>
-
-
-    <div class="admin-container">
-        <h1>Manage Menus</h1>
-
-        @if (session('success'))
-            <div class="success-message">
-                {{ session('success') }}
+                </div>
             </div>
-        @endif
-
-        <div class="admin-content">
-            <div class="mb-3">
-                <a href="{{ route('admin.menus.create') }}" class="btn btn-primary">Tambah Menu Baru</a>
-            </div>
-
-            @if ($menus->isEmpty())
-                <p>Belum ada menu yang ditambahkan.</p>
-            @else
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>#</th>
-                            <th>Nama</th>
-                            <th>Gambar</th>
-                            <th>Harga</th>
-                            <th>Deskripsi</th>
-                            <th>Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($menus as $menu)
-                            <tr>
-                                <td>{{ $loop->iteration }}</td>
-                                <td>{{ $menu->name }}</td>
-                                <td>
-                                    @if ($menu->image)
-                                        <img src="{{ asset('storage/' . $menu->image) }}" alt="{{ $menu->name }}" width="50">
-                                    @else
-                                        Tidak Ada Gambar
-                                    @endif
-                                </td>
-                                <td>{{ number_format($menu->price, 0, ',', '.') }}</td>
-                                <td>{{ Str::limit($menu->description, 50) }}</td>
-                                <td>
-                                        <a href="{{ route('admin.menus.edit', $menu->id) }}" class="btn btn-sm btn-warning">Edit</a>
-                                    <form action="{{ route('admin.menus.destroy', $menu->id) }}" method="POST" style="display: inline-block;">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus menu ini?')">Hapus</button>
-                                    </form>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            @endif
         </div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap core JavaScript-->
+    <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="{{ asset('vendor/jquery-easing/jquery.easing.min.js') }}"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="{{ asset('js/sb-admin-2.min.js') }}"></script>
+
+    <!-- Page level plugins -->
+    <script src="{{ asset('vendor/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="{{ asset('js/demo/datatables-demo.js') }}"></script>
+
 </body>
+
 </html>
