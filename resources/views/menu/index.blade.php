@@ -80,12 +80,7 @@
 
                                 <!-- Tombol WhatsApp (Hanya Tampil Jika Login) -->
                                 @auth
-                                    <a
-                                        href="https://wa.me/6281260287468?text={{ urlencode('Halo, saya ingin pesan menu: ' . $menu->name . ' dengan harga Rp ' . number_format($menu->price, 2)) }}"
-                                        class="btn btn-success mt-2"
-                                        target="_blank">
-                                        Pesan via WhatsApp
-                                    </a>
+
 
                                 @endauth
                             </div>
