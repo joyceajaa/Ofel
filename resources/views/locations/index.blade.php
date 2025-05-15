@@ -26,6 +26,46 @@
 
   <!-- Main CSS File -->
   <link href="{{ URL::asset('assets/css/main.css') }}" rel="stylesheet">
+
+  <style>
+    .map-container {
+      position: relative;
+      padding-bottom: 56.25%; /* Maintain 16:9 aspect ratio (adjustable) */
+      height: 0;
+      overflow: hidden;
+    }
+
+    .map-container iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100% !important;  /* Make iframe take up full width of container */
+      height: 100% !important; /* Make iframe take up full height of container */
+    }
+
+    /* Make the columns wider */
+    .col-lg-6 {
+      width: 100%; /* Each map takes the full width */
+    }
+    @media (min-width: 992px) { /* breakpoint for large screens */
+        .col-lg-6 {
+            width: 50%; /* Restore the original 50% width for two columns on larger screens */
+        }
+    }
+
+    /* CSS untuk daftar kecamatan Balige (opsional) */
+    .location-section h4 {
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+
+    .location-section ul {
+      list-style-type: disc;
+      padding-left: 20px;
+    }
+
+  </style>
+
 </head>
 
 <body>
@@ -74,6 +114,34 @@
             </div>
           @endforelse
         </div>
+
+        <!-- Daftar Kecamatan Balige -->
+        @if(isset($balige_kecamatan['Balige']) && count($balige_kecamatan['Balige']) > 0)
+          <div class="row">
+            <div class="col-12">
+              <h4>Kecamatan di Balige yang Terjangkau</h4>
+              <ul>
+                @foreach($balige_kecamatan['Balige'] as $kecamatan)
+                  <li>{{ $kecamatan['name'] }}
+                    @if($kecamatan['deliverable'])
+                      (Bisa diantar)
+                    @else
+                      (Tidak bisa diantar)
+                    @endif
+                  </li>
+                @endforeach
+              </ul>
+            </div>
+          </div>
+        @else
+          <div class="row">
+            <div class="col-12">
+              <p>Belum ada daftar kecamatan Balige.</p>
+            </div>
+          </div>
+        @endif
+        <!-- End Daftar Kecamatan Balige -->
+
       </div>
     </section>
     <!-- End Location Section -->

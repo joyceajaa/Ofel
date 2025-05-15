@@ -80,41 +80,43 @@
 
         <div class="row gy-5 justify-content-center">
 
-          <!-- Left: Info -->
-          <div class="col-lg-5">
-            <div class="info-item d-flex mb-4">
-              <i class="icon bi bi-geo-alt flex-shrink-0"></i>
-              <div>
-                <h4>Address</h4>
-                <p>Uma Rihit Onan Raja, Balige III</p>
-              </div>
-            </div>
+          <div class="row">  <!-- Tambahkan kontainer row untuk membagi menjadi kolom -->
+  <div class="col-lg-6"> <!-- Kolom kiri -->
+    <div class="info-item d-flex mb-4">
+      <i class="icon bi bi-geo-alt flex-shrink-0"></i>
+      <div>
+        <h4>Address</h4>
+        <p>Uma Rihit Onan Raja, Balige III</p>
+      </div>
+    </div>
 
-            <div class="info-item d-flex mb-4">
-              <i class="icon bi bi-telephone flex-shrink-0"></i>
-              <div>
-                <h4>Call Us</h4>
-                <p>‪+62 819 1259 1669‬</p>
-              </div>
-            </div>
+    <div class="info-item d-flex mb-4">
+      <i class="icon bi bi-telephone flex-shrink-0"></i>
+      <div>
+        <h4>Call Us</h4>
+        <p>‪+62 819 1259 1669‬</p>
+      </div>
+    </div>
+  </div>
 
-            <div class="info-item d-flex mb-4">
-              <i class="icon bi bi-envelope flex-shrink-0"></i>
-              <div>
-                <h4>Email Us</h4>
-                <p>ofelkitchen@gmail.com</p>
-              </div>
-            </div>
+  <div class="col-lg-6"> <!-- Kolom kanan -->
+    <div class="info-item d-flex mb-4">
+      <i class="icon bi bi-envelope flex-shrink-0"></i>
+      <div>
+        <h4>Email Us</h4>
+        <p>ofelkitchen@gmail.com</p>
+      </div>
+    </div>
 
-            <div class="info-item d-flex">
-              <i class="icon bi bi-clock flex-shrink-0"></i>
-              <div>
-                <h4>Opening Hours</h4>
-                <p><strong>Mon-Sat:</strong> 08AM - 23PM<br><strong>Sunday:</strong> Closed</p>
-              </div>
-            </div>
-          </div>
-
+    <div class="info-item d-flex">
+      <i class="icon bi bi-clock flex-shrink-0"></i>
+      <div>
+        <h4>Opening Hours</h4>
+        <p><strong>Mon-Sat:</strong> 08AM - 23PM<br><strong>Sunday:</strong> Closed</p>
+      </div>
+    </div>
+  </div>
+</div>
 
 
         </div>

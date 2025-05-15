@@ -84,19 +84,19 @@
 
             <!-- Filter Kategori -->
             <div class="container category-filter" data-aos="fade-up">
-                <button class="btn btn-outline-primary btn-sm" data-category="all">Semua</button>
-                <button class="btn btn-outline-primary btn-sm" data-category="BentoCake">BentoCake</button>
-                <button class="btn btn-outline-primary btn-sm" data-category="Bouquet">Bouquet</button>
-                <button class="btn btn-outline-primary btn-sm" data-category="CharacterCake">CharacterCake</button>
-                <button class="btn btn-outline-primary btn-sm" data-category="FlowerBouquet">FlowerBouquet</button>
-                <button class="btn btn-outline-primary btn-sm" data-category="FruitCake">FruitCake</button>
-                <button class="btn btn-outline-primary btn-sm" data-category="FudyBrownies">FudyBrownies</button>
-                <button class="btn btn-outline-primary btn-sm" data-category="KleponCake">KleponCake</button>
-                <button class="btn btn-outline-primary btn-sm" data-category="PaintingCake">PaintingCake</button>
-                <button class="btn btn-outline-primary btn-sm" data-category="Pudding">Pudding</button>
-                <button class="btn btn-outline-primary btn-sm" data-category="RibbonCake">RibbonCake</button>
-                <button class="btn btn-outline-primary btn-sm" data-category="TierCake">TierCake</button>
-            </div>
+                <button class="btn btn-outline-dark btn-sm" data-category="all">Semua</button>
+                <button class="btn btn-outline-dark btn-sm" data-category="BentoCake">BentoCake</button>
+                <button class="btn btn-outline-dark btn-sm" data-category="Bouquet">Bouquet</button>
+                <button class="btn btn-outline-dark btn-sm" data-category="CharacterCake">CharacterCake</button>
+                <button class="btn btn-outline-dark btn-sm" data-category="FlowerBouquet">FlowerBouquet</button>
+                <button class="btn btn-outline-dark btn-sm" data-category="FruitCake">FruitCake</button>
+                <button class="btn btn-outline-dark btn-sm" data-category="FudyBrownies">FudyBrownies</button>
+                <button class="btn btn-outline-dark btn-sm" data-category="KleponCake">KleponCake</button>
+                <button class="btn btn-outline-dark btn-sm" data-category="PaintingCake">PaintingCake</button>
+                <button class="btn btn-outline-dark btn-sm" data-category="Pudding">Pudding</button>
+                <button class="btn btn-outline-dark btn-sm" data-category="RibbonCake">RibbonCake</button>
+                <button class="btn btn-outline-dark btn-sm" data-category="TierCake">TierCake</button>
+            </div> 
 
             <div class="container">
                 <div class="row gy-5 menu-items">
@@ -171,7 +171,7 @@
                         </div>
 
                         {{-- Pilihan Kecamatan (Dinamis) --}}
-                         <div class="mb-3">
+                        <div class="mb-3">
                             <label for="orderDistrict" class="form-label">Pilih Kecamatan <span
                                     class="text-danger">*</span></label>
                             <select class="form-select" id="orderDistrict" required disabled>

@@ -16,8 +16,8 @@ class FeedbackController extends Controller
             'name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
             'message' => 'required|string',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Validate image
-            'video' => 'nullable|file|mimes:mp4,mov,avi|max:10240', // Validate video
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:1024000', // Validate image
+            'video' => 'nullable|file|mimes:mp4,mov,avi|max:1024000', // Validate video
         ]);
 
         $imagePath = null;
@@ -25,12 +25,12 @@ class FeedbackController extends Controller
 
         if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store('feedback_images', 'public');  // Store in storage/app/public/feedback_images
-            $imagePath = Storage::url($imagePath); //Get the URL for the image
+            //$imagePath = Storage::url($imagePath); //Get the URL for the image
         }
 
         if ($request->hasFile('video')) {
             $videoPath = $request->file('video')->store('feedback_videos', 'public'); // Store in storage/app/public/feedback_videos
-            $videoPath = Storage::url($videoPath); //Get the URL for the video
+            //$videoPath = Storage::url($videoPath); //Get the URL for the video
         }
 
         Feedback::create([

@@ -26,19 +26,33 @@ class FeedbackController extends Controller
         return view('admin.feedback.create');
     }
 
-    public function store(Request $request)
-    {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
-            'message' => 'required|string',
-        ]);
+public function store(Request $request)
+{
+    $request->validate([
+        'name' => 'required|string|max:255',
+        'email' => 'required|email|max:255',
+        'message' => 'required|string',
+        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:1024000',
+        'video' => 'nullable|mimetypes:video/mp4,video/avi,video/mpeg|max:1024000',
+    ]);
 
-        Feedback::create($request->all());
+    $data = $request->only('name', 'email', 'message');
 
-        return redirect()->route('feedback')
-                         ->with('success', 'Terima kasih atas feedback Anda!');
+    // Simpan file image jika ada
+    if ($request->hasFile('image')) {
+        $data['image'] = $request->file('image')->store('feedback_images', 'public');
     }
+
+    // Simpan file video jika ada
+    if ($request->hasFile('video')) {
+        $data['video'] = $request->file('video')->store('feedback_videos', 'public');
+    }
+
+    Feedback::create($data);
+
+    return redirect()->route('admin.feedback')->with('success', 'Terima kasih atas feedback Anda!');
+}
+
 
     /**
      * Hapus feedback yang ditentukan. (Hanya untuk Admin)
