@@ -22,7 +22,7 @@
   <link href="{{ URL::asset('assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
   <link href="{{ URL::asset('assets/vendor/aos/aos.css') }}" rel="stylesheet">
   <link href="{{ URL::asset('assets/vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
-  <link href="{{ URL::asset('assets/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
+  <link href="{{ URL::asset('assets/vendor/swiper/swiper-bundle.min.js') }}" rel="stylesheet">
 
   <!-- Main CSS File -->
   <link href="{{ URL::asset('assets/css/main.css') }}" rel="stylesheet">
@@ -39,17 +39,38 @@
       position: absolute;
       top: 0;
       left: 0;
-      width: 100% !important;  /* Make iframe take up full width of container */
-      height: 100% !important; /* Make iframe take up full height of container */
+      width: 100% !important;
+      height: 100% !important;
     }
 
-    /* Make the columns wider */
-    .col-lg-6 {
-      width: 100%; /* Each map takes the full width */
+    /* Style agar map dan dropdown berdampingan */
+    .location-item {
+      display: flex;
+      flex-direction: row; /* Mengatur item dalam baris */
+      align-items: flex-start; /* Agar item berada di atas */
     }
-    @media (min-width: 992px) { /* breakpoint for large screens */
+
+    .map-container {
+      flex: 3; /* Map mengambil 3/4 lebar */
+      margin-right: 20px; /* Beri jarak antara map dan dropdown */
+    }
+
+    .district-select-container {
+      flex: 2; /* Dropdown mengambil 2/4 lebar */
+      width: 30%; /* Lebar dropdown */ /* set lebar dropdown */
+    }
+
+    /* Lebar kolom diperbesar */
+    .col-lg-6 {
+      width: 100%; /* Mengisi seluruh lebar */
+    }
+
+    @media (min-width: 992px) { /* breakpoint untuk large screens */
         .col-lg-6 {
-            width: 50%; /* Restore the original 50% width for two columns on larger screens */
+            width: 100%; /* Mengisi seluruh lebar */
+        }
+        .location-item { /*mengatur tampilan map dan dropdown berdampingan */
+        display: flex;
         }
     }
 
@@ -63,7 +84,6 @@
       list-style-type: disc;
       padding-left: 20px;
     }
-
   </style>
 
 </head>
@@ -102,9 +122,18 @@
           @forelse ($locations as $location)
             <div class="col-lg-6 mb-4">
               <div class="location-item" data-aos="fade-up" data-aos-delay="{{ $loop->index * 100 }}">
-                <h3>{{ $location->name }}</h3>
                 <div class="map-container">
+                  <h3>{{ $location->name }}</h3>
                   {!! $location->location !!}  <!-- Menampilkan embed code -->
+                </div>
+
+                {{-- Dropdown Kecamatan --}}
+                <div class="district-select-container">
+                    <label for="orderDistrict" class="form-label">Pilih Kecamatan <span class="text-danger">*</span></label>
+                    <select class="form-select" id="orderDistrict-{{ $location->id }}" required>
+                        <option value="" selected disabled>-- Pilih Kecamatan --</option>
+                         {{-- Opsi akan diisi oleh JavaScript --}}
+                    </select>
                 </div>
               </div>
             </div>
@@ -218,6 +247,59 @@
 
   <!-- Main JS File -->
   <script src="{{ URL::asset('assets/js/main.js') }}"></script>
+
+  <script>
+    // --- DATA KECAMATAN (DIMODIFIKASI DENGAN STATUS DELIVERABLE) ---
+    const cityDistricts = {
+        "Balige": [
+            { name: "Balige I", deliverable: true },
+            { name: "Balige II", deliverable: true },
+            { name: "Balige III", deliverable: true },
+            { name: "Aek Bolon Jae", deliverable: true },
+            { name: "Aek Bolon Julu", deliverable: true },
+            { name: "Baru Ara", deliverable: true },
+            { name: "Bonan Dolok I", deliverable: true },
+            { name: "Bonan Dolok III", deliverable: true },
+            { name: "Hinalang Bagasan", deliverable: true },
+            { name: "Huta Bulu Mejan", deliverable: true },
+            { name: "Huta Dame", deliverable: true },
+            { name: "Huta Namora", deliverable: true },
+            { name: "Lumban Bulbul", deliverable: true },
+            { name: "Lumban Gaol", deliverable: true },
+            { name: "Lumban Gorat", deliverable: true },
+            { name: "Lumban Pea", deliverable: true },
+            { name: "Lumban Silintong", deliverable: true },
+            { name: "Paindoan", deliverable: true },
+            { name: "Parsuratan", deliverable: true },
+            { name: "Sianipar Sihailhail", deliverable: true },
+            { name: "Sibolahotang Sas", deliverable: true },
+            { name: "Siboruon", deliverable: true },
+            { name: "Silalahi Pagar Batu", deliverable: true }
+        ]
+    };
+    // --- END DATA KECAMATAN ---
+
+    document.addEventListener('DOMContentLoaded', function() {
+      @foreach ($locations as $location)
+      const orderDistrictSelect{{ $location->id }} = document.getElementById('orderDistrict-{{ $location->id }}');
+
+      function populateDistricts{{ $location->id }}() {
+          const districts = cityDistricts["Balige"]; // Karena hanya Balige
+          orderDistrictSelect{{ $location->id }}.innerHTML = '<option value="" selected disabled>-- Pilih Kecamatan --</option>';
+
+          if (districts) {
+              districts.forEach(district => {
+                  const option = new Option(district.name, district.name);
+                  orderDistrictSelect{{ $location->id }}.add(option);
+              });
+          }
+      }
+
+      populateDistricts{{ $location->id }}(); // Panggil saat halaman diload
+      @endforeach
+    });
+
+  </script>
 
 </body>
 
