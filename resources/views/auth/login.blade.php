@@ -8,10 +8,7 @@
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background-image: url('{{ asset('assets/img/') }}');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
+            background-image: url('{{ asset('assets/img/putih.png') }}');
             display: flex;
             justify-content: center;
             align-items: center;
@@ -20,10 +17,10 @@
         }
 
         .login-form {
-            background-color: #ffffff;
+            background-color: #fff;
             padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 6px 12px rgba(255, 0, 0, 0.15);
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             width: 100%;
             max-width: 400px;
         }
@@ -42,7 +39,7 @@
             font-size: 24px;
             text-align: center;
             margin-bottom: 20px;
-            color: #b30000;
+            color: #333;
         }
 
         .message-container {
@@ -53,22 +50,20 @@
         }
 
         .success.message-container {
-            background-color: #ffe6e6;
-            color: #660000;
-            border: 1px solid #ff9999;
+            background-color: #d4edda;
+            color: #155724;
         }
 
         .error.message-container {
-            background-color: #ffe6e6;
-            color: #b30000;
-            border: 1px solid #ff4d4d;
+            background-color: #f8d7da;
+            color: #721c24;
         }
 
         label {
             display: block;
             margin-bottom: 5px;
             font-weight: 600;
-            color: #b30000;
+            color: #555;
         }
 
         input[type="email"],
@@ -78,15 +73,14 @@
             margin-top: 8px;
             margin-bottom: 18px;
             border-radius: 6px;
-            border: 1px solid #ffcccc;
+            border: 1px solid #ccc;
             font-size: 16px;
             box-sizing: border-box;
-            background-color: #fffafa;
+            background-color: #f8f9fa;
         }
 
         input[type="checkbox"] {
             margin-right: 10px;
-            accent-color: #ff4d4d;
         }
 
         .remember-container {
@@ -98,34 +92,31 @@
             padding: 12px;
             border: none;
             border-radius: 6px;
-            background-color: #ff4d4d;
+            background-color: #007bff;
             color: #fff;
             font-size: 16px;
-            font-weight: bold;
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
 
         button:hover {
-            background-color: #cc0000;
+            background-color: #0056b3;
         }
 
         p {
             text-align: center;
             margin-top: 15px;
             font-size: 14px;
-            color: #b30000;
+            color: #555;
         }
 
         .register-link {
-            color: #ff4d4d;
+            color: #007bff;
             text-decoration: none;
-            font-weight: bold;
         }
 
         .register-link:hover {
             text-decoration: underline;
-            color: #cc0000;
         }
     </style>
 </head>
@@ -134,7 +125,8 @@
     <div class="login-form">
         <!-- Logo Container -->
         <div class="logo-container">
-            <img src="{{ asset('assets/img/ofelkitchen.png') }}" alt="Logo">
+            <!-- Add your logo image here -->
+            <img src="{{ asset('assets\img\ofelkitchen.png') }}" alt="Logo">
         </div>
 
         <h2>Login</h2>

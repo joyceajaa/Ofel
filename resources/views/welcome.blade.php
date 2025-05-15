@@ -2,446 +2,366 @@
 <html lang="en">
 
 <head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Index - Yummy Bootstrap Template</title>
-  <meta name="description" content="">
-  <meta name="keywords" content="">
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>Index - Ofel Kitchen</title>
+    <meta name="description" content="Ofel Kitchen - Home">
+    <meta name="keywords" content="Ofel Kitchen, kue, cake, bakery, enak, berkualitas">
 
-  <!-- Favicons -->
-  <link href="{{URL:: asset('assets/img/favicon.png')}}" rel="icon">
-  <link href="{{URL:: asset('assets/img/apple-touch-icon.png')}}" rel="apple-touch-icon">
+    <!-- Favicons -->
+    <link href="{{ URL::asset('assets/img/favicon.png') }}" rel="icon">
+    <link href="{{ URL::asset('assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
 
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com" rel="preconnect">
-  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Amatic+SC:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Amatic+SC:wght@400;700&display=swap"
+        rel="stylesheet">
 
-  <!-- Vendor CSS Files -->
-  <link href="{{URL:: asset('assets/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
-  <link href="{{URL:: asset('assets/vendor/bootstrap-icons/bootstrap-icons.css')}}" rel="stylesheet">
-  <link href="{{URL:: asset('assets/vendor/aos/aos.css')}}" rel="stylesheet">
-  <link href="{{URL:: asset('assets/vendor/glightbox/css/glightbox.min.css')}}" rel="stylesheet">
-  <link href="{{URL:: asset('assets/vendor/swiper/swiper-bundle.min.css')}}" rel="stylesheet">
+    <!-- Vendor CSS Files -->
+    <link href="{{ URL::asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('assets/vendor/aos/aos.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('assets/vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('assets/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
 
-  <!-- Main CSS File -->
-  <link href="{{URL:: asset('assets/css/main.css')}}" rel="stylesheet">
+    <!-- Main CSS File -->
+    <link href="{{ URL::asset('assets/css/main.css') }}" rel="stylesheet">
 
-  <!-- =======================================================
-  * Template Name: Yummy
-  * Template URL: https://bootstrapmade.com/yummy-bootstrap-restaurant-website-template/
-  * Updated: Aug 07 2024 with Bootstrap v5.3.3
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+    <style>
+        /* Style adjustments for video container */
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%;
+            /* 16:9 aspect ratio */
+            height: 0;
+            overflow: hidden;
+        }
+
+        .video-container video {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        /* Style adjustments for menu item cards */
+        .menu-item {
+            margin-bottom: 20px;
+        }
+
+        .menu-card-img-container {
+            height: 200px; /* Sesuaikan tinggi yang diinginkan */
+            overflow: hidden;
+        }
+
+        .menu-card-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Ini yang paling penting */
+            display: block;
+            transition: transform 0.3s ease;
+        }
+
+        .menu-card-img:hover {
+            transform: scale(1.1); /* Efek zoom saat dihover */
+        }
+
+        /* Style for location map */
+        .map-container {
+            overflow: hidden;
+            /* Prevent scrolling on the map itself */
+        }
+
+        /* Style adjustments for About Us image */
+        .about-image-container {
+            position: relative;
+            /* Add positioning context */
+        }
+
+        .about-image {
+            width: 105%;
+            /* Reduce the width slightly */
+            max-height: 450px;
+            /* Reduce the max-height slightly */
+            object-fit: cover;
+            margin-left: 5%;
+            /* Adjust margin to center it visually */
+        }
+
+        /* Styling untuk gambar di Hero Section */
+        .hero-img-container {
+            position: relative;
+            overflow: hidden;
+            border-radius: 10px;
+            /* Optional: Add rounded corners */
+            cursor: pointer;
+            /* Change cursor to indicate clickable */
+        }
+
+        .hero-img-container img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.3s ease;
+            /* Optional: Add zoom effect on hover */
+        }
+
+        .hero-img-container:hover img {
+            transform: scale(1.1);
+            /* Optional: Add zoom effect on hover */
+        }
+    </style>
 </head>
 
 <body class="index-page">
 
-  <header id="header" class="header d-flex align-items-center sticky-top">
-    <div class="container position-relative d-flex align-items-center justify-content-between">
-      <a href="index.html" class="logo d-flex align-items-center me-auto me-xl-0">
-        <img src="assets/img/ofelkitchen.png" alt="Ofel Kitchen Logo">
-        <h1 class="sitename">Ofel Kitchen</h1>
-      </a>
+    <!-- ======= Header ======= -->
+    <header id="header" class="header d-flex align-items-center sticky-top">
+        <div class="container position-relative d-flex align-items-center justify-content-between">
+            <a href="{{ route('welcome') }}" class="logo d-flex align-items-center me-auto me-xl-0">
+                <img src="{{ asset('assets/img/ofelkitchen.png') }}" alt="Ofel Kitchen Logo">
+                <h1 class="sitename">Ofel Kitchen</h1>
+            </a>
 
-      @include('layouts.navbar')
+            @include('layouts.navbar')
 
-      <a></a>
-
-    </div>
-  </header>
-
-  <main class="main">
-
-    <!-- Hero Section -->
-    <section id="hero" class="hero section light-background">
-      <div class="container">
-        <div class="row gy-4 justify-content-center justify-content-lg-between">
-          <div class="col-lg-5 order-2 order-lg-1 d-flex flex-column justify-content-center">
-            <h1 data-aos="fade-up">Celebrate Special Moment With Us</h1>
-            <p data-aos="fade-up" data-aos-delay="100">Setiap kue punya cerita, setiap gigitan membawa kebahagiaan, Rasakan kelezatan istimewa yang diciptakan dengan cerita, hanya di Ofel Kitchen</p>
-            <div class="d-flex" data-aos="fade-up" data-aos-delay="200">
-              <a></a>
-              <a href="https://www.youtube.com/watch?v=Y7f98aduVJ8" class="glightbox btn-watch-video d-flex align-items-center"><i class="bi bi-play-circle"></i><span>Watch Video</span></a>
-            </div>
-          </div>
-          <div class="col-lg-5 order-1 order-lg-2 hero-img" data-aos="zoom-out">
-            <img src="assets/img/ofelkitchen.png" class="img-fluid animated" alt="">
-          </div>
+            <div></div>
         </div>
-      </div>
-    </section><!-- /Hero Section -->
+    </header><!-- End Header -->
 
-    <!-- About Us Section -->
-    <section id="about" class="about section light-background">
-      <div class="container">
-        <div class="row">
-          <div class="col-lg-6 d-flex flex-column justify-content-center">
-            <h2>About Ofel Kitchen</h2>
-            <p>Ofel Kitchen adalah tempat terbaik untuk menikmati hidangan lezat dan berkualitas. Setiap hidangan yang kami buat adalah cerita yang dikemas dengan penuh cinta, dengan bahan terbaik dan resep yang telah teruji untuk menciptakan pengalaman makan yang tak terlupakan.</p>
-            <a href="#book-a-table" class="btn-getstarted">Reserve Now</a>
-          </div>
-          <div class="col-lg-6">
-            <img src="assets/img/stats-bg.jpg" alt="About Us" class="img-fluid rounded">
-          </div>
-        </div>
-      </div>
-    </section>
- <!-- Menu Section -->
- <section id="menu" class="menu section">
-  <div class="container">
-    <h2 class="text-center">Our Menu</h2>
-    <div class="row">
-      <div class="col-md-4 menu-item">
-        <img src="assets\img\menu\FlowerBouquet\menu-(1).jpg" alt="Menu Item" class="img-fluid rounded">
-        <h4>Flower Bouquet</h4>
-        <p class="description">##.</p>
-      </div>
-      <div class="col-md-4 menu-item">
-        <img src="assets\img\menu\FlowerBouquet\menu-(2).jpg" alt="Menu Item" class="img-fluid rounded">
-        <h4>Flower Bouquet</h4>
-        <p class="description">##</p>
-      </div>
-      <div class="col-md-4 menu-item">
-        <img src="assets\img\menu\FlowerBouquet\menu-(3).jpg" alt="Menu Item" class="img-fluid rounded">
-        <h4>Flower Bouquet</h4>
-        <p class="description">##</p>
-      </div>
-    </div>
-  </div>
-</section>
-    <section id="menu" class="menu section">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-4 menu-item">
-            <img src="assets\img\menu\FruitCake\menu-(1).jpg" alt="Menu Item" class="img-fluid rounded">
-            <h4>Fruit Cake</h4>
-            <p class="description">##</p>
-          </div>
-          <div class="col-md-4 menu-item">
-            <img src="assets\img\menu\FruitCake\menu-(2).jpg" alt="Menu Item" class="img-fluid rounded">
-            <h4>Fruit Cake</h4>
-            <p class="description">##</p>
-          </div>
-          <div class="col-md-4 menu-item">
-            <img src="assets\img\menu\FruitCake\menu-(3).jpg" alt="Menu Item" class="img-fluid rounded">
-            <h4>Fruit Cake</h4>
-            <p class="description">##</p>
-          </div>
-        </div>
-      </div>
-    </section>
+    <main class="main">
 
-    <!-- Testimonials Section -->
-    <section id="testimonials" class="testimonials section bg-light">
-      <div class="container">
-        <h2 class="text-center">What Our Customers Say</h2>
-        <div class="row">
-          <div class="col-md-4 testimonial-item">
-            <p>"Absolutely delightful! The chocolate cake was perfect. Will definitely come back."</p>
-            <p class="customer-name">John Doe</p>
-          </div>
-          <div class="col-md-4 testimonial-item">
-            <p>"A hidden gem! The strawberry tart is a must-try. Highly recommend it!"</p>
-            <p class="customer-name">Jane Smith</p>
-          </div>
-          <div class="col-md-4 testimonial-item">
-            <p>"Best cupcakes I've ever had! So soft and flavorful."</p>
-            <p class="customer-name">Alice Johnson</p>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Index | Ofel Kitchen</title>
-  <meta name="description" content="">
-  <meta name="keywords" content="">
-
-  <!-- Favicons -->
-  <link href="{{URL:: asset('assets/img/favicon.png')}}" rel="icon">
-  <link href="{{URL:: asset('assets/img/apple-touch-icon.png')}}" rel="apple-touch-icon">
-
-  <!-- Fonts -->
-  <link href="https://fonts.googleapis.com" rel="preconnect">
-  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Amatic+SC:wght@400;700&display=swap" rel="stylesheet">
-
-  <!-- Vendor CSS Files -->
-  <link href="{{URL:: asset('assets/vendor/bootstrap/css/bootstrap.min.css')}}" rel="stylesheet">
-  <link href="{{URL:: asset('assets/vendor/bootstrap-icons/bootstrap-icons.css')}}" rel="stylesheet">
-  <link href="{{URL:: asset('assets/vendor/aos/aos.css')}}" rel="stylesheet">
-  <link href="{{URL:: asset('assets/vendor/glightbox/css/glightbox.min.css')}}" rel="stylesheet">
-  <link href="{{URL:: asset('assets/vendor/swiper/swiper-bundle.min.css')}}" rel="stylesheet">
-
-  <!-- Main CSS File -->
-  <link href="{{URL:: asset('assets/css/main.css')}}" rel="stylesheet">
-
-</head>
-
-<body class="index-page">
-
-  <header id="header" class="header d-flex align-items-center sticky-top">
-    <div class="container position-relative d-flex align-items-center justify-content-between">
-
-      <a href="index.html" class="logo d-flex align-items-center me-auto me-xl-0">
-        <img src="assets/img/ofelkitchen.png" alt="Ofel Kitchen Logo">
-        <!-- Uncomment the line below if you also wish to use an image logo -->
-        <!-- <img src="assets/img/logo.png" alt=""> -->
-        <h1 class="sitename">Ofel Kitchen</h1>
-        <span>.</span>
-      </a>
-
-      @include('layouts.navbar')
-
-    </div>
-  </header>
-
-  <main class="main">
-
-    <!-- Hero Section -->
-    <section id="hero" class="hero section light-background">
-
-      <div class="container">
-        <div class="row gy-4 justify-content-center justify-content-lg-between">
-          <div class="col-lg-5 order-2 order-lg-1 d-flex flex-column justify-content-center">
-            <h1> <data-aos="fade-up">Celebrate Special Moment With Us<br></h1>
-
-            <p>Setiap kue punya cerita, setiap gigitan membawa kebahagiaan, Rasakan kelezatan istimewa yang diciptakan dengan cerita, hanya di Ofel Kitchen</p>
-            <div class="d-flex" data-aos="fade-up" data-aos-delay="200">
-            </div>
-          </div>
-          <div class="col-lg-5 order-1 order-lg-2 hero-img" data-aos="zoom-out">
-            <img src="assets/img/ofelkitchen.png" class="img-fluid animated" alt="">
-          </div>
-        </div>
-      </div>
-
-    </section><!-- /Hero Section -->
-
-
-
-    <!-- Contact Section -->
-    <section id="contact" class="contact section">
-
-      <!-- Section Title -->
-      <div class="container section-title" data-aos="fade-up">
-        <h2>Contact</h2>
-        <p><span>Need Help?</span> <span class="description-title">Contact Us</span></p>
-      </div><!-- End Section Title -->
-
-      <div class="container" data-aos="fade-up" data-aos-delay="100">
-
-        <div class="row gy-5">
-
-          <!-- Left: Info -->
-          <div class="col-lg-5">
-            <div class="info-item d-flex mb-4">
-              <i class="icon bi bi-geo-alt flex-shrink-0"></i>
-              <div>
-                <h4>Address</h4>
-                <p>Uma Rihit Onan Raja, Balige III</p>
-              </div>
-            </div>
-
-            <div class="info-item d-flex mb-4">
-              <i class="icon bi bi-telephone flex-shrink-0"></i>
-              <div>
-                <h4>Call Us</h4>
-                <p>+62 819 1259 1669</p>
-              </div>
-            </div>
-
-            <div class="info-item d-flex mb-4">
-              <i class="icon bi bi-envelope flex-shrink-0"></i>
-              <div>
-                <h4>Email Us</h4>
-                <p>ofelkitchen@gmail.com</p>
-              </div>
-            </div>
-
-            <div class="info-item d-flex">
-              <i class="icon bi bi-clock flex-shrink-0"></i>
-              <div>
-                <h4>Opening Hours</h4>
-                <p><strong>Mon-Sat:</strong> 08AM - 23PM<br><strong>Sunday:</strong> Closed</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Right: Contact Form -->
-          <div class="col-lg-7">
-            <form action="forms/contact.php" method="post" class="php-email-form">
-              <div class="row gy-4">
-
-                <div class="col-md-6">
-                  <input type="text" name="name" class="form-control" placeholder="Your Name" required>
+        <!-- ======= Hero Section ======= -->
+        <section id="hero" class="hero section light-background">
+            <div class="container">
+                <div class="row gy-4 justify-content-center justify-content-lg-between">
+                    <div class="col-lg-5 order-2 order-lg-1 d-flex flex-column justify-content-center">
+                        <h1 data-aos="fade-up">Celebrate Special Moment With Us</h1>
+                        <p data-aos="fade-up" data-aos-delay="100">Setiap kue punya cerita, setiap gigitan membawa
+                            kebahagiaan. Rasakan kelezatan istimewa yang diciptakan dengan cerita, hanya di Ofel
+                            Kitchen.</p>
+                        <div class="d-flex" data-aos="fade-up" data-aos-delay="200">
+                            <!-- Tombol Watch Video -->
+                            <button type="button" class="btn btn-danger" data-bs-toggle="modal"
+                                data-bs-target="#videoModal">
+                                Watch Video
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-lg-5 order-1 order-lg-2 hero-img" data-aos="zoom-out">
+                        <!-- Ganti dengan struktur yang mirip dengan menu -->
+                        <a href="{{ route('menu') }}">
+                            <div class="hero-img-container">
+                                <img src="{{ asset('assets/img/ofelkitchen.png') }}" class="img-fluid animated"
+                                    alt="Ofel Kitchen Image">
+                            </div>
+                        </a>
+                    </div>
                 </div>
+            </div>
+        </section><!-- End Hero Section -->
 
-                <div class="col-md-6">
-                  <input type="email" name="email" class="form-control" placeholder="Your Email" required>
+        <!-- ======= About Us Section ======= -->
+        <section id="about" class="about section light-background">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-6 d-flex flex-column justify-content-center">
+                        <h2>About Ofel Kitchen</h2>
+                        @if ($about)
+                        <p>{{ $about->description }}</p>
+                        @else
+                        <p>No About Us content available.</p>
+                        @endif
+                        <a href="{{ route('about') }}" class="btn-getstarted">Learn More</a>
+                    </div>
+                    <div class="col-lg-6 about-image-container">
+                        @if ($about && $about->image_path)
+                        <img src="{{ asset('storage/' . $about->image_path) }}" alt="About Us"
+                            class="img-fluid rounded about-image">
+                        @else
+                        <img src="{{ asset('assets/img/stats-bg.jpg') }}" alt="Default About Us"
+                            class="img-fluid rounded about-image">
+                        @endif
+                    </div>
                 </div>
+            </div>
+        </section><!-- End About Us Section -->
 
-                <div class="col-md-12">
-                  <input type="text" name="subject" class="form-control" placeholder="Subject" required>
-                </div>
-
-                <div class="col-md-12">
-                  <textarea name="message" class="form-control" rows="6" placeholder="Message" required></textarea>
-                </div>
-
-                <div class="col-md-12 text-center">
-                  <div class="loading">Loading</div>
-                  <div class="error-message"></div>
-                  <div class="sent-message">Your message has been sent. Thank you!</div>
-                  <button type="submit">Send Message</button>
-                </div>
-
-              </div>
-            </form>
-          </div>
-
-        </div>
-
-
-      </div>
-    </section>
-
-  </main>
-
-  <footer id="footer" class="footer dark-background">
-<!-- Footer -->
-<footer id="footer" class="footer dark-background py-5">
+       <!-- ======= Menu Section ======= -->
+<section id="menu" class="menu section">
     <div class="container">
-      <div class="row gy-3">
-        <div class="col-lg-3 col-md-6 d-flex">
-          <i class="bi bi-geo-alt icon"></i>
-          <div class="address">
-            <h4>Address</h4>
-            <p>Uma Rihit</p>
-            <p>Onan Raja, Balige III</p>
-          </div>
+        <h2 class="text-center">Our Menu</h2>
+        <div class="container">
+            <div class="row gy-5 menu-items">
+                @foreach($menus as $menu)
+                <div class="col-lg-4 col-md-6 menu-item" data-aos="fade-up" data-aos-delay="100"
+                    data-category="{{ $menu->category }}">
+                    <div class="card h-100 shadow-sm menu-card">
+                        <div class="menu-card-img-container">
+                            <a href="{{ asset('storage/' . $menu->image) }}" class="glightbox"
+                                data-gallery="menu-gallery-{{ $menu->id }}">
+                                <img src="{{ asset('storage/' . $menu->image) }}" class="menu-card-img"
+                                    alt="{{ $menu->name }}">
+                            </a>
+                        </div>
+                        <div class="card-body d-flex flex-column">
+                            <span class="menu-card-category">{{ $menu->category }}</span>
+                            <h4 class="menu-card-title">{{ $menu->name }}</h4>
+                            <p class="ingredients">
+                                {{ $menu->description }}
+                            </p>
+                            <p class="price">
+                                Rp {{ number_format($menu->price, 0, ',', '.') }}
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                @endforeach
+            </div>
+            <div class="text-center mt-3">
+                    <a href="{{ route('menu') }}" class="btn btn-primary">See Full Menu</a>
+                </div>
+        </div>
+</section><!-- End Menu Section -->
+
+        <!-- ======= Locations Section ======= -->
+        <section id="locations" class="locations section">
+            <div class="container">
+                <h2 class="text-center">Our Locations</h2>
+                <div class="row">
+                    @foreach($locations->take(2) as $location)
+                    <div class="col-md-6">
+                        <h3>{{ $location->name }}</h3>
+                        <div class="map-container">
+                            {!! $location->location !!}
+                        </div>
+                    </div>
+                    @endforeach
+                </div>
+                <div class="text-center mt-3">
+                    <a href="{{ route('locations.indexPublic') }}" class="btn btn-secondary">View All Locations</a>
+                </div>
+            </div>
+        </section><!-- End Locations Section -->
+
+        <!-- ======= Testimonials Section ======= -->
+        <section id="testimonials" class="testimonials section bg-light">
+            <div class="container">
+                <h2 class="text-center">What Our Customers Say</h2>
+                <div class="row">
+                    @foreach($feedbacks->take(3) as $feedback)
+                    <div class="col-md-4 testimonial-item">
+                        <p>{{ $feedback->message }}</p>
+                        <p class="customer-name">{{ $feedback->name }}</p>
+                    </div>
+                    @endforeach
+                </div>
+                <div class="text-center mt-3">
+                    <a href="{{ route('feedback') }}" class="btn btn-info">Read More Reviews</a>
+                </div>
+            </div>
+        </section><!-- End Testimonials Section -->
+
+    </main><!-- End #main -->
+
+    <!-- ======= Footer ======= -->
+    <footer id="footer" class="footer dark-background py-5">
+        <div class="container">
+            <div class="row gy-3">
+                <div class="col-lg-3 col-md-6 d-flex">
+                    <i class="bi bi-geo-alt icon"></i>
+                    <div class="address">
+                        <h4>Address</h4>
+                        <p>Uma Rihit</p>
+                        <p>Onan Raja, Balige III</p>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6 d-flex">
+                    <i class="bi bi-telephone icon"></i>
+                    <div>
+                        <h4>Contact</h4>
+                        <p>
+                            <strong>Phone:</strong> <span>+62 819 1259 1669</span><br>
+                            <strong>Instagram:</strong> <span>@ofelkitchen.id</span><br>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6 d-flex">
+                    <i class="bi bi-clock icon"></i>
+                    <div>
+                        <h4>Opening Hours</h4>
+                        <p>
+                            <strong>Mon-Sat:</strong> <span>08AM - 11PM</span><br>
+                            <strong>Sunday</strong>: <span>Closed</span>
+                        </p>
+                    </div>
+                </div>
+
+                <div class="col-lg-3 col-md-6">
+                    <h4>Follow Us</h4>
+                    <div class="social-links d-flex">
+                        <a href="#" class="twitter"><i class="bi bi-twitter-x"></i></a>
+                        <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+                        <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+                        <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <div class="col-lg-3 col-md-6 d-flex">
-          <i class="bi bi-telephone icon"></i>
-          <div>
-            <h4>Contact</h4>
-            <p>
-              <strong>Phone:</strong> <span>+62 819 1259 1669</span><br>
-              <strong>Instagram:</strong> <span>@ofelkitchen.id</span><br>
-            </p>
-          </div>
+        <div class="container copyright text-center mt-4">
+            <p>© <span>Copyright</span> <strong class="px-1 sitename">Ofel Kitchen</strong> <span>All Rights
+                    Reserved</span></p>
+            <div class="credits">
+                Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a> Distributed by <a
+                    href="https://themewagon.com">ThemeWagon</a>
+            </div>
         </div>
+    </footer><!-- End Footer -->
 
-        <div class="col-lg-3 col-md-6 d-flex">
-          <i class="bi bi-clock icon"></i>
-          <div>
-            <h4>Opening Hours</h4>
-            <p>
-              <strong>Mon-Sat:</strong> <span>08AM - 11PM</span><br>
-              <strong>Sunday</strong>: <span>Closed</span>
-            </p>
-          </div>
+    <!-- ======= Video Modal ======= -->
+    <div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="videoModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="videoModalLabel">Watch Video</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="video-container">
+                        <video width="100%" controls>
+                            <source src="{{ asset('assets/Video/ofel.mp4') }}" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                </div>
+            </div>
         </div>
+    </div><!-- End Video Modal -->
 
+    <!-- Scroll Top -->
+    <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i
+            class="bi bi-arrow-up-short"></i></a>
 
-        <div class="col-lg-3 col-md-6">
-          <h4>Follow Us</h4>
-          <div class="social-links d-flex">
-            <a href="#" class="twitter"><i class="bi bi-twitter-x"></i></a>
-            <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-            <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-            <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
-          </div>
-        </div>
+    <!-- Preloader -->
+    <div id="preloader"></div>
 
-      </div>
-    </div>
+    <!-- Vendor JS Files -->
+    <script src="{{ URL::asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/vendor/php-email-form/validate.js') }}"></script>
+    <script src="{{ URL::asset('assets/vendor/aos/aos.js') }}"></script>
+    <script src="{{ URL::asset('assets/vendor/glightbox/js/glightbox.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/vendor/purecounter/purecounter_vanilla.js') }}"></script>
+    <script src="{{ URL::asset('assets/vendor/swiper/swiper-bundle.min.js') }}"></script>
 
-    <div class="container copyright text-center mt-4">
-      <p>© <span>Copyright</span> <strong class="px-1 sitename">Yummy</strong> <span>All Rights Reserved</span></p>
-      <div class="credits">
-        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a> Distributed by <a href="https://themewagon.com">ThemeWagon</a>
-      </div>
-    </div>
-
-  </footer>
-
-  <!-- Scroll Top -->
-  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-
-  <!-- Preloader -->
-  <div id="preloader"></div>
-
-  <!-- Vendor JS Files -->
-  <script src="{{URL:: asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-  <script src="{{URL:: asset('assets/vendor/php-email-form/validate.js')}}"></script>
-  <script src="{{URL:: asset('assets/vendor/aos/aos.js')}}"></script>
-  <script src="{{URL:: asset('assets/vendor/glightbox/js/glightbox.min.js')}}"></script>
-  <script src="{{URL:: asset('assets/vendor/purecounter/purecounter_vanilla.js')}}"></script>
-  <script src="{{URL:: asset('assets/vendor/swiper/swiper-bundle.min.js')}}"></script>
-
-  <!-- Main JS File -->
-  <script src="assets/js/main.js"></script>
-
-  <script>
-    window.onload = function() {
-      const contactSection = document.getElementById('contact');
-      if (contactSection) {
-        window.scrollTo(0, contactSection.offsetTop);
-      }
-    };
-  </script>
-
-</body>
-
-</html>
-
-        <div class="col-lg-3 col-md-6">
-          <h4>Follow Us</h4>
-          <div class="social-links d-flex">
-            <a href="#" class="twitter"><i class="bi bi-twitter-x"></i></a>
-            <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-            <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-            <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div class="container copyright text-center mt-4">
-      <p>© <span>Copyright</span> <strong class="px-1 sitename">Yummy</strong> <span>All Rights Reserved</span></p>
-      <div class="credits">
-        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a> Distributed by <a href="https://themewagon.com">ThemeWagon</a>
-      </div>
-    </div>
-
-  </footer>
-
-  <!-- Scroll Top -->
-  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
-
-  <!-- Preloader -->
-  <div id="preloader"></div>
-
-  <!-- Vendor JS Files -->
-  <script src="{{URL:: asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-  <script src="{{URL:: asset('assets/vendor/php-email-form/validate.js')}}"></script>
-  <script src="{{URL:: asset('assets/vendor/aos/aos.js')}}"></script>
-  <script src="{{URL:: asset('assets/vendor/glightbox/js/glightbox.min.js')}}"></script>
-  <script src="{{URL:: asset('assets/vendor/purecounter/purecounter_vanilla.js')}}"></script>
-  <script src="{{URL:: asset('assets/vendor/swiper/swiper-bundle.min.js')}}"></script>
-
-  <!-- Main JS File -->
-  <script src="assets/js/main.js"></script>
+    <!-- Main JS File -->
+    <script src="{{ asset('assets/js/main.js') }}"></script>
 
 </body>
 

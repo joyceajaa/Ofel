@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Index - Yummy Bootstrap Template</title>
+  <title>About Us - Yummy Bootstrap Template</title>
   <meta name="description" content="">
   <meta name="keywords" content="">
 
@@ -34,9 +34,20 @@
   * Author: BootstrapMade.com
   * License: https://bootstrapmade.com/license/
   ======================================================== -->
+  <style>
+      .about-image {
+          width: 105%;
+          /* Reduce the width slightly */
+          max-height: 450px;
+          /* Reduce the max-height slightly */
+          object-fit: cover;
+          margin-left: -2.5%;
+          /* Adjust margin to center it visually */
+      }
+  </style>
 </head>
 
-<body class="index-page">
+<body>
 
   <header id="header" class="header d-flex align-items-center sticky-top">
     <div class="container position-relative d-flex align-items-center justify-content-between">
@@ -49,6 +60,8 @@
 
       @include('layouts.navbar')
 
+      <a><a></a>
+
     </div>
   </header>
 
@@ -56,158 +69,121 @@
 
     <!-- Hero Section -->
     <!-- ======= About Us Section ======= -->
-<section id="about" class="about section">
+    <section id="about" class="about section">
 
-  <div class="container" data-aos="fade-up">
+      <div class="container" data-aos="fade-up">
 
-    <div class="section-title">
-      <h2>About Us</h2>
-      <p>Learn More <span>About Ofel Kitchen</span></p>
-    </div>
-
-    <div class="row gy-4 align-items-center">
-
-      <div class="col-lg-6 content">
-        <h3>Kami Menghadirkan Cita Rasa Rumahan Dengan Bahan-Bahan Premium</h3>
-        <p class="fst-italic">
-            Ofel berdiri November 2020. Menjual cake online melalui media sosial. Usaha ini home made dan berlokasi di onan raja balige 3. Sampai hari ini ofel masih terus belajar memberikannya pelayanan terbaik kepada customer. Total produk yg sudah terjual sudah lebih dari 10k++. Pelanggan ofel berasal dari banyak daerah di Indonesia bahkan dari luar negeri Costumer dari jauh pesan cake untuk diantarkan kepada keluarga di kampung (balige)
-        </p>
-        <ul>
-          <li><i class="bi bi-check-circle"></i>Bahan-bahan segar lokal yang diolah setiap hari dengan standar tinggi.</li>
-          <li><i class="bi bi-check-circle"></i>Menu beragam yang dirancang untuk memuaskan selera setiap pelanggan.</li>
-
-        </ul>
-        <p>
-            Sejak pertama kali kami membuka pintu, misi kami jelas yaitu menyajikan makanan yang tidak hanya mengenyangkan, tetapi juga menghadirkan rasa "pulang" di setiap suapan. Tim dapur kami yang penuh semangat dan staf yang ramah siap memberikan pengalaman bersantap terbaik untuk Anda.
-        </p>
-      </div>
-
-      <div class="col-lg-6">
-        <img src="assets/img/about.jpg" class="img-fluid rounded" alt="About Ofel Kitchen">
-      </div>
-
-    </div>
-
-    <div class="row gy-4 mt-5">
-
-      <div class="col-lg-6">
-        <div class="icon-box d-flex">
-          <i class="bi bi-bullseye flex-shrink-0"></i>
-          <div>
-            <h4>How To Order?</h4>
-            <ul>
-                <li>Chat admin sesuai dengan kebutuhan, dan menginformasikan rencana tanggal yang diinginkan</li>
-                <li>Apabila tanggal yang diinginkan tersedia, proses diskusi design akan dilanjutkan dan detail harga akan disampaikan oleh admin</li>
-                <li>Setelah customer setuju dengan penawaran yang diberikan, form order akan di share oleh admin</li>
-                <li>Setelah form order diisi, admin akan merekap dan mentotalkannya</li>
-                <li>Pesanan akan diproses apabila customer sudah melakukan pembayaran melalui bank transfer</li>
-          </div>
+        <div class="section-title">
+          <h2>About Us</h2>
+          <p>Learn More <span>About Ofel Kitchen</span></p>
         </div>
-      </div>
 
-      <div class="col-lg-6">
-        <div class="icon-box d-flex">
-          <i class="bi bi-award flex-shrink-0"></i>
-          <div>
-            <h4>Our Vision</h4>
-            <p>Menyajikan pengalaman bersantap yang istimewa melalui pelayanan sepenuh hati, kualitas yang konsisten, dan sentuhan kehangatan rumah di setiap hidangan.</p>
+        @if ($about)
+        <div class="row gy-4">
+
+          <div class="col-lg-6">
+            <h3>{{ $about->title }}</h3>
+            <p class="fst-italic">
+              {{ $about->description }}
+            </p>
           </div>
+
+          <div class="col-lg-6">
+            @if ($about->image_path)
+            <a href="{{ asset('storage/' . $about->image_path) }}" class="glightbox" data-gallery="about-gallery">
+                <img src="{{ asset('storage/' . $about->image_path) }}" class="img-fluid rounded about-image" alt="About Ofel Kitchen">
+            </a>
+            @else
+            <p>No image available</p>
+            @endif
+          </div>
+
         </div>
+        @else
+        <p>No About Us content available.</p>
+        @endif
+
       </div>
+    </section><!-- End About Us Section -->
 
-    </div>
-
-  </div>
-</section>
-<!-- End About Us Section -->
-
-
+  </main>
 
   <footer id="footer" class="footer dark-background">
 
     <!-- Footer -->
-<footer id="footer" class="footer dark-background py-5">
-    <div class="container">
-      <div class="row gy-3">
-        <div class="col-lg-3 col-md-6 d-flex">
-          <i class="bi bi-geo-alt icon"></i>
-          <div class="address">
-            <h4>Address</h4>
-            <p>Uma Rihit</p>
-            <p>Onan Raja, Balige III</p>
+    <footer id="footer" class="footer dark-background py-5">
+      <div class="container">
+        <div class="row gy-3">
+          <div class="col-lg-3 col-md-6 d-flex">
+            <i class="bi bi-geo-alt icon"></i>
+            <div class="address">
+              <h4>Address</h4>
+              <p>Uma Rihit</p>
+              <p>Onan Raja, Balige III</p>
+            </div>
           </div>
-        </div>
 
-        <div class="col-lg-3 col-md-6 d-flex">
-          <i class="bi bi-telephone icon"></i>
-          <div>
-            <h4>Contact</h4>
-            <p>
-              <strong>Phone:</strong> <span>+62 819 1259 1669</span><br>
-              <strong>Instagram:</strong> <span>@ofelkitchen.id</span><br>
-            </p>
+          <div class="col-lg-3 col-md-6 d-flex">
+            <i class="bi bi-telephone icon"></i>
+            <div>
+              <h4>Contact</h4>
+              <p>
+                <strong>Phone:</strong> <span>+62 819 1259 1669</span><br>
+                <strong>Instagram:</strong> <span>@ofelkitchen.id</span><br>
+              </p>
+            </div>
           </div>
-        </div>
 
-        <div class="col-lg-3 col-md-6 d-flex">
-          <i class="bi bi-clock icon"></i>
-          <div>
-            <h4>Opening Hours</h4>
-            <p>
-              <strong>Mon-Sat:</strong> <span>08AM - 11PM</span><br>
-              <strong>Sunday</strong>: <span>Closed</span>
-            </p>
+          <div class="col-lg-3 col-md-6 d-flex">
+            <i class="bi bi-clock icon"></i>
+            <div>
+              <h4>Opening Hours</h4>
+              <p>
+                <strong>Mon-Sat:</strong> <span>08AM - 11PM</span><br>
+                <strong>Sunday</strong>: <span>Closed</span>
+              </p>
+            </div>
           </div>
-        </div>
 
 
-        <div class="col-lg-3 col-md-6">
-          <h4>Follow Us</h4>
-          <div class="social-links d-flex">
-            <a href="#" class="twitter"><i class="bi bi-twitter-x"></i></a>
-            <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-            <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-            <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+          <div class="col-lg-3 col-md-6">
+            <h4>Follow Us</h4>
+            <div class="social-links d-flex">
+              <a href="#" class="twitter"><i class="bi bi-twitter-x"></i></a>
+              <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+              <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+              <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+            </div>
           </div>
-        </div>
 
+        </div>
       </div>
-    </div>
 
-    <div class="container copyright text-center mt-4">
-      <p>© <span>Copyright</span> <strong class="px-1 sitename">Yummy</strong> <span>All Rights Reserved</span></p>
-      <div class="credits">
-        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a> Distributed by <a href="https://themewagon.com">ThemeWagon</a>
+      <div class="container copyright text-center mt-4">
+        <p>© <span>Copyright</span> <strong class="px-1 sitename">Yummy</strong> <span>All Rights Reserved</span></p>
+        <div class="credits">
+          Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a> Distributed by <a href="https://themewagon.com">ThemeWagon</a>
+        </div>
       </div>
-    </div>
 
-  </footer>
+    </footer>
 
-  <!-- Scroll Top -->
-  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+    <!-- Scroll Top -->
+    <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
 
-  <!-- Preloader -->
-  <div id="preloader"></div>
+    <!-- Preloader -->
+    <div id="preloader"></div>
 
-  <!-- Vendor JS Files -->
-  <script src="{{URL:: asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
-  <script src="{{URL:: asset('assets/vendor/php-email-form/validate.js')}}"></script>
-  <script src="{{URL:: asset('assets/vendor/aos/aos.js')}}"></script>
-  <script src="{{URL:: asset('assets/vendor/glightbox/js/glightbox.min.js')}}"></script>
-  <script src="{{URL:: asset('assets/vendor/purecounter/purecounter_vanilla.js')}}"></script>
-  <script src="{{URL:: asset('assets/vendor/swiper/swiper-bundle.min.js')}}"></script>
+    <!-- Vendor JS Files -->
+    <script src="{{URL:: asset('assets/vendor/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
+    <script src="{{URL:: asset('assets/vendor/php-email-form/validate.js')}}"></script>
+    <script src="{{URL:: asset('assets/vendor/aos/aos.js')}}"></script>
+    <script src="{{URL:: asset('assets/vendor/glightbox/js/glightbox.min.js')}}"></script>
+    <script src="{{URL:: asset('assets/vendor/purecounter/purecounter_vanilla.js')}}"></script>
+    <script src="{{URL:: asset('assets/vendor/swiper/swiper-bundle.min.js')}}"></script>
 
-  <!-- Main JS File -->
-  <script src="assets/js/main.js"></script>
-
-  <script>
-    window.onload = function() {
-      const aboutSection = document.getElementById('about');
-      if (aboutSection) {
-        window.scrollTo(0, aboutSection.offsetTop);
-      }
-    };
-  </script>
+    <!-- Main JS File -->
+    <script src="assets/js/main.js"></script>
 
 </body>
 

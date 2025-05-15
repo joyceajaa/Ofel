@@ -180,22 +180,34 @@
         margin-top: 10px;
         color: #555;
     }
+
+    /* Style untuk Gambar dan Video */
+    .feedback-media {
+        margin-top: 10px;
+    }
+
+    .feedback-media img,
+    .feedback-media video {
+        max-width: 100%; /* Gambar dan video responsif */
+        height: auto;
+        margin-bottom: 5px;
+        border-radius: 5px;
+    }
   </style>
 </head>
 
 <body>
   <header id="header" class="header d-flex align-items-center sticky-top">
     <div class="container position-relative d-flex align-items-center justify-content-between">
-      <a href="/" class="logo d-flex align-items-center me-auto me-xl-0" style="gap: 10px;">
-        <img src="{{ asset('assets/img/ofelkitchen.png') }}" alt="Ofel Kitchen Logo" style="max-width: 120px; height: auto; object-fit: contain;">
-        <h1 class="sitename" style="margin-bottom: 0;">Ofel Kitchen</h1>
-        <span>.</span>
-      </a>
-      @include('layouts.navbar')
-
-      <a class="btn-getstarted" href="#book-a-table">Book a Table</a>
+        <a href="/" class="logo d-flex align-items-center me-auto me-xl-0" style="gap: 5px;">
+            <img src="{{ asset('assets/img/ofelkitchen.png') }}" alt="Ofel Kitchen Logo" style="max-width: 120px; height: auto; object-fit: contain;">
+            <h1 class="sitename" style="margin-bottom: 0; margin-left: 5px;">Ofel Kitchen</h1>
+            <span>.</span>
+        </a>
+        @include('layouts.navbar')
+        <a><a><a></a>
     </div>
-  </header>
+</header>
 
   <main class="main">
     <!-- Feedback Section -->
@@ -216,6 +228,21 @@
                               <h3 class="feedback-name">{{ $feedback->name }}</h3>
                               <p class="feedback-email">{{ $feedback->email }}</p>
                               <p class="feedback-message">{{ $feedback->message }}</p>
+
+                              <!-- Menampilkan Media (Gambar dan Video) -->
+                              <div class="feedback-media">
+                                  @if($feedback->image_url)
+                                      <img src="{{ asset($feedback->image_url) }}" alt="Feedback Image">
+                                  @endif
+
+                                  @if($feedback->video_url)
+                                      <video controls>
+                                          <source src="{{ asset($feedback->video_url) }}" type="video/mp4">
+                                          Your browser does not support the video tag.
+                                      </video>
+                                  @endif
+                              </div>
+
                               <small>Received on: {{ $feedback->created_at->format('Y-m-d H:i') }}</small>
                           </div>
                       @endforeach
@@ -225,69 +252,75 @@
                       </div>
                   @endif
               </div>
-
-              @auth
-                <div class="text-center mt-4">
-                  <a href="{{ route('feedback.create') }}" class="btn-submit">Submit Your Feedback</a>
-                </div>
-              @else
-                <div class="text-center mt-4">
-                  <p>Please <a href="{{ route('login') }}">login</a> to submit your feedback.</p>
-                </div>
-              @endauth
             </div>
           </div>
         </div>
       </div>
     </section><!-- End Feedback Section -->
+    <br><br><br><br><br><br><br><br><br><br>
   </main>
 
-  <footer id="footer" class="footer dark-background py-5">
-    <div class="container">
-      <div class="row gy-3">
-        <div class="col-lg-3 col-md-6 d-flex">
-          <i class="bi bi-geo-alt icon"></i>
-          <div class="address">
-            <h4>Address</h4>
-            <p>Uma Rihit</p>
-            <p>Onan Raja, Balige III</p>
+  <footer id="footer" class="footer dark-background">
+
+        <!-- Footer -->
+    <footer id="footer" class="footer dark-background py-5">
+        <div class="container">
+          <div class="row gy-3">
+            <div class="col-lg-3 col-md-6 d-flex">
+              <i class="bi bi-geo-alt icon"></i>
+              <div class="address">
+                <h4>Address</h4>
+                <p>Uma Rihit</p>
+                <p>Onan Raja, Balige III</p>
+              </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6 d-flex">
+              <i class="bi bi-telephone icon"></i>
+              <div>
+                <h4>Contact</h4>
+                <p>
+                  <strong>Phone:</strong> <span>+62 819 1259 1669</span><br>
+                  <strong>Instagram:</strong> <span>@ofelkitchen.id</span><br>
+                </p>
+              </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6 d-flex">
+              <i class="bi bi-clock icon"></i>
+              <div>
+                <h4>Opening Hours</h4>
+                <p>
+                  <strong>Mon-Sat:</strong> <span>08AM - 11PM</span><br>
+                  <strong>Sunday</strong>: <span>Closed</span>
+                </p>
+              </div>
+            </div>
+
+
+            <div class="col-lg-3 col-md-6">
+              <h4>Follow Us</h4>
+              <div class="social-links d-flex">
+                <a href="#" class="twitter"><i class="bi bi-twitter-x"></i></a>
+                <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+                <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+                <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+              </div>
+            </div>
+
           </div>
         </div>
 
-        <div class="col-lg-3 col-md-6 d-flex">
-          <i class="bi bi-telephone icon"></i>
-          <div>
-            <h4>Contact</h4>
-            <p>
-              <strong>Phone:</strong> <span>+62 819 1259 1669</span><br>
-              <strong>Instagram:</strong> <span>@ofelkitchen.id</span><br>
-            </p>
+        <div class="container copyright text-center mt-4">
+          <p>© <span>Copyright</span> <strong class="px-1 sitename">Yummy</strong> <span>All Rights Reserved</span></p>
+          <div class="credits">
+            Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a> Distributed by <a href="https://themewagon.com">ThemeWagon</a>
           </div>
         </div>
 
-        <div class="col-lg-3 col-md-6 d-flex">
-          <i class="bi bi-clock icon"></i>
-          <div>
-            <h4>Opening Hours</h4>
-            <p>
-              <strong>Mon-Sat:</strong> <span>08AM - 11PM</span><br>
-              <strong>Sunday</strong>: <span>Closed</span>
-            </p>
-          </div>
-        </div>
+      </footer>
 
-        <div class="col-lg-3 col-md-6">
-          <h4>Follow Us</h4>
-          <div class="social-links d-flex">
-            <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
-            <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-            <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-            <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </footer>
+
 
   <!-- Scroll Top -->
   <a href="#" id="scroll-top" class="scroll-top"><i class="bi bi-arrow-up-short"></i></a>

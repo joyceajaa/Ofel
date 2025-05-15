@@ -31,6 +31,7 @@ class MenuController extends Controller
     public function store(Request $request)
     {
         $request->validate([
+            'category' => 'required|string|max:255|in:BentoCake,Bouquet,CharacterCake,FlowerBouquet,FruitCake,FudyBrownies,KleponCake,PaintingCake,Pudding,RibbonCake,TierCake', // Validasi kategori
             'name' => 'required|string|max:255',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Validasi gambar
             'price' => 'required|numeric|min:0',
@@ -72,6 +73,7 @@ class MenuController extends Controller
     public function update(Request $request, Menu $menu)
     {
         $request->validate([
+            'category' => 'required|string|max:255|in:BentoCake,Bouquet,CharacterCake,FlowerBouquet,FruitCake,FudyBrownies,KleponCake,PaintingCake,Pudding,RibbonCake,TierCake', // Validasi kategori
             'name' => 'required|string|max:255',
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'price' => 'required|numeric|min:0',

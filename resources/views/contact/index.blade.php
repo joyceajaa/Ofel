@@ -32,20 +32,16 @@
 <body class="index-page">
 
   <header id="header" class="header d-flex align-items-center sticky-top">
-    <div class="container position-relative d-flex align-items-center justify-content-between">
-
-      <a href="index.html" class="logo d-flex align-items-center me-auto me-xl-0">
-        <img src="assets/img/ofelkitchen.png" alt="Ofel Kitchen Logo">
-        <!-- Uncomment the line below if you also wish to use an image logo -->
-        <!-- <img src="assets/img/logo.png" alt=""> -->
-        <h1 class="sitename">Ofel Kitchen</h1>
-        <span>.</span>
-      </a>
-
-      @include('layouts.navbar')
-
-    </div>
-  </header>
+        <div class="container position-relative d-flex align-items-center justify-content-between">
+            <a href="{{ route('welcome') }}" class="logo d-flex align-items-center me-auto me-xl-0">
+                <img src="{{URL:: asset('assets/img/ofelkitchen.png')}}" alt="Ofel Kitchen Logo">
+                <h1 class="sitename">Ofel Kitchen</h1>
+                <span>.</span>
+            </a>
+            @include('layouts.navbar')
+            <a><a></a>
+        </div>
+    </header>
 
   <main class="main">
 
@@ -82,7 +78,7 @@
 
       <div class="container" data-aos="fade-up" data-aos-delay="100">
 
-        <div class="row gy-5">
+        <div class="row gy-5 justify-content-center">
 
           <!-- Left: Info -->
           <div class="col-lg-5">
@@ -98,7 +94,7 @@
               <i class="icon bi bi-telephone flex-shrink-0"></i>
               <div>
                 <h4>Call Us</h4>
-                <p>+62 819 1259 1669</p>
+                <p>‪+62 819 1259 1669‬</p>
               </div>
             </div>
 
@@ -119,37 +115,7 @@
             </div>
           </div>
 
-          <!-- Right: Contact Form -->
-          <div class="col-lg-7">
-            <form action="forms/contact.php" method="post" class="php-email-form">
-              <div class="row gy-4">
 
-                <div class="col-md-6">
-                  <input type="text" name="name" class="form-control" placeholder="Your Name" required>
-                </div>
-
-                <div class="col-md-6">
-                  <input type="email" name="email" class="form-control" placeholder="Your Email" required>
-                </div>
-
-                <div class="col-md-12">
-                  <input type="text" name="subject" class="form-control" placeholder="Subject" required>
-                </div>
-
-                <div class="col-md-12">
-                  <textarea name="message" class="form-control" rows="6" placeholder="Message" required></textarea>
-                </div>
-
-                <div class="col-md-12 text-center">
-                  <div class="loading">Loading</div>
-                  <div class="error-message"></div>
-                  <div class="sent-message">Your message has been sent. Thank you!</div>
-                  <button type="submit">Send Message</button>
-                </div>
-
-              </div>
-            </form>
-          </div>
 
         </div>
 

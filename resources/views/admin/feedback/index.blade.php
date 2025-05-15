@@ -16,9 +16,30 @@
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
 
     <!-- Custom styles for this template-->
     <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
+
+    <!-- Styles -->
+    <style>
+        .footer.dark-background {
+        background-color: #343a40; /* Dark background color */
+        color: white; /* White text color */
+    }
+
+    .footer.dark-background a {
+        color: #aaa; /* Light gray link color */
+    }
+
+    .footer.dark-background a:hover {
+        color: white; /* White link color on hover */
+    }
+
+    .footer.dark-background .icon {
+        color: #5cb85c; /* Green color for icons */
+    }
+    </style>
 
 </head>
 
@@ -43,7 +64,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item">
-                <a class="nav-link" href="{{ route('welcome') }}">
+                <a class="nav-link" href="{{ route('admin.dashboard') }}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Dashboard</span></a>
             </li>
@@ -57,37 +78,7 @@
             </div>
 
             <!-- Nav Items - Pages -->
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('menus.index') }}">
-                    <i class="fas fa-fw fa-utensils"></i>
-                    <span>Menus</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('about') }}">
-                    <i class="fas fa-fw fa-info-circle"></i>
-                    <span>About Us</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('location') }}">
-                    <i class="fas fa-fw fa-map-marker-alt"></i>
-                    <span>Location</span>
-                </a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="{{ route('feedback.index') }}">
-                    <i class="fas fa-fw fa-comment"></i>
-                    <span>Feedback</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('contact') }}">
-                    <i class="fas fa-fw fa-envelope"></i>
-                    <span>Contact</span>
-                </a>
-            </li>
-
+            @include('admin.sidebar')
             <!-- Divider -->
             <hr class="sidebar-divider d-none d-md-block">
 
@@ -106,50 +97,7 @@
             <div id="content">
 
                 <!-- Topbar (Sama seperti di kode dashboard) -->
-                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
-                    <!-- Sidebar Toggle (Topbar) -->
-                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                        <i class="fa fa-bars"></i>
-                    </button>
-
-                    <!-- Topbar Navbar -->
-                    <ul class="navbar-nav ml-auto">
-
-                        <!-- Nav Item - User Information -->
-                        <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
-                                <img class="img-profile rounded-circle"
-                                    src="{{ asset('img/undraw_profile.svg') }}">
-                            </a>
-                            <!-- Dropdown - User Information -->
-                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Profile
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Settings
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Activity Log
-                                </a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Logout
-                                </a>
-                            </div>
-                        </li>
-
-                    </ul>
-
-                </nav>
+                @include('admin.topbar')
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
@@ -157,7 +105,7 @@
 
                     <!-- Page Heading -->
                     <h1 class="h3 mb-2 text-gray-800">Feedback</h1>
-                    <p class="mb-4">Berikut adalah umpan balik dari pengguna. <a href="{{ route('feedback.create') }}">Berikan Umpan Balik</a>.</p>
+                    <p class="mb-4">Berikut adalah umpan balik dari pengguna.</p>
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
@@ -169,6 +117,10 @@
                                 <div class="alert alert-success">{{ session('success') }}</div>
                             @endif
 
+                            <div class="mb-3">
+                                <a href="{{ route('admin.feedback.create') }}" class="btn btn-primary">Tambah Menu Baru</a>
+                            </div>
+
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                                     <thead>
@@ -178,6 +130,7 @@
                                             <th>Email</th>
                                             <th>Pesan</th>
                                             <th>Waktu</th>
+                                            <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -187,6 +140,7 @@
                                             <th>Email</th>
                                             <th>Pesan</th>
                                             <th>Waktu</th>
+                                            <th>Aksi</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
@@ -197,7 +151,38 @@
                                                 <td>{{ $feedback->email }}</td>
                                                 <td>{{ $feedback->message }}</td>
                                                 <td>{{ $feedback->created_at }}</td>
+                                                <td>
+                                                    <!-- Tombol Hapus dengan Modal -->
+                                                    <button type="button" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#deleteModal{{ $feedback->id }}">
+                                                        <i class="fas fa-trash"></i> Hapus
+                                                    </button>
+                                                </td>
                                             </tr>
+
+                                            <!-- Modal Konfirmasi Hapus -->
+                                            <div class="modal fade" id="deleteModal{{ $feedback->id }}" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel{{ $feedback->id }}" aria-hidden="true">
+                                                <div class="modal-dialog" role="document">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h5 class="modal-title" id="deleteModalLabel{{ $feedback->id }}">Konfirmasi Hapus</h5>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">×</span>
+                                                            </button>
+                                                        </div>
+                                                        <div class="modal-body">
+                                                            Apakah Anda yakin ingin menghapus feedback dari <strong>{{ $feedback->name }}</strong>?
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                                            <form action="{{ route('admin.feedback.destroy', $feedback->id) }}" method="POST">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button type="submit" class="btn btn-danger">Hapus</button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         @endforeach
                                     </tbody>
                                 </table>
@@ -215,14 +200,63 @@
             </div>
             <!-- End of Main Content -->
 
-            <!-- Footer (Sama seperti di kode dashboard) -->
-            <footer class="sticky-footer bg-white">
-                <div class="container my-auto">
-                    <div class="copyright text-center my-auto">
-                        <span>Copyright © Your Website {{ date('Y') }}</span>
-                    </div>
-                </div>
-            </footer>
+            <!-- Footer -->
+            <footer id="footer" class="footer dark-background py-5">
+        <div class="container">
+          <div class="row gy-3">
+            <div class="col-lg-3 col-md-6 d-flex">
+              <i class="bi bi-geo-alt icon"></i>
+              <div class="address">
+                <h4>Address</h4>
+                <p>Uma Rihit</p>
+                <p>Onan Raja, Balige III</p>
+              </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6 d-flex">
+              <i class="bi bi-telephone icon"></i>
+              <div>
+                <h4>Contact</h4>
+                <p>
+                  <strong>Phone:</strong> <span>+62 819 1259 1669</span><br>
+                  <strong>Instagram:</strong> <span>@ofelkitchen.id</span><br>
+                </p>
+              </div>
+            </div>
+
+            <div class="col-lg-3 col-md-6 d-flex">
+              <i class="bi bi-clock icon"></i>
+              <div>
+                <h4>Opening Hours</h4>
+                <p>
+                  <strong>Mon-Sat:</strong> <span>08AM - 11PM</span><br>
+                  <strong>Sunday</strong>: <span>Closed</span>
+                </p>
+              </div>
+            </div>
+
+
+            <div class="col-lg-3 col-md-6">
+              <h4>Follow Us</h4>
+              <div class="social-links d-flex">
+                <a href="#" class="twitter"><i class="bi bi-twitter-x"></i></a>
+                <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
+                <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
+                <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="container copyright text-center mt-4">
+          <p>© <span>Copyright</span> <strong class="px-1 sitename">Yummy</strong> <span>All Rights Reserved</span></p>
+          <div class="credits">
+            Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a> Distributed by <a href="https://themewagon.com">ThemeWagon</a>
+          </div>
+        </div>
+
+      </footer>
             <!-- End of Footer -->
 
         </div>
@@ -237,24 +271,7 @@
     </a>
 
     <!-- Logout Modal (Sama seperti di kode dashboard) -->
-    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">×</span>
-                    </button>
-                </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
-                </div>
-            </div>
-        </div>
-    </div>
+    @include('admin.modal.logout')
 
     <!-- Bootstrap core JavaScript-->
     <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>

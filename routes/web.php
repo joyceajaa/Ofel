@@ -9,7 +9,10 @@ use App\Http\Controllers\Admin\MenuController as AdminMenuController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\MenuController as PublicMenuController;
 use App\Http\Controllers\MenuController;
-use App\Http\Controllers\FeedbackController; // Tambahkan ini
+use App\Http\Controllers\FeedbackController;
+use App\Http\Controllers\LocationController;
+use App\Http\Controllers\Admin\AboutController; // <-- Tambahkan ini
+use App\Http\Controllers\WelcomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -17,20 +20,15 @@ use App\Http\Controllers\FeedbackController; // Tambahkan ini
 |--------------------------------------------------------------------------
 */
 
-
 // == Rute Publik ==
-Route::get('/', function () {
-    if (Auth::check() && Auth::user()->is_admin) {
-        return redirect()->route('admin.dashboard');
-    }
-    return view('welcome');
-})->name('welcome');
+Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 
 Route::get('/menu', [PublicMenuController::class, 'indexPublic'])->name('menu');
 Route::get('/menu/{menu}', [PublicMenuController::class, 'showPublic'])->name('menu.show');
-Route::get('/about', fn() => view('about.index'))->name('about');
-Route::get('/location', fn() => view('location.index'))->name('location');
-Route::get('/feedback', fn() => view('feedback.index'))->name('feedback');
+Route::get('/about', [AboutController::class, 'indexPublic'])->name('about');
+// Route::get('/location', fn() => view('location.index'))->name('location');
+Route::get('/locationpublic', [LocationController::class, 'indexPublic'])->name('locations.indexPublic');
+Route::get('/feedback', [FeedbackController::class, 'indexPublic'])->name('feedback');
 Route::get('/contact', fn() => view('contact.index'))->name('contact');
 
 
@@ -46,27 +44,14 @@ Route::middleware('auth')->group(function () {
     Route::get('/menu', [UserMenuController::class, 'index'])->name('user.menu.index');
 });
 
-Route::middleware(['auth', 'admin'])->prefix('admin')->group(function () {
-    Route::get('/about', [AdminController::class, 'about'])->name('admin.about');
-});
-
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
-    Route::get('/about', [AdminController::class, 'about'])->name('about');
-    Route::get('/location', [AdminController::class, 'location'])->name('location');
-    Route::get('/feedback', [AdminController::class, 'feedback'])->name('feedback');
+    Route::get('/about', [AboutController::class, 'indexPublic'])->name('aboutssss');
+    Route::get('/location', [LocationController::class, 'index'])->name('location');
     Route::get('/contact', [AdminController::class, 'contact'])->name('contact');
 });
 
-
 // == Rute Publik (Bisa diakses siapa saja) ==
-Route::get('/', function () {
-    // Jika user sudah login dan dia admin, redirect ke admin dashboard
-    if (Auth::check() && Auth::user()->is_admin) {
-        return redirect()->route('admin.dashboard');
-    }
-    // Jika sudah login dan bukan admin, atau belum login, tampilkan welcome
-    return view('welcome');
-})->name('welcome');
+
 
 // Harus login dulu untuk bisa akses halaman ini
 Route::middleware(['auth'])->group(function () {
@@ -74,9 +59,9 @@ Route::middleware(['auth'])->group(function () {
     Route::post('/contact', [ContactController::class, 'store']);
 });
 
-Route::get('/about', function () {
-    return view('about.index');
-})->name('about');
+// Route::get('/about', function () {
+//     return view('about.index');
+// })->name('about');
 
 Route::get('/menu', [MenuController::class, 'indexPublic'])->name('menu'); // Menampilkan daftar menu untuk publik
 Route::get('/menu/{menu}', [MenuController::class, 'showPublic'])->name('menu.show'); // Menampilkan detail menu untuk publik
@@ -86,12 +71,10 @@ Route::get('/location', function () {
 })->name('location');
 
 // Rute feedback
-Route::get('/feedback', [FeedbackController::class, 'index'])->name('feedback');
-
-Route::middleware(['auth'])->group(function () {
-    Route::get('/feedback/create', [FeedbackController::class, 'create'])->name('feedback.create');
-    Route::post('/feedback', [FeedbackController::class, 'store'])->name('feedback.store');
-});
+// Route::middleware(['auth'])->group(function () {
+//     Route::get('/feedback/create', [FeedbackController::class, 'create'])->name('feedback.create');
+//     Route::post('/feedback', [FeedbackController::class, 'store'])->name('feedback.store');
+// });
 
 
 Route::get('/contact', function () {
@@ -126,46 +109,50 @@ Route::middleware('auth')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout'])
           ->name('logout');
 
-    // == Rute Khusus Admin ==
-    Route::prefix('admin')
-         ->middleware('admin')
-         ->group(function () {
+     // == Rute Khusus Admin ==
+     Route::prefix('admin')
+     ->middleware('admin')
+     ->name('admin.')
+     ->group(function () {
 
-            // Contoh: Dashboard Admin
-            Route::get('/dashboard', function () {
-                return view('admin.dashboard');
-            })->name('admin.dashboard');
+         // Contoh: Dashboard Admin
+         Route::get('/dashboard', function () {
+             return view('admin.dashboard');
+         })->name('dashboard');
 
-            // Rute Menu Admin (CRUD) - Didefinisikan manual
-            Route::get('/menus', [MenuController::class, 'index'])->name('admin.menus.index');
-            Route::get('/menus/create', [MenuController::class, 'create'])->name('admin.menus.create');
-            Route::post('/menus', [MenuController::class, 'store'])->name('admin.menus.store');
-            Route::get('/menus/{menu}', [MenuController::class, 'show'])->name('admin.menus.show');
-            Route::get('/menus/{menu}/edit', [MenuController::class, 'edit'])->name('admin.menus.edit');
-            Route::put('/menus/{menu}', [MenuController::class, 'update'])->name('admin.menus.update');
-            Route::delete('/menus/{menu}', [MenuController::class, 'destroy'])->name('admin.menus.destroy');
+         Route::get('/about', [AdminController::class, 'about'])->name('aboutsss');
+         Route::get('/location', [LocationController::class, 'index'])->name('location');
+         Route::get('/feedback', [FeedbackController::class, 'index'])->name('feedback');
+         Route::get('/feedback/create', [FeedbackController::class, 'create'])->name('feedback.create');
+         Route::post('/feedback', [FeedbackController::class, 'store'])->name('feedback.store');
+         Route::delete('/feedback/{feedback}', [FeedbackController::class, 'destroy'])->name('feedback.destroy');
+         Route::get('/contact', [AdminController::class, 'contact'])->name('contact');
 
+         // Rute Menu Admin (CRUD) - Didefinisikan manual
+         Route::get('/menus', [AdminMenuController::class, 'index'])->name('menus.index');
+         Route::get('/menus/create', [MenuController::class, 'create'])->name('menus.create');
+         Route::post('/menus', [MenuController::class, 'store'])->name('menus.store');
+         Route::get('/menus/{menu}', [MenuController::class, 'show'])->name('menus.show');
+         Route::get('/menus/{menu}/edit', [MenuController::class, 'edit'])->name('menus.edit');
+         Route::put('/menus/{menu}', [MenuController::class, 'update'])->name('menus.update');
+         Route::delete('/menus/{menu}', [MenuController::class, 'destroy'])->name('menus.destroy');
 
-            // Tambahkan rute admin lainnya di sini
-            // Contoh: Route::get('/users', [AdminUserController::class, 'index'])->name('users.index');
+         // Rute Lokasi Admin (CRUD) - Didefinisikan manual
+         Route::get('/locations', [LocationController::class, 'index'])->name('locations.index');
+         Route::get('/locations/create', [LocationController::class, 'create'])->name('locations.create');
+         Route::post('/locations', [LocationController::class, 'store'])->name('locations.store');
+         Route::get('/locations/{location}', [LocationController::class, 'show'])->name('locations.show');
+         Route::get('/locations/{location}/edit', [LocationController::class, 'edit'])->name('locations.edit');
+         Route::put('/locations/{location}', [LocationController::class, 'update'])->name('locations.update');
+         Route::delete('/locations/{location}', [LocationController::class, 'destroy'])->name('locations.destroy');
 
-    });
-
-    // Catatan: Rute untuk pelanggan ('welcome') sudah didefinisikan di bagian publik.
-    // AuthController akan mengarahkan pelanggan yang login ke route('welcome').
-    // Jika ada halaman lain yang *hanya* bisa diakses pelanggan (bukan admin),
-    // Anda bisa menambahkannya di sini, di luar grup 'admin'.
-    // Contoh:
-    // Route::get('/my-orders', function() {
-    //     if (Auth::user()->is_admin) {
-    //          abort(403); // Admin tidak boleh akses halaman pesanan pelanggan
-    //     }
-    //     return view('orders.my_orders');
-    // })->name('my.orders');
-
+         // Route About Us Admin (CRUD) - Didefinisikan manual
+         Route::get('/abouts', [AboutController::class, 'index'])->name('abouts.index');
+         Route::get('/abouts/create', [AboutController::class, 'create'])->name('abouts.create');
+         Route::post('/abouts', [AboutController::class, 'store'])->name('abouts.store');
+         Route::get('/abouts/{about}', [AboutController::class, 'show'])->name('abouts.show');
+         Route::get('/abouts/{about}/edit', [AboutController::class, 'edit'])->name('abouts.edit');
+         Route::put('/abouts/{about}', [AboutController::class, 'update'])->name('abouts.update');
+         Route::delete('/abouts/{about}', [AboutController::class, 'destroy'])->name('abouts.destroy');
+     });
 });
-
-// Pastikan Controller diupdate untuk menggunakan view yang benar
-// Dalam AuthController.php:
-// - showLoginForm() harus return view('login.index');
-// - showRegisterForm() harus return view('registrasi.index');

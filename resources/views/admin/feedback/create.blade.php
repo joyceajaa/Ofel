@@ -57,44 +57,7 @@
             </div>
 
             <!-- Nav Items - Pages -->
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('menus.index') }}">
-                    <i class="fas fa-fw fa-utensils"></i>
-                    <span>Menus</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('about') }}">
-                    <i class="fas fa-fw fa-info-circle"></i>
-                    <span>About Us</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('location') }}">
-                    <i class="fas fa-fw fa-map-marker-alt"></i>
-                    <span>Location</span>
-                </a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="{{ route('feedback.index') }}">
-                    <i class="fas fa-fw fa-comment"></i>
-                    <span>Feedback</span>
-                </a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('contact') }}">
-                    <i class="fas fa-fw fa-envelope"></i>
-                    <span>Contact</span>
-                </a>
-            </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
-
-            <!-- Sidebar Toggler (Sidebar) -->
-            <div class="text-center d-none d-md-inline">
-                <button class="rounded-circle border-0" id="sidebarToggle"></button>
-            </div>
+            @include('admin.sidebar')
 
         </ul>
         <!-- End of Sidebar -->
@@ -106,50 +69,7 @@
             <div id="content">
 
                 <!-- Topbar (Sama seperti di kode dashboard) -->
-                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
-
-                    <!-- Sidebar Toggle (Topbar) -->
-                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
-                        <i class="fa fa-bars"></i>
-                    </button>
-
-                    <!-- Topbar Navbar -->
-                    <ul class="navbar-nav ml-auto">
-
-                        <!-- Nav Item - User Information -->
-                        <li class="nav-item dropdown no-arrow">
-                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
-                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Douglas McGee</span>
-                                <img class="img-profile rounded-circle"
-                                    src="{{ asset('img/undraw_profile.svg') }}">
-                            </a>
-                            <!-- Dropdown - User Information -->
-                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
-                                aria-labelledby="userDropdown">
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Profile
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Settings
-                                </a>
-                                <a class="dropdown-item" href="#">
-                                    <i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Activity Log
-                                </a>
-                                <div class="dropdown-divider"></div>
-                                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">
-                                    <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i>
-                                    Logout
-                                </a>
-                            </div>
-                        </li>
-
-                    </ul>
-
-                </nav>
+                @include('admin.topbar')
                 <!-- End of Topbar -->
 
                 <!-- Begin Page Content -->
@@ -165,7 +85,7 @@
                             <h6 class="m-0 font-weight-bold text-primary">Form Feedback</h6>
                         </div>
                         <div class="card-body">
-                            <form action="{{ route('feedback.store') }}" method="POST">
+                            <form action="{{ route('admin.feedback.store') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="mb-3">
                                     <label for="name" class="form-label">Nama</label>
@@ -185,6 +105,20 @@
                                     <label for="message" class="form-label">Pesan</label>
                                     <textarea class="form-control" id="message" name="message" rows="3" required>{{ old('message') }}</textarea>
                                     @error('message')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="mb-3">
+                                    <label for="image" class="form-label">Foto</label>
+                                    <input class="form-control" type="file" id="image" name="image">
+                                    @error('image')
+                                        <div class="text-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <div class="mb-3">
+                                    <label for="video" class="form-label">Video</label>
+                                    <input class="form-control" type="file" id="video" name="video">
+                                    @error('video')
                                         <div class="text-danger">{{ $message }}</div>
                                     @enderror
                                 </div>

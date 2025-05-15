@@ -8,6 +8,6 @@ class AdminController extends Controller
 {
     public function about()
     {
-        return view('admin.about'); // pastikan view-nya ada di resources/views/admin/about.blade.php
+        return view('admin.about.index'); // pastikan view-nya ada di resources/views/admin/about.blade.php
     }
 }

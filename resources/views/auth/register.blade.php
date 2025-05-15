@@ -12,7 +12,7 @@
         body {
             margin: 0;
             padding: 0;
-            background-image: url('{{ asset('assets/img/login.png') }}');
+            background-image: url('{{ asset('assets/img/putih.png') }}');
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             display: flex;
             justify-content: center;

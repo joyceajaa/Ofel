@@ -21,7 +21,7 @@
         .navmenu { background-color: #343a40; padding: 0; }
         .navmenu ul { list-style: none; padding: 0 15px; margin: 0; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; min-height: 60px; }
         .navmenu ul li { margin: 5px 10px; }
-        .navmenu ul li a { color: rgba(255, 255, 255, 0.75); text-decoration: none; padding: 10px 15px; display: block; border-radius: 4px; transition: background-color 0.3s, color 0.3s; }
+        .navmenu ul li a { color: rgba(255, 255, 255, 0.75); text-decoration: none; padding: 10px 15px; display: block; border-radius: 4px; transition: background-color 0.3s, color: 0.3s; }
         .navmenu ul li a:hover { background-color: #495057; color: #fff; }
         .navmenu ul li a.active { color: #fff; background-color: #007bff; }
         .navmenu ul li span {
@@ -90,6 +90,26 @@
                     <label for="name" class="form-label">Nama Menu</label>
                     <input type="text" class="form-control" id="name" name="name" value="{{ old('name', $menu->name) }}" required>
                     @error('name')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
+                </div>
+
+                 <div class="mb-3">
+                    <label for="category" class="form-label">Kategori</label>
+                    <select name="category" id="category" class="form-control">
+                        <option value="BentoCake" {{ old('category', $menu->category) == 'BentoCake' ? 'selected' : '' }}>BentoCake</option>
+                        <option value="Bouquet" {{ old('category', $menu->category) == 'Bouquet' ? 'selected' : '' }}>Bouquet</option>
+                        <option value="CharacterCake" {{ old('category', $menu->category) == 'CharacterCake' ? 'selected' : '' }}>CharacterCake</option>
+                        <option value="FlowerBouquet" {{ old('category', $menu->category) == 'FlowerBouquet' ? 'selected' : '' }}>FlowerBouquet</option>
+                        <option value="FruitCake" {{ old('category', $menu->category) == 'FruitCake' ? 'selected' : '' }}>FruitCake</option>
+                        <option value="FudyBrownies" {{ old('category', $menu->category) == 'FudyBrownies' ? 'selected' : '' }}>FudyBrownies</option>
+                        <option value="KleponCake" {{ old('category', $menu->category) == 'KleponCake' ? 'selected' : '' }}>KleponCake</option>
+                        <option value="PaintingCake" {{ old('category', $menu->category) == 'PaintingCake' ? 'selected' : '' }}>PaintingCake</option>
+                        <option value="Pudding" {{ old('category', $menu->category) == 'Pudding' ? 'selected' : '' }}>Pudding</option>
+                        <option value="RibbonCake" {{ old('category', $menu->category) == 'RibbonCake' ? 'selected' : '' }}>RibbonCake</option>
+                        <option value="TierCake" {{ old('category', $menu->category) == 'TierCake' ? 'selected' : '' }}>TierCake</option>
+                    </select>
+                    @error('category')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
                 </div>

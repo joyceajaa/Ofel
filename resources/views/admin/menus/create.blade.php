@@ -20,7 +20,7 @@
         .navmenu { background-color: #343a40; padding: 0; }
         .navmenu ul { list-style: none; padding: 0 15px; margin: 0; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; min-height: 60px; }
         .navmenu ul li { margin: 5px 10px; }
-        .navmenu ul li a { color: rgba(255, 255, 255, 0.75); text-decoration: none; padding: 10px 15px; display: block; border-radius: 4px; transition: background-color 0.3s, color 0.3s; }
+        .navmenu ul li a { color: rgba(255, 255, 255, 0.75); text-decoration: none; padding: 10px 15px; display: block; border-radius: 4px; transition: background-color 0.3s, color: 0.3s; }
         .navmenu ul li a:hover { background-color: #495057; color: #fff; }
         .navmenu ul li a.active { color: #fff; background-color: #007bff; }
         .navmenu ul li span {
@@ -84,6 +84,26 @@
         <div class="admin-content">
             <form action="{{ route('admin.menus.store') }}" method="POST" enctype="multipart/form-data">
                 @csrf
+
+                 <div class="mb-3">
+                    <label for="category" class="form-label">Kategori</label>
+                    <select name="category" id="category" class="form-control">
+                        <option value="BentoCake">BentoCake</option>
+                        <option value="Bouquet">Bouquet</option>
+                        <option value="CharacterCake">CharacterCake</option>
+                        <option value="FlowerBouquet">FlowerBouquet</option>
+                        <option value="FruitCake">FruitCake</option>
+                        <option value="FudyBrownies">FudyBrownies</option>
+                        <option value="KleponCake">KleponCake</option>
+                        <option value="PaintingCake">PaintingCake</option>
+                        <option value="Pudding">Pudding</option>
+                        <option value="RibbonCake">RibbonCake</option>
+                        <option value="TierCake">TierCake</option>
+                    </select>
+                    @error('category')
+                        <div class="text-danger">{{ $message }}</div>
+                    @enderror
+                </div>
 
                 <div class="mb-3">
                     <label for="name" class="form-label">Nama Menu</label>
