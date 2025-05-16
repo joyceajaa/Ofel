@@ -96,7 +96,7 @@
                 <button class="btn btn-outline-dark btn-sm" data-category="Pudding">Pudding</button>
                 <button class="btn btn-outline-dark btn-sm" data-category="RibbonCake">RibbonCake</button>
                 <button class="btn btn-outline-dark btn-sm" data-category="TierCake">TierCake</button>
-            </div> 
+            </div>
 
             <div class="container">
                 <div class="row gy-5 menu-items">
@@ -686,7 +686,7 @@
         const menuLink = document.getElementById('modalMenuLinkHidden').value; // Ambil tautan produk
 
         // Nomor WhatsApp Tujuan (Ganti dengan nomor Anda)
-        const whatsAppNumber = '6281260287468';
+        const whatsAppNumber = '6281912591669';
 
         // Buat teks pesan WhatsApp
         let message = `Halo Ofel Kitchen, saya ingin memesan:\n\n`;
