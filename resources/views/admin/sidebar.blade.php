@@ -10,12 +10,7 @@
         <span>Manage About Us</span>
     </a>
 </li>
-<li class="nav-item">
-    <a class="nav-link" href="{{ route('admin.location') }}">
-        <i class="fas fa-fw fa-map-marker-alt"></i>
-        <span>Manage Location</span>
-    </a>
-</li>
+
 <li class="nav-item">
     <a class="nav-link" href="{{ route('admin.feedback') }}">
         <i class="fas fa-fw fa-comment"></i>
