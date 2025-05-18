@@ -84,58 +84,6 @@
             box-shadow: 0 0 2px rgba(0, 123, 255, 0.5);
         }
 
-        /* Styles for the menu items and card - 4 COLUMNS */
-        .menu-items {
-            display: flex;
-            flex-wrap: wrap;
-            margin-right: -15px;
-            margin-left: -15px;
-        }
-
-        .menu-item {
-            width: 25%;
-            padding-right: 15px;
-            padding-left: 15px;
-            margin-bottom: 10px;
-            box-sizing: border-box;
-        }
-
-        .menu-card {
-            width: 100%;
-            font-size: 0.8rem;
-        }
-
-        .menu-card-img-container {
-            max-height: 120px;
-            overflow: hidden;
-        }
-
-        .menu-card-img {
-            width: 100%;
-            height: auto;
-            object-fit: cover;
-        }
-
-        .menu-card-title {
-            font-size: 0.9em;
-            margin-bottom: 3px;
-        }
-
-        .ingredients {
-            font-size: 0.75em;
-            margin-bottom: 5px;
-        }
-
-        .price {
-            font-size: 0.8em;
-            margin-bottom: 7px;
-        }
-
-        .btn-danger {
-            font-size: 0.7em;
-            padding: 3px 6px;
-        }
-
         /* Animasi Fade In/Out */
         .fade-in {
             animation: fadeIn 0.3s ease-in-out;
@@ -365,10 +313,10 @@
             <div class="container">
                 <h2 class="text-center">Our Menu</h2>
                 <div class="container">
-                    <div class="row gy-5 menu-items">
+                    <div class="row gy-5">
                         @foreach($menus->take(8) as $menu)
                         <!-- Limit to 8 items -->
-                        <div class="col-lg-3 col-md-6 menu-item" data-aos="fade-up" data-aos-delay="100"
+                        <div class="col-sm-6 col-md-4 col-lg-3 mb-4" data-aos="fade-up" data-aos-delay="100"
                             data-category="{{ $menu->category }}">
                             <div class="card h-100 shadow-sm menu-card">
                                 <div class="menu-card-img-container">
@@ -438,7 +386,7 @@
                 <h2 class="text-center">What Our Customers Say</h2>
                 <div class="row">
                     @foreach($feedbacks->take(3) as $feedback)
-                    <div class="col-md-4 testimonial-item">
+                    <div class="col-md-4 testimonial-item mb-4">
                         <p>{{ $feedback->message }}</p>
                         <p class="customer-name">{{ $feedback->name }}</p>
                     </div>
