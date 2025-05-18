@@ -20,7 +20,7 @@
   <!-- Vendor CSS Files -->
   <link href="{{ URL::asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
   <link href="{{ URL::asset('assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
-  <link href="{{ URL::asset('assets/vendor/aos/aos.css') }}" rel="stylesheet">
+  <link href="{{ URL::asset('assets/vendor/aos/aos.js') }}" rel="stylesheet">
   <link href="{{ URL::asset('assets/vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
   <link href="{{ URL::asset('assets/vendor/swiper/swiper-bundle.min.js') }}" rel="stylesheet">
 
@@ -30,9 +30,10 @@
   <style>
     .map-container {
       position: relative;
-      padding-bottom: 56.25%; /* Maintain 16:9 aspect ratio (adjustable) */
+      padding-bottom: 40%; /* Tinggi dikurangi */
       height: 0;
       overflow: hidden;
+      max-width: 600px; /* Lebar tetap sama */
     }
 
     .map-container iframe {
@@ -48,16 +49,17 @@
       display: flex;
       flex-direction: row; /* Mengatur item dalam baris */
       align-items: flex-start; /* Agar item berada di atas */
+      gap: 20px; /* Jarak antara map dan dropdown */
     }
 
     .map-container {
-      flex: 3; /* Map mengambil 3/4 lebar */
-      margin-right: 20px; /* Beri jarak antara map dan dropdown */
+      flex: 6; /* Map mengambil 6/10 lebar */
     }
 
     .district-select-container {
-      flex: 2; /* Dropdown mengambil 2/4 lebar */
-      width: 30%; /* Lebar dropdown */ /* set lebar dropdown */
+      flex: 4; /* Dropdown mengambil 4/10 lebar */
+      width: auto; /* Biarkan lebar otomatis */
+      min-width: 200px; /* Lebar minimum dropdown */
     }
 
     /* Lebar kolom diperbesar */
@@ -129,11 +131,12 @@
 
                 {{-- Dropdown Kecamatan --}}
                 <div class="district-select-container">
-                    <label for="orderDistrict" class="form-label">Pilih Kecamatan <span class="text-danger">*</span></label>
+                    <label for="orderDistrict" class="form-label">Pilih Kecamatan (yang terjangkau) <span class="text-danger">*</span></label>
                     <select class="form-select" id="orderDistrict-{{ $location->id }}" required>
                         <option value="" selected disabled>-- Pilih Kecamatan --</option>
                          {{-- Opsi akan diisi oleh JavaScript --}}
                     </select>
+                     <small class="text-muted">Pilih hanya jika Anda berada di salah satu kecamatan ini.</small>
                 </div>
               </div>
             </div>

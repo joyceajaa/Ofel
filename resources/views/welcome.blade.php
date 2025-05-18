@@ -6,7 +6,7 @@
     <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>Index - Ofel Kitchen</title>
     <meta name="description" content="Ofel Kitchen - Home">
-    <meta name="keywords" content="Ofel Kitchen, kue, cake, bakery, enak, berkualitas">
+    <meta name="keywords" content="Ofel Kitchen, Menu, Cake, bakery, enak, berkualitas">
 
     <!-- Favicons -->
     <link href="{{ URL::asset('assets/img/favicon.png') }}" rel="icon">
@@ -22,7 +22,7 @@
     <!-- Vendor CSS Files -->
     <link href="{{ URL::asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
-    <link href="{{ URL::asset('assets/vendor/aos/aos.css') }}" rel="stylesheet">
+    <link href="{{ URL::asset('assets/vendor/aos/aos.js') }}" rel="stylesheet">
     <link href="{{ URL::asset('assets/vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('assets/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
 
@@ -30,6 +30,141 @@
     <link href="{{ URL::asset('assets/css/main.css') }}" rel="stylesheet">
 
     <style>
+        /* Optional: Style adjustments */
+        .modal-body .form-label {
+            font-weight: 500;
+        }
+
+        #modalTotalPrice {
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        /* Style untuk kategori */
+        .menu-card-category {
+            font-size: 0.75em;
+            color: #555;
+            margin-bottom: 3px;
+            display: block;
+        }
+
+        /* Style untuk filter (Dropdown) - LEFT ALIGN */
+        .category-filter {
+            margin-bottom: 10px;
+            text-align: left;
+        }
+
+        .category-filter select {
+            padding: 6px 12px;
+            font-size: 0.8rem;
+            border-radius: 20px;
+            border: 1px solid #ccc;
+            background-color: white;
+            color: #333;
+            cursor: pointer;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 4 5'%3E%3Cpath fill='%23343a40' d='M2 0L0 2h4zm0 5L0 3h4z'/%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position-x: 85%;
+            background-position-y: 50%;
+            padding-right: 15px;
+            transition: border-color 0.2s ease;
+            max-width: 170px;
+        }
+
+        .category-filter select:hover {
+            border-color: #007bff;
+        }
+
+        .category-filter select:focus {
+            outline: none;
+            border-color: #007bff;
+            box-shadow: 0 0 2px rgba(0, 123, 255, 0.5);
+        }
+
+        /* Styles for the menu items and card - 4 COLUMNS */
+        .menu-items {
+            display: flex;
+            flex-wrap: wrap;
+            margin-right: -15px;
+            margin-left: -15px;
+        }
+
+        .menu-item {
+            width: 25%;
+            padding-right: 15px;
+            padding-left: 15px;
+            margin-bottom: 10px;
+            box-sizing: border-box;
+        }
+
+        .menu-card {
+            width: 100%;
+            font-size: 0.8rem;
+        }
+
+        .menu-card-img-container {
+            max-height: 120px;
+            overflow: hidden;
+        }
+
+        .menu-card-img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+        }
+
+        .menu-card-title {
+            font-size: 0.9em;
+            margin-bottom: 3px;
+        }
+
+        .ingredients {
+            font-size: 0.75em;
+            margin-bottom: 5px;
+        }
+
+        .price {
+            font-size: 0.8em;
+            margin-bottom: 7px;
+        }
+
+        .btn-danger {
+            font-size: 0.7em;
+            padding: 3px 6px;
+        }
+
+        /* Animasi Fade In/Out */
+        .fade-in {
+            animation: fadeIn 0.3s ease-in-out;
+        }
+
+        .fade-out {
+            animation: fadeOut 0.2s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes fadeOut {
+            from {
+                opacity: 1;
+            }
+
+            to {
+                opacity: 0;
+            }
+        }
+
         /* Style adjustments for video container */
         .video-container {
             position: relative;
@@ -114,6 +249,40 @@
             transform: scale(1.1);
             /* Optional: Add zoom effect on hover */
         }
+
+         /* Locations Section Style */
+         .location-card {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+            background-color: white;
+        }
+
+        .location-card:hover {
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            transform: translateY(-3px);
+        }
+
+        .location-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+        }
+
+        .location-card .map-container {
+            margin-bottom: 15px;
+        }
+
+        .location-card .address,
+        .location-card .phone {
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        .location-card .phone i {
+            margin-right: 5px;
+        }
     </style>
 </head>
 
@@ -191,53 +360,68 @@
             </div>
         </section><!-- End About Us Section -->
 
-       <!-- ======= Menu Section ======= -->
-<section id="menu" class="menu section">
-    <div class="container">
-        <h2 class="text-center">Our Menu</h2>
-        <div class="container">
-            <div class="row gy-5 menu-items">
-                @foreach($menus as $menu)
-                <div class="col-lg-4 col-md-6 menu-item" data-aos="fade-up" data-aos-delay="100"
-                    data-category="{{ $menu->category }}">
-                    <div class="card h-100 shadow-sm menu-card">
-                        <div class="menu-card-img-container">
-                            <a href="{{ asset('storage/' . $menu->image) }}" class="glightbox"
-                                data-gallery="menu-gallery-{{ $menu->id }}">
-                                <img src="{{ asset('storage/' . $menu->image) }}" class="menu-card-img"
-                                    alt="{{ $menu->name }}">
-                            </a>
+        <!-- ======= Menu Section ======= -->
+        <section id="menu" class="menu section">
+            <div class="container">
+                <h2 class="text-center">Our Menu</h2>
+                <div class="container">
+                    <div class="row gy-5 menu-items">
+                        @foreach($menus->take(8) as $menu)
+                        <!-- Limit to 8 items -->
+                        <div class="col-lg-3 col-md-6 menu-item" data-aos="fade-up" data-aos-delay="100"
+                            data-category="{{ $menu->category }}">
+                            <div class="card h-100 shadow-sm menu-card">
+                                <div class="menu-card-img-container">
+                                    <a href="{{ asset('storage/' . $menu->image) }}" class="glightbox"
+                                        data-gallery="menu-gallery-{{ $menu->id }}">
+                                        <img src="{{ asset('storage/' . $menu->image) }}" class="menu-card-img"
+                                            alt="{{ $menu->name }}">
+                                    </a>
+                                </div>
+                                <div class="card-body d-flex flex-column">
+                                    <span class="menu-card-category">{{ $menu->category }}</span>
+                                    <h4 class="menu-card-title">{{ $menu->name }}</h4>
+                                    <p class="ingredients">
+                                        {{ $menu->description }}
+                                    </p>
+                                    <p class="price">
+                                        Rp {{ number_format($menu->price, 0, ',', '.') }}
+                                    </p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="card-body d-flex flex-column">
-                            <span class="menu-card-category">{{ $menu->category }}</span>
-                            <h4 class="menu-card-title">{{ $menu->name }}</h4>
-                            <p class="ingredients">
-                                {{ $menu->description }}
-                            </p>
-                            <p class="price">
-                                Rp {{ number_format($menu->price, 0, ',', '.') }}
-                            </p>
-                        </div>
+                        @endforeach
+                    </div>
+                    <div class="text-center mt-3">
+                        <a href="{{ route('menu') }}" class="btn btn-primary">See Full Menu</a>
                     </div>
                 </div>
-                @endforeach
-            </div>
-            <div class="text-center mt-3">
-                    <a href="{{ route('menu') }}" class="btn btn-primary">See Full Menu</a>
-                </div>
-        </div>
-</section><!-- End Menu Section -->
+        </section><!-- End Menu Section -->
 
-        <!-- ======= Locations Section ======= -->
+       <!-- ======= Locations Section ======= -->
         <section id="locations" class="locations section">
             <div class="container">
                 <h2 class="text-center">Our Locations</h2>
                 <div class="row">
                     @foreach($locations->take(2) as $location)
-                    <div class="col-md-6">
-                        <h3>{{ $location->name }}</h3>
-                        <div class="map-container">
-                            {!! $location->location !!}
+                    <div class="col-md-6 mb-4">
+                        <!-- Tambahkan mb-4 untuk margin bawah -->
+                        <div class="location-card">
+                            <h3>{{ $location->name }}</h3>
+                            <div class="map-container">
+                                {!! $location->location !!}
+                            </div>
+                            <p class="address">{{ $location->address }}</p>
+                            <!-- Tambahkan alamat -->
+                            <p class="phone"><i class="bi bi-phone"></i> {{ $location->phone }}</p>
+                            <!-- Tambahkan nomor telepon -->
+                            @if($location->directions_url)
+                            <a href="{{ $location->directions_url }}" target="_blank"
+                                class="btn btn-sm btn-outline-info">
+                                <i class="bi bi-geo-alt"></i> Get Directions
+                            </a>
+                            @endif
+                            <!-- Tambahkan tautan arah -->
                         </div>
                     </div>
                     @endforeach
