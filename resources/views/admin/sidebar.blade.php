@@ -18,6 +18,12 @@
     </a>
 </li>
 <li class="nav-item">
+    <a class="nav-link" href="{{ route('admin.location') }}">
+        <i class="fas fa-fw fa-envelope"></i>
+        <span>Manage Location</span>
+    </a>
+</li>
+<li class="nav-item">
     <a class="nav-link" href="{{ route('admin.contact') }}">
         <i class="fas fa-fw fa-envelope"></i>
         <span>Manage Contact</span>
