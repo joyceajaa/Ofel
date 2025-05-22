@@ -26,6 +26,15 @@
     .sidebar-brand-text {
         text-transform: none; /* Keep brand text as is */
     }
+    .stretched-link:after {
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 1;
+        content: "";
+    }
     </style>
 
 </head>
@@ -116,6 +125,7 @@
 
                             <!-- Example Dashboard Cards -->
                             <div class="row">
+
                                 <div class="col-xl-3 col-md-6 mb-4">
                                     <div class="card border-left-primary shadow h-100 py-2">
                                         <div class="card-body">
@@ -149,6 +159,60 @@
                                             </div>
                                         </div>
                                         <a href="{{ route('admin.feedback') }}" class="stretched-link"></a>
+                                    </div>
+                                </div>
+
+                                 <div class="col-xl-3 col-md-6 mb-4">
+                                    <div class="card border-left-info shadow h-100 py-2">
+                                        <div class="card-body">
+                                            <div class="row no-gutters align-items-center">
+                                                <div class="col mr-2">
+                                                    <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                                                        Manage About Us</div>
+                                                    <div class="h5 mb-0 font-weight-bold text-gray-800"></div>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <i class="fas fa-info-circle fa-2x text-gray-300"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <a href="{{ route('admin.about') }}" class="stretched-link"></a>
+                                    </div>
+                                </div>
+
+                                <div class="col-xl-3 col-md-6 mb-4">
+                                    <div class="card border-left-warning shadow h-100 py-2">
+                                        <div class="card-body">
+                                            <div class="row no-gutters align-items-center">
+                                                <div class="col mr-2">
+                                                    <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                                                        Manage Location</div>
+                                                    <div class="h5 mb-0 font-weight-bold text-gray-800"></div>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <i class="fas fa-map-marker-alt fa-2x text-gray-300"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <a href="{{ route('admin.location') }}" class="stretched-link"></a>
+                                    </div>
+                                </div>
+
+                                 <div class="col-xl-3 col-md-6 mb-4">
+                                    <div class="card border-left-danger shadow h-100 py-2">
+                                        <div class="card-body">
+                                            <div class="row no-gutters align-items-center">
+                                                <div class="col mr-2">
+                                                    <div class="text-xs font-weight-bold text-danger text-uppercase mb-1">
+                                                        Manage Contact</div>
+                                                    <div class="h5 mb-0 font-weight-bold text-gray-800"></div>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <i class="fas fa-envelope fa-2x text-gray-300"></i>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <a href="{{ route('admin.contact') }}" class="stretched-link"></a>
                                     </div>
                                 </div>
                             </div>
