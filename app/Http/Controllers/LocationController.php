@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Location;
+use App\Models\Wilayah;
 use Illuminate\Http\Request;
 
 class LocationController extends Controller
@@ -11,7 +12,8 @@ class LocationController extends Controller
     public function indexPublic()
     {
         $locations = Location::all(); // Mengambil semua data lokasi
-        return view('locations.index', compact('locations')); // Menampilkan view index dengan data locations
+        $wilayahs = Wilayah::all(); // atau query sesuai kebutuhan Anda
+        return view('locations.index', compact('locations', 'wilayahs'));
     }
     /**
      * Display a listing of the resource.
@@ -66,17 +68,17 @@ class LocationController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, Location $location)
-    {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'location' => 'required|string', // Bisa juga tambahkan validasi panjang karakter
-        ]);
+{
+    $request->validate([
+        'name' => 'required|string|max:255',
+    ]);
 
-        $location->update($request->all());
+    $location->name = $request->name; // Hanya update kolom 'name'
+    $location->save();
 
-        return redirect()->route('admin.locations.index')
-                         ->with('success', 'Lokasi berhasil diupdate.');
-    }
+    return redirect()->route('admin.locations.index')
+                     ->with('success', 'Lokasi berhasil diupdate.');
+}
 
     /**
      * Remove the specified resource from storage.

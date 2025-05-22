@@ -126,7 +126,9 @@ class MenuController extends Controller
      */
     public function indexPublic()
     {
-        $menus = Menu::all(); // Atau paginate jika perlu
-        return view('menu.index', compact('menus')); // Buat view 'menus/index_public.blade.php'
+        $menus = Menu::all();
+        // Ambil nilai-nilai unik dari kolom 'category'
+        $categories = Menu::distinct('category')->pluck('category');
+        return view('menu.index', compact('menus', 'categories'));
     }
 }

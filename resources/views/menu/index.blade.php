@@ -13,16 +13,10 @@
     <link href="{{ URL::asset('assets/img/apple-touch-icon.png') }}" rel="apple-touch-icon">
 
     <!-- Fonts -->
-    <link href="https://fonts.googleapis.com" rel="preconnect">
-    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Amatic+SC:wght@400;700&display=swap"
-        rel="stylesheet">
-
     <!-- Vendor CSS Files -->
     <link href="{{ URL::asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('assets/vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
-    <link href="{{ URL::asset('assets/vendor/aos/aos.js') }}" rel="stylesheet">
+    <link href="{{ URL::asset('assets/vendor/aos/aos.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('assets/vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
     <link href="{{ URL::asset('assets/vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
 
@@ -100,8 +94,10 @@
             padding-left: 15px;
             margin-bottom: 10px;
             box-sizing: border-box;
-            opacity: 1;  /* Set opacity to 1 by default */
-            transition: opacity 0.3s ease-in-out, display 0.3s ease-in-out; /* Add transition for opacity and display */
+            opacity: 1;
+            /* Set opacity to 1 by default */
+            transition: opacity 0.3s ease-in-out, display 0.3s ease-in-out;
+            /* Add transition for opacity and display */
         }
 
         .menu-card {
@@ -204,17 +200,9 @@
             <div class="container category-filter" data-aos="fade-up">
                 <select id="categoryFilterDropdown" class="form-select">
                     <option value="all" selected>Semua Kategori</option>
-                    <option value="BentoCake">Bento Cake</option>
-                    <option value="Bouquet">Bouquet</option>
-                    <option value="CharacterCake">Character Cake</option>
-                    <option value="FlowerBouquet">Flower Bouquet</option>
-                    <option value="FruitCake">Fruit Cake</option>
-                    <option value="FudyBrownies">Fudy Brownies</option>
-                    <option value="KleponCake">Klepon Cake</option>
-                    <option value="PaintingCake">Painting Cake</option>
-                    <option value="Pudding">Pudding</option>
-                    <option value="RibbonCake">Ribbon Cake</option>
-                    <option value="TierCake">Tier Cake</option>
+                    @foreach ($categories as $category)
+                        <option value="{{ $category }}">{{ $category }}</option>
+                    @endforeach
                 </select>
             </div>
 
@@ -222,7 +210,7 @@
                 <div class="row menu-items gy-5">
                     @foreach($menus as $menu)
                     <div class="col-12 col-sm-6 col-md-4 col-lg-3 menu-item" data-aos="fade-up" data-aos-delay="100"
-                        data-category="{{ $menu->category }}">
+                        data-category="{{ $menu->category }}" style="display: block;">  <!-- PERUBAHAN PENTING -->
                         <div class="card h-100 shadow-sm menu-card">
                             <div class="menu-card-img-container">
                                 <a href="{{ asset('storage/' . $menu->image) }}" class="glightbox"
@@ -854,12 +842,16 @@
                     const category = this.value;
 
                     menuItems.forEach(item => {
-                         // Atur display dan opacity secara bersamaan
+                        // Atur display
                         if (category === 'all' || item.dataset.category === category) {
-                            item.classList.remove('fade-out');
-                            item.classList.add('fade-in');
                             item.style.display = 'block';
-                            item.style.opacity = 1;
                         } else {
-                            item.classList.remove('fade-in');
-                            item.
+                            item.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        </script>
+</body>
+
+</html>

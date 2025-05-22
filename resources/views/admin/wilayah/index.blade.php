@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Edit Lokasi - {{ config('app.name', 'Laravel') }}</title>
+    <title>Manage Wilayahs - {{ config('app.name', 'Laravel') }}</title>
 
     <!-- Custom fonts for this template-->
     <link href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
@@ -27,7 +27,7 @@
     <!-- Page Wrapper -->
     <div id="wrapper">
 
-        <!-- Sidebar -->
+        <!-- Sidebar (Sama seperti di kode dashboard, pastikan menu sudah sesuai)-->
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
@@ -58,15 +58,6 @@
 
             <!-- Nav Items - Pages -->
             @include('admin.sidebar')
-
-            <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
-
-            <!-- Sidebar Toggler (Sidebar) -->
-            <div class="text-center d-none d-md-inline">
-                <button class="rounded-circle border-0" id="sidebarToggle"></button>
-            </div>
-
         </ul>
         <!-- End of Sidebar -->
 
@@ -76,7 +67,7 @@
             <!-- Main Content -->
             <div id="content">
 
-                <!-- Topbar -->
+                <!-- Topbar (Sama seperti di kode dashboard) -->
                 @include('admin.topbar')
                 <!-- End of Topbar -->
 
@@ -84,30 +75,64 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Edit Lokasi</h1>
-                    <p class="mb-4">Edit informasi lokasi Anda di sini.</p>
+                    <h1 class="h3 mb-2 text-gray-800">Manage Wilayahs</h1>
+                    <p class="mb-4">Kelola daftar wilayah Anda di sini.</p>
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
-                            <h6 class="m-0 font-weight-bold text-primary">Form Edit Lokasi</h6>
+                            <h6 class="m-0 font-weight-bold text-primary">Daftar Wilayah</h6>
                         </div>
                         <div class="card-body">
 
-                            <form action="{{ route('admin.locations.update', $location->id) }}" method="POST">
-                                @csrf
-                                @method('PUT')
-
-                                <div class="form-group">
-                                    <label for="name">Nama:</label>
-                                    <input type="text" class="form-control" id="name" name="name" value="{{ $location->name }}" required>
+                            @if (session('success'))
+                                <div class="alert alert-success">
+                                    {{ session('success') }}
                                 </div>
-                                <!-- Menghilangkan input field location karena tidak ada di database -->
+                            @endif
 
-                                <button type="submit" class="btn btn-primary">Update</button>
-                                <a href="{{ route('admin.locations.index') }}" class="btn btn-secondary">Batal</a>
-                            </form>
+                            <div class="mb-3">
+                                <a href="{{ route('admin.wilayahs.create') }}" class="btn btn-primary">Tambah Wilayah Baru</a>
+                            </div>
 
+                            <div class="table-responsive">
+                                @if ($wilayahs->isEmpty())
+                                    <p>Belum ada wilayah yang ditambahkan.</p>
+                                @else
+                                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Nama</th>
+                                                <th>Aksi</th>
+                                            </tr>
+                                        </thead>
+                                        <tfoot>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>Nama</th>
+                                                <th>Aksi</th>
+                                            </tr>
+                                        </tfoot>
+                                        <tbody>
+                                            @foreach ($wilayahs as $wilayah)
+                                                <tr>
+                                                    <td>{{ $loop->iteration }}</td>
+                                                    <td>{{ $wilayah->nama }}</td>
+                                                    <td>
+                                                        <a href="{{ route('admin.wilayahs.edit', $wilayah->id) }}" class="btn btn-sm btn-warning">Edit</a>
+                                                        <form action="{{ route('admin.wilayahs.destroy', $wilayah->id) }}" method="POST" style="display: inline-block;">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus wilayah ini?')">Hapus</button>
+                                                        </form>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                @endif
+                            </div>
                         </div>
                     </div>
 
@@ -117,7 +142,7 @@
             </div>
             <!-- End of Main Content -->
 
-            <!-- Footer -->
+            <!-- Footer (Sama seperti di kode dashboard) -->
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
@@ -138,7 +163,7 @@
         <i class="fas fa-angle-up"></i>
     </a>
 
-    <!-- Logout Modal-->
+    <!-- Logout Modal (Sama seperti di kode dashboard) -->
     @include('admin.modal.logout')
 
     <!-- Bootstrap core JavaScript-->
@@ -150,6 +175,13 @@
 
     <!-- Custom scripts for all pages-->
     <script src="{{ asset('js/sb-admin-2.min.js') }}"></script>
+
+    <!-- Page level plugins -->
+    <script src="{{ asset('vendor/datatables/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="{{ asset('js/demo/datatables-demo.js') }}"></script>
 
 </body>
 

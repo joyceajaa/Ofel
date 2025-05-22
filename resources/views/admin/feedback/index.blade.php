@@ -17,6 +17,7 @@
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
 
     <!-- Custom styles for this template-->
     <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
@@ -25,24 +26,173 @@
     <style>
         .footer.dark-background {
             background-color: #343a40;
-            /* Dark background color */
             color: white;
-            /* White text color */
         }
 
         .footer.dark-background a {
             color: #aaa;
-            /* Light gray link color */
         }
 
         .footer.dark-background a:hover {
             color: white;
-            /* White link color on hover */
         }
 
         .footer.dark-background .icon {
             color: #5cb85c;
-            /* Green color for icons */
+        }
+
+        /* Custom CSS for improved look and responsiveness */
+        .dataTables_wrapper .row {
+            margin-bottom: 15px;
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        .img-thumbnail {
+            max-width: 150px; /* Increased max-width */
+            height: auto;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .img-thumbnail:hover {
+             transform: scale(1.1);
+             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        /* Increase video size */
+        .video-container {
+            width: 240px; /* Increased width */
+            height: 135px; /* Increased height, maintaining aspect ratio */
+            margin: 0 auto; /* Center the video */
+        }
+
+        .video-container video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Ensure video fills the container */
+        }
+
+        /* Adjustments for better responsiveness */
+        @media (max-width: 768px) {
+            .sidebar {
+                display: none;
+            }
+
+            #content-wrapper {
+                margin-left: 0;
+            }
+
+            .table-responsive {
+                border: none;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .table-responsive {
+                overflow-x: scroll;
+            }
+        }
+
+        /* Enhancement for Buttons */
+        .btn-primary, .btn-danger {
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover, .btn-danger:hover {
+            transform: scale(1.05);
+            box-shadow: 0 3px 7px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Table Header Styling */
+        .card-header {
+            background-color: #f8f9fc;
+            border-bottom: 1px solid #e3e6f0;
+        }
+
+        /* Improve Modal Appearance */
+        .modal-content {
+            border-radius: 10px;
+        }
+
+        .modal-header {
+            border-bottom: none;
+        }
+
+        .modal-footer {
+            border-top: none;
+        }
+
+        /* Add a subtle background pattern */
+        body {
+            background-size: cover;
+            background-attachment: fixed;
+        }
+
+        /* Style links in the table for better visibility */
+        .table a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .table a:hover {
+            text-decoration: underline;
+        }
+
+        /* Animation for the page title */
+        .page-title {
+            animation: fadeInUp 1s ease;
+        }
+
+        /* Animated gradient for the add button */
+        .btn-primary.add-button {
+            background: linear-gradient(to right, #4CAF50, #2E7D32);
+            color: white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            border: none;
+        }
+
+        .btn-primary.add-button:hover {
+            background: linear-gradient(to right, #2E7D32, #4CAF50);
+            transform: scale(1.05);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Add animation to the table rows */
+        .table tbody tr {
+            animation: fadeIn 0.7s ease-in-out forwards;
+            opacity: 0;
+        }
+
+        .table tbody tr:nth-child(odd) {
+            animation-delay: 0.1s;
+        }
+
+        .table tbody tr:nth-child(even) {
+            animation-delay: 0.2s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Keyframe animation for fadeInUp (using Animate.css) */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translate3d(0, 20px, 0);
+            }
+
+            to {
+                opacity: 1;
+                transform: translate3d(0, 0, 0);
+            }
         }
     </style>
 
@@ -53,7 +203,7 @@
     <!-- Page Wrapper -->
     <div id="wrapper">
 
-        <!-- Sidebar (Sama seperti di kode dashboard, pastikan menu sudah sesuai)-->
+        <!-- Sidebar -->
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
@@ -101,7 +251,7 @@
             <!-- Main Content -->
             <div id="content">
 
-                <!-- Topbar (Sama seperti di kode dashboard) -->
+                <!-- Topbar -->
                 @include('admin.topbar')
                 <!-- End of Topbar -->
 
@@ -109,8 +259,12 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Feedback</h1>
-                    <p class="mb-4">Berikut adalah umpan balik dari pengguna.</p>
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800 page-title">Feedback</h1>
+                        <a href="{{ route('admin.feedback.create') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary add-button shadow-sm">
+                            <i class="fas fa-plus fa-sm text-white-50"></i> Tambah Feedback Baru
+                        </a>
+                    </div>
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
@@ -121,11 +275,6 @@
                             @if (session('success'))
                                 <div class="alert alert-success">{{ session('success') }}</div>
                             @endif
-
-                            <div class="mb-3">
-                                <a href="{{ route('admin.feedback.create') }}" class="btn btn-primary">Tambah Menu
-                                    Baru</a>
-                            </div>
 
                             <div class="table-responsive">
                                 <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -141,18 +290,6 @@
                                             <th>Aksi</th>
                                         </tr>
                                     </thead>
-                                    <tfoot>
-                                        <tr>
-                                            <th>#</th>
-                                            <th>Nama</th>
-                                            <th>Email</th>
-                                            <th>Pesan</th>
-                                            <th>Foto</th>
-                                            <th>Video</th>
-                                            <th>Waktu</th>
-                                            <th>Aksi</th>
-                                        </tr>
-                                    </tfoot>
                                     <tbody>
                                         @foreach ($feedbacks as $feedback)
                                             <tr>
@@ -163,7 +300,7 @@
                                                 <td>
                                                     @if ($feedback->image)
                                                         <img src="{{ asset('storage/' . $feedback->image) }}"
-                                                            alt="Foto" width="80">
+                                                            alt="Foto" class="img-thumbnail">
                                                     @else
                                                         <span class="text-muted">Tidak ada</span>
                                                     @endif
@@ -171,11 +308,13 @@
 
                                                 <td>
                                                     @if ($feedback->video)
-                                                        <video width="160" height="90" controls>
-                                                            <source src="{{ asset('storage/' . $feedback->video) }}"
-                                                                type="video/mp4">
-                                                            Browser tidak mendukung pemutaran video.
-                                                        </video>
+                                                       <div class="video-container">
+                                                          <video controls>
+                                                                <source src="{{ asset('storage/' . $feedback->video) }}"
+                                                                   type="video/mp4">
+                                                                Browser tidak mendukung pemutaran video.
+                                                          </video>
+                                                        </div>
                                                     @else
                                                         <span class="text-muted">Tidak ada</span>
                                                     @endif
@@ -314,7 +453,7 @@
         <i class="fas fa-angle-up"></i>
     </a>
 
-    <!-- Logout Modal (Sama seperti di kode dashboard) -->
+    <!-- Logout Modal -->
     @include('admin.modal.logout')
 
     <!-- Bootstrap core JavaScript-->
@@ -333,6 +472,14 @@
 
     <!-- Page level custom scripts -->
     <script src="{{ asset('js/demo/datatables-demo.js') }}"></script>
+
+    <script>
+        $(document).ready( function () {
+            $('#dataTable').DataTable({
+                responsive: true
+            });
+        } );
+    </script>
 
 </body>
 

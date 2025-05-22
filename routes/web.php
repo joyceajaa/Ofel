@@ -13,6 +13,7 @@ use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\Admin\AboutController; // <-- Tambahkan ini
 use App\Http\Controllers\WelcomeController;
+use App\Http\Controllers\WilayahController; // <-- Tambahkan ini
 
 /*
 |--------------------------------------------------------------------------
@@ -154,5 +155,14 @@ Route::middleware('auth')->group(function () {
          Route::get('/abouts/{about}/edit', [AboutController::class, 'edit'])->name('abouts.edit');
          Route::put('/abouts/{about}', [AboutController::class, 'update'])->name('abouts.update');
          Route::delete('/abouts/{about}', [AboutController::class, 'destroy'])->name('abouts.destroy');
+
+         // == Rute Wilayah Admin (CRUD) - Didefinisikan manual ==
+         Route::get('/wilayahs', [WilayahController::class, 'index'])->name('wilayahs.index');
+         Route::get('/wilayahs/create', [WilayahController::class, 'create'])->name('wilayahs.create');
+         Route::post('/wilayahs', [WilayahController::class, 'store'])->name('wilayahs.store');
+         Route::get('/wilayahs/{wilayah}', [WilayahController::class, 'show'])->name('wilayahs.show');
+         Route::get('/wilayahs/{wilayah}/edit', [WilayahController::class, 'edit'])->name('wilayahs.edit');
+         Route::put('/wilayahs/{wilayah}', [WilayahController::class, 'update'])->name('wilayahs.update');
+         Route::delete('/wilayahs/{wilayah}', [WilayahController::class, 'destroy'])->name('wilayahs.destroy');
      });
 });
