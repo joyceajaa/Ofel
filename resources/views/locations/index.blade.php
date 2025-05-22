@@ -86,61 +86,7 @@
     </main><!-- End #main -->
 
     <!-- ======= Footer ======= -->
-    <footer id="footer" class="footer dark-background py-5">
-        <div class="container">
-            <div class="row gy-3">
-                <div class="col-lg-3 col-md-6 d-flex">
-                    <i class="bi bi-geo-alt icon"></i>
-                    <div class="address">
-                        <h4>Address</h4>
-                        <p>Uma Rihit</p>
-                        <p>Onan Raja, Balige III</p>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6 d-flex">
-                    <i class="bi bi-telephone icon"></i>
-                    <div>
-                        <h4>Contact</h4>
-                        <p>
-                            <strong>Phone:</strong> <span>+62 819 1259 1669</span><br>
-                            <strong>Instagram:</strong> <span>@ofelkitchen.id</span><br>
-                        </p>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6 d-flex">
-                    <i class="bi bi-clock icon"></i>
-                    <div>
-                        <h4>Opening Hours</h4>
-                        <p>
-                            <strong>Mon-Sat:</strong> <span>08AM - 11PM</span><br>
-                            <strong>Sunday</strong>: <span>Closed</span>
-                        </p>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-md-6">
-                    <h4>Follow Us</h4>
-                    <div class="social-links d-flex">
-                        <a href="#" class="twitter"><i class="bi bi-twitter-x"></i></a>
-                        <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-                        <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-                        <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="container copyright text-center mt-4">
-            <p>© <span>Copyright</span> <strong class="px-1 sitename">Ofel Kitchen</strong> <span>All Rights
-                    Reserved</span></p>
-            <div class="credits">
-                Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a> Distributed by <a
-                    href="https://themewagon.com">ThemeWagon</a>
-            </div>
-        </div>
-    </footer><!-- End Footer -->
+    @include('layouts.footer')
 
     <!-- Scroll Top -->
     <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i

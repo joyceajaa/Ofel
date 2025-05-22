@@ -53,7 +53,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('admin.contact') }}">
+                    <a class="nav-link" href="{{ route('admin.contacts.index') }}">
                         <i class="fas fa-fw fa-envelope"></i>
                         <span>Manage Contact</span>
                     </a>

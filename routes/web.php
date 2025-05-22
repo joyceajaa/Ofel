@@ -14,6 +14,7 @@ use App\Http\Controllers\Admin\AboutController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\WilayahController;
 
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,7 +28,7 @@ Route::get('/menu/{menu}', [PublicMenuController::class, 'showPublic'])->name('m
 Route::get('/about', [AboutController::class, 'indexPublic'])->name('about');
 Route::get('/locationpublic', [LocationController::class, 'indexPublic'])->name('locations.indexPublic');
 Route::get('/feedback', [FeedbackController::class, 'indexPublic'])->name('feedback');
-Route::get('/contact', fn () => view('contact.index'))->name('contact');
+Route::get('/contact', [ContactController::class, 'showPublic'])->name('contact');
 
 
 // == RUTE KHUSUS USER (Login) ==
@@ -99,4 +100,13 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::get('/wilayahs/{wilayah}/edit', [WilayahController::class, 'edit'])->name('wilayahs.edit');
     Route::put('/wilayahs/{wilayah}', [WilayahController::class, 'update'])->name('wilayahs.update');
     Route::delete('/wilayahs/{wilayah}', [WilayahController::class, 'destroy'])->name('wilayahs.destroy');
+
+    // CRUD Contact
+    Route::get('/admin/contacts', [ContactController::class, 'index'])->name('contacts.index');
+    Route::get('/admin/contacts/create', [ContactController::class, 'create'])->name('contacts.create');
+    Route::post('/admin/contacts', [ContactController::class, 'store'])->name('contacts.store');
+    Route::get('/admin/contacts/{contact}', [ContactController::class, 'show'])->name('contacts.show');
+    Route::get('/admin/contacts/{contact}/edit', [ContactController::class, 'edit'])->name('contacts.edit');
+    Route::put('/admin/contacts/{contact}', [ContactController::class, 'update'])->name('contacts.update');
+    Route::delete('/admin/contacts/{contact}', [ContactController::class, 'destroy'])->name('contacts.destroy');
 });

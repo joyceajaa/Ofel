@@ -17,7 +17,7 @@ class WelcomeController extends Controller
             return redirect()->route('admin.dashboard');
         }
 
-        $menus = Menu::all()->take(3); // Ambil 3 menu pertama
+        $menus = Menu::all()->take(8); // Ambil 3 menu pertama
         $about = About::first(); // Ambil record "About Us" pertama
         $locations = Location::all()->take(2); // Ambil 2 lokasi pertama
         $feedbacks = Feedback::all()->take(3); // Ambil 3 feedback pertama
