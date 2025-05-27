@@ -55,15 +55,27 @@
         /* Feedback Section */
         .feedback-section {
             padding: 40px 0;
-            background: #f9fafc;
+            background-color: #f8f9fa; /* Light gray background */
+        }
+
+        .feedback-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
         }
 
         .feedback-card {
             background-color: #ffffff;
-            border-left: 5px solid rgb(207, 19, 28);
             border-radius: 12px;
             box-shadow: 0 6px 12px rgba(0, 0, 0, 0.06);
             padding: 20px;
+            transition: transform 0.2s ease;
+        }
+
+        .feedback-card:hover {
+            transform: translateY(-5px);
         }
 
         .feedback-card h2 {
@@ -199,59 +211,55 @@
     <main class="main">
         <section id="feedback" class="feedback-section">
             <div class="container-fluid">
-                <div class="row justify-content-center">
-                    <div class="col-lg-12">
-                        <div class="feedback-card" data-aos="fade-up">
-                            <h2>Customer Feedback</h2>
-                            <p>What our customers are saying about us!</p>
-
-                            <div class="feedback-list">
-                                @if ($feedbacks->isEmpty())
-                                    <div class="empty-feedback">
-                                        <img src="{{ asset('assets/img/empty-feedback.svg') }}" alt="No Feedback">
-                                        <p>Belum ada tanggapan. Jadilah yang pertama memberikan feedback!</p>
-                                    </div>
-                                @else
-                                    @foreach ($feedbacks as $feedback)
-                                        <div class="feedback-item">
-                                            <h3 class="feedback-name">{{ $feedback->name }}</h3>
-                                            <p class="feedback-email">{{ $feedback->email }}</p>
-                                            <p class="feedback-message">{{ $feedback->message }}</p>
-
-                                            <div class="media-container">
-                                                @if ($feedback->image)
-                                                    <div class="media-item">
-                                                        <img src="{{ asset('storage/' . $feedback->image) }}"
-                                                            alt="Foto">
-                                                    </div>
-                                                @endif
-
-                                                @if ($feedback->video)
-                                                    <div class="media-item">
-                                                        <video controls style="max-width: 100%; height: auto;">
-                                                            <source src="{{ asset('storage/' . $feedback->video) }}"
-                                                                type="video/mp4">
-                                                            Browser tidak mendukung video.
-                                                        </video>
-                                                    </div>
-                                                @endif
-                                            </div>
-
-                                            <small class="text-muted">
-                                                Diterima pada: {{ $feedback->created_at->format('Y-m-d H:i') }}
-                                            </small>
-                                        </div>
-                                    @endforeach
-
-                                    <!-- Pagination -->
-                                    <div class="mt-4">
-                                        {{ $feedbacks->links() }}
-                                    </div>
-                                @endif
-                            </div>
+                <div class="feedback-container">
+                    @if ($feedbacks->isEmpty())
+                        <div class="empty-feedback">
+                            <img src="{{ asset('assets/img/empty-feedback.svg') }}" alt="No Feedback">
+                            <p>Belum ada tanggapan. Jadilah yang pertama memberikan feedback!</p>
                         </div>
-                    </div>
+                    @else
+                        @foreach ($feedbacks as $feedback)
+                            <div class="feedback-card" data-aos="fade-up">
+                                <div class="feedback-list">
+                                    <div class="feedback-item">
+                                        <h3 class="feedback-name">{{ $feedback->name }}</h3>
+                                        <p class="feedback-email">{{ $feedback->email }}</p>
+                                        <p class="feedback-message">{{ $feedback->message }}</p>
+
+                                        <div class="media-container">
+                                            @if ($feedback->image)
+                                                <div class="media-item">
+                                                    <img src="{{ asset('storage/' . $feedback->image) }}" alt="Foto">
+                                                </div>
+                                            @endif
+
+                                            @if ($feedback->video)
+                                                <div class="media-item">
+                                                    <video controls style="max-width: 100%; height: auto;">
+                                                        <source src="{{ asset('storage/' . $feedback->video) }}"
+                                                            type="video/mp4">
+                                                        Browser tidak mendukung video.
+                                                    </video>
+                                                </div>
+                                            @endif
+                                        </div>
+
+                                        <small class="text-muted">
+                                            Diterima pada: {{ $feedback->created_at->format('Y-m-d H:i') }}
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                    @endif
                 </div>
+
+                <!-- Pagination -->
+                @if (!$feedbacks->isEmpty())
+                    <div class="mt-4 d-flex justify-content-center">
+                        {{ $feedbacks->links() }}
+                    </div>
+                @endif
             </div>
         </section>
     </main>

@@ -47,7 +47,7 @@
                     </a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('admin.location') }}">
+                    <a class="nav-link" href="{{ route('admin.wilayahs.index') }}">
                         <i class="fas fa-fw fa-envelope"></i>
                         <span>Manage Location</span>
                     </a>
