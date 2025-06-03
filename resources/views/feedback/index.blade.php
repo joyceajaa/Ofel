@@ -274,4 +274,4 @@
     <script src="{{ URL::asset('assets/js/main.js') }}"></script>
 </body>
 
-</html>
+</html> 
