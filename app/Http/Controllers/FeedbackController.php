@@ -36,7 +36,7 @@ public function store(Request $request)
         'video' => 'nullable|mimetypes:video/mp4,video/avi,video/mpeg|max:1024000',
     ]);
 
-    $data = $request->only('name', 'email', 'message');
+    $data = $request->only('name', 'email', 'message', 'image', 'video');
 
     // Simpan file image jika ada
     if ($request->hasFile('image')) {
@@ -47,6 +47,9 @@ public function store(Request $request)
     if ($request->hasFile('video')) {
         $data['video'] = $request->file('video')->store('feedback_videos', 'public');
     }
+
+    // Tambahkan user_id ke data
+    $data['user_id'] = auth()->user()->id_users; // Dapatkan ID user yang sedang login, asumsikan kolomnya id_users
 
     Feedback::create($data);
 
@@ -79,7 +82,9 @@ public function store(Request $request)
     public function destroyUserFeedback(Feedback $feedback)
     {
         // 1. Otorisasi: Pastikan pengguna yang login *adalah* pemilik feedback ini
-        if ($feedback->email !== Auth::user()->email) { // Periksa email atau kolom user_id (terbaik)
+        //if ($feedback->email !== Auth::user()->email) { // Periksa email atau kolom user_id (terbaik)
+
+        if ($feedback->user_id !== Auth::user()->id_users) { // Periksa user_id
             abort(403, 'Unauthorized action.'); // Atau redirect
         }
 

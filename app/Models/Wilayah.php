@@ -9,5 +9,5 @@ class Wilayah extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['nama']; // Kolom yang boleh diisi
+    protected $fillable = ['nama', 'user_id']; // Kolom yang boleh diisi
 }

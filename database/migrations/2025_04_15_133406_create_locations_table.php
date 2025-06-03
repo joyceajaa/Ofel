@@ -13,6 +13,8 @@ return new class extends Migration
     {
         Schema::create('locations', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('user_id')->nullable(); // Tambahkan user_id, nullable
+            $table->foreign('user_id')->references('id_users')->on('users')->onDelete('set null'); // Foreign key ke kolom id_users di tabel users
             $table->string('name');
             $table->text('location'); // Gunakan text karena embed code biasanya panjang
             $table->timestamps();

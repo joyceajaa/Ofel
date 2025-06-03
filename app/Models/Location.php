@@ -24,6 +24,7 @@ class Location extends Model
     protected $fillable = [
         'name',
         'location', // Kolom untuk embed code
+        'user_id', // Tambahkan user_id ke fillable
     ];
 
     /**
@@ -36,5 +37,11 @@ class Location extends Model
         'name' => 'string',
         'location' => 'string',  // Pastikan di cast ke string
     ];
+
+     // Definisikan relasi dengan model User
+     public function user()
+     {
+         return $this->belongsTo(User::class, 'user_id', 'id_users'); // sesuaikan foreign key dan local key
+     }
 
 }

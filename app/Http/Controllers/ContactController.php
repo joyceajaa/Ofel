@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Contact;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ContactController extends Controller
 {
@@ -33,7 +34,11 @@ class ContactController extends Controller
             'jadwal_toko' => 'nullable',
         ]);
 
-        Contact::create($request->all());
+        // Tambahkan user_id ke data
+        $data = $request->all();
+        $data['user_id'] = auth()->user()->id_users; // Dapatkan ID user yang sedang login
+
+        Contact::create($data);
 
         return redirect()->route('admin.contacts.index')
             ->with('success', 'Contact created successfully.');

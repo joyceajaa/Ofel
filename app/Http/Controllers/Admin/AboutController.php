@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\About;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Auth;
 
 class AboutController extends Controller
 {
@@ -48,6 +49,9 @@ class AboutController extends Controller
             $path = $request->file('image')->store('about-images', 'public');
             $data['image_path'] = $path;
         }
+
+        // Tambahkan user_id ke data
+        $data['user_id'] = auth()->user()->id_users; // Dapatkan ID user yang sedang login
 
         About::create($data);
 

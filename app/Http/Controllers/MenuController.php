@@ -29,27 +29,30 @@ class MenuController extends Controller
      * Store a newly created resource in storage. (Admin)
      */
     public function store(Request $request)
-    {
-        $request->validate([
-            'category' => 'required|string|max:255|in:BentoCake,Bouquet,CharacterCake,FlowerBouquet,FruitCake,FudyBrownies,KleponCake,PaintingCake,Pudding,RibbonCake,TierCake', // Validasi kategori
-            'name' => 'required|string|max:255',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048', // Validasi gambar
-            'price' => 'required|numeric|min:0',
-            'description' => 'nullable|string',
-        ]);
+{
+    $request->validate([
+        'category' => 'required|string|max:255|in:BentoCake,Bouquet,CharacterCake,FlowerBouquet,FruitCake,FudyBrownies,KleponCake,PaintingCake,Pudding,RibbonCake,TierCake',
+        'name' => 'required|string|max:255',
+        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        'price' => 'required|numeric|min:0',
+        'description' => 'nullable|string',
+    ]);
 
-        $data = $request->all();
+    $data = $request->all();
 
-        if ($request->hasFile('image')) {
-            $imagePath = $request->file('image')->store('public/images/menus'); // Simpan di storage/app/public/images/menus
-            $data['image'] = str_replace('public/', '', $imagePath); // Simpan path relatif ke database
-        }
-
-        Menu::create($data);
-
-        return redirect()->route('admin.menus.index')
-                         ->with('success', 'Menu berhasil ditambahkan.');
+    if ($request->hasFile('image')) {
+        $imagePath = $request->file('image')->store('public/images/menus');
+        $data['image'] = str_replace('public/', '', $imagePath);
     }
+
+    // Tambahkan user_id ke data
+    $data['user_id'] = auth()->id(); // Dapatkan ID user yang sedang login
+
+    Menu::create($data);
+
+    return redirect()->route('admin.menus.index')
+                     ->with('success', 'Menu berhasil ditambahkan.');
+}
 
     /**
      * Display the specified resource. (Admin)
@@ -71,31 +74,35 @@ class MenuController extends Controller
      * Update the specified resource in storage. (Admin)
      */
     public function update(Request $request, Menu $menu)
-    {
-        $request->validate([
-            'category' => 'required|string|max:255|in:BentoCake,Bouquet,CharacterCake,FlowerBouquet,FruitCake,FudyBrownies,KleponCake,PaintingCake,Pudding,RibbonCake,TierCake', // Validasi kategori
-            'name' => 'required|string|max:255',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'price' => 'required|numeric|min:0',
-            'description' => 'nullable|string',
-        ]);
+{
+    $request->validate([
+        'category' => 'required|string|max:255|in:BentoCake,Bouquet,CharacterCake,FlowerBouquet,FruitCake,FudyBrownies,KleponCake,PaintingCake,Pudding,RibbonCake,TierCake',
+        'name' => 'required|string|max:255',
+        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        'price' => 'required|numeric|min:0',
+        'description' => 'nullable|string',
+    ]);
 
-        $data = $request->all();
+    $data = $request->all();
 
-        if ($request->hasFile('image')) {
-            // Hapus gambar lama jika ada
-            if ($menu->image) {
-                Storage::delete('public/' . $menu->image);
-            }
-            $imagePath = $request->file('image')->store('public/images/menus');
-            $data['image'] = str_replace('public/', '', $imagePath);
+    if ($request->hasFile('image')) {
+        if ($menu->image) {
+            Storage::delete('public/' . $menu->image);
         }
-
-        $menu->update($data);
-
-        return redirect()->route('admin.menus.index')
-                         ->with('success', 'Menu berhasil diupdate.');
+        $imagePath = $request->file('image')->store('public/images/menus');
+        $data['image'] = str_replace('public/', '', $imagePath);
     }
+
+    // Pastikan user_id tidak diubah saat update
+    // Jika perlu, Anda bisa memvalidasi bahwa user yang mengupdate
+    // adalah user yang membuat menu ini sebelumnya.
+    // $data['user_id'] = auth()->id();  // Hindari mengganti user_id yang sudah ada, kecuali ada kebutuhan spesifik
+
+    $menu->update($data);
+
+    return redirect()->route('admin.menus.index')
+                     ->with('success', 'Menu berhasil diupdate.');
+}
 
     /**
      * Remove the specified resource from storage. (Admin)

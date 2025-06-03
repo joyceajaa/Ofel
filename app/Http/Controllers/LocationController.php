@@ -42,7 +42,11 @@ class LocationController extends Controller
             'location' => 'required|string', // Bisa juga tambahkan validasi panjang karakter
         ]);
 
-        Location::create($request->all());
+        // Tambahkan user_id ke data yang akan disimpan
+        $data = $request->all();
+        $data['user_id'] = auth()->user()->id_users; // Dapatkan ID user yang sedang login, asumsikan kolomnya id_users
+
+        Location::create($data);
 
         return redirect()->route('admin.locations.index')
                          ->with('success', 'Lokasi berhasil ditambahkan.');
@@ -74,6 +78,8 @@ class LocationController extends Controller
     ]);
 
     $location->name = $request->name; // Hanya update kolom 'name'
+    // Anda mungkin perlu menambahkan logika untuk memeriksa apakah user yang mengupdate
+    // memiliki izin untuk mengubah lokasi ini.
     $location->save();
 
     return redirect()->route('admin.locations.index')

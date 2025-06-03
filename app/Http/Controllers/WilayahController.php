@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Wilayah;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class WilayahController extends Controller
 {
@@ -33,7 +34,11 @@ class WilayahController extends Controller
             'nama' => 'required|string|max:255',
         ]);
 
-        Wilayah::create($request->all());
+        // Tambahkan user_id ke data
+        $data = $request->all();
+        $data['user_id'] = auth()->user()->id_users; // Dapatkan ID user yang sedang login
+
+        Wilayah::create($data);
 
         return redirect()->route('admin.wilayahs.index')
                          ->with('success', 'Wilayah berhasil ditambahkan.');
