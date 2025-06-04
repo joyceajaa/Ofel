@@ -53,7 +53,7 @@ public function store(Request $request)
 
     Feedback::create($data);
 
-    return redirect()->route('admin.feedback')->with('success', 'Terima kasih atas feedback Anda!');
+    return redirect()->route('admin.feedback.index')->with('success', 'Terima kasih atas feedback Anda!');
 }
 
 

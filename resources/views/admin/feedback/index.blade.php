@@ -253,80 +253,88 @@
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($feedbacks as $feedback)
+                                        @if ($feedbacks->isEmpty())
                                             <tr>
-                                                <td>{{ $loop->iteration }}</td>
-                                                <td>{{ $feedback->name }}</td>
-                                                <td>{{ $feedback->email }}</td>
-                                                <td>{{ $feedback->message }}</td>
-                                                <td>
-                                                    @if ($feedback->image)
-                                                        <img src="{{ asset('storage/' . $feedback->image) }}"
-                                                            alt="Foto" class="img-thumbnail">
-                                                    @else
-                                                        <span class="text-muted">Tidak ada</span>
-                                                    @endif
-                                                </td>
-
-                                                <td>
-                                                    @if ($feedback->video)
-                                                       <div class="video-container">
-                                                          <video controls>
-                                                                <source src="{{ asset('storage/' . $feedback->video) }}"
-                                                                   type="video/mp4">
-                                                                Browser tidak mendukung pemutaran video.
-                                                          </video>
-                                                        </div>
-                                                    @else
-                                                        <span class="text-muted">Tidak ada</span>
-                                                    @endif
-                                                </td>
-                                                <td>{{ $feedback->created_at }}</td>
-                                                <td>
-                                                    <!-- Tombol Hapus dengan Modal -->
-                                                    <button type="button" class="btn btn-danger btn-sm"
-                                                        data-toggle="modal"
-                                                        data-target="#deleteModal{{ $feedback->id }}">
-                                                        <i class="fas fa-trash"></i> Hapus
-                                                    </button>
-                                                </td>
+                                                <td colspan="8" class="text-center">Belum ada feedback.</td>
                                             </tr>
+                                        @else
+                                            @foreach ($feedbacks as $feedback)
+                                                <tr>
+                                                    <td>{{ $loop->iteration }}</td>
+                                                    <td>{{ $feedback->name }}</td>
+                                                    <td>{{ $feedback->email }}</td>
+                                                    <td>{{ Str::limit($feedback->message, 50) }}</td>
+                                                    <td>
+                                                        @if ($feedback->image)
+                                                            <a href="{{ asset('storage/' . $feedback->image) }}" target="_blank">
+                                                                <img src="{{ asset('storage/' . $feedback->image) }}"
+                                                                     alt="Foto" class="img-thumbnail">
+                                                            </a>
+                                                        @else
+                                                            <span class="text-muted">Tidak ada</span>
+                                                        @endif
+                                                    </td>
 
-                                            <!-- Modal Konfirmasi Hapus -->
-                                            <div class="modal fade" id="deleteModal{{ $feedback->id }}" tabindex="-1"
-                                                role="dialog" aria-labelledby="deleteModalLabel{{ $feedback->id }}"
-                                                aria-hidden="true">
-                                                <div class="modal-dialog" role="document">
-                                                    <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title"
-                                                                id="deleteModalLabel{{ $feedback->id }}">Konfirmasi
-                                                                Hapus</h5>
+                                                    <td>
+                                                        @if ($feedback->video)
+                                                            <div class="video-container">
+                                                                <video controls>
+                                                                    <source src="{{ asset('storage/' . $feedback->video) }}"
+                                                                            type="video/mp4">
+                                                                    Browser tidak mendukung pemutaran video.
+                                                                </video>
+                                                            </div>
+                                                        @else
+                                                            <span class="text-muted">Tidak ada</span>
+                                                        @endif
+                                                    </td>
+                                                    <td>{{ $feedback->created_at->format('d M Y, H:i') }}</td>
+                                                    <td>
+                                                        <!-- Tombol Hapus dengan Modal -->
+                                                        <button type="button" class="btn btn-danger btn-sm"
+                                                                data-toggle="modal"
+                                                                data-target="#deleteModal{{ $feedback->id }}">
+                                                            <i class="fas fa-trash"></i> Hapus
+                                                        </button>
+                                                    </td>
+                                                </tr>
+
+                                                <!-- Modal Konfirmasi Hapus -->
+                                                <div class="modal fade" id="deleteModal{{ $feedback->id }}" tabindex="-1"
+                                                     role="dialog" aria-labelledby="deleteModalLabel{{ $feedback->id }}"
+                                                     aria-hidden="true">
+                                                    <div class="modal-dialog" role="document">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title"
+                                                                    id="deleteModalLabel{{ $feedback->id }}">Konfirmasi
+                                                                    Hapus</h5>
                                                             <button type="button" class="close" data-dismiss="modal"
-                                                                aria-label="Close">
+                                                                    aria-label="Close">
                                                                 <span aria-hidden="true">×</span>
                                                             </button>
-                                                        </div>
-                                                        <div class="modal-body">
-                                                            Apakah Anda yakin ingin menghapus feedback dari
-                                                            <strong>{{ $feedback->name }}</strong>?
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-secondary"
-                                                                data-dismiss="modal">Batal</button>
-                                                            <form
-                                                                action="{{ route('admin.feedback.destroy', $feedback->id) }}"
-                                                                method="POST">
-                                                                @csrf
-                                                                @method('DELETE')
-                                                                <button type="submit"
-                                                                    class="btn btn-danger">Hapus</button>
-                                                            </form>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                Apakah Anda yakin ingin menghapus feedback dari
+                                                                <strong>{{ $feedback->name }}</strong>?
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-secondary"
+                                                                        data-dismiss="modal">Batal</button>
+                                                                <form
+                                                                    action="{{ route('admin.feedback.destroy', $feedback->id) }}"
+                                                                    method="POST">
+                                                                    @csrf
+                                                                    @method('DELETE')
+                                                                    <button type="submit"
+                                                                            class="btn btn-danger">Hapus</button>
+                                                                </form>
+                                                            </div>
                                                         </div>
                                                     </div>
                                                 </div>
-                                            </div>
-                                        @endforeach
+                                            @endforeach
+                                        @endif
                                     </tbody>
                                 </table>
                             </div>
@@ -343,64 +351,13 @@
             </div>
             <!-- End of Main Content -->
 
-            <!-- Footer -->
-            <footer id="footer" class="footer dark-background py-5">
-                <div class="container">
-                    <div class="row gy-3">
-                        <div class="col-lg-3 col-md-6 d-flex">
-                            <i class="bi bi-geo-alt icon"></i>
-                            <div class="address">
-                                <h4>Address</h4>
-                                <p>Uma Rihit</p>
-                                <p>Onan Raja, Balige III</p>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-3 col-md-6 d-flex">
-                            <i class="bi bi-telephone icon"></i>
-                            <div>
-                                <h4>Contact</h4>
-                                <p>
-                                    <strong>Phone:</strong> <span>+62 819 1259 1669</span><br>
-                                    <strong>Instagram:</strong> <span>@ofelkitchen.id</span><br>
-                                </p>
-                            </div>
-                        </div>
-
-                        <div class="col-lg-3 col-md-6 d-flex">
-                            <i class="bi bi-clock icon"></i>
-                            <div>
-                                <h4>Opening Hours</h4>
-                                <p>
-                                    <strong>Mon-Sat:</strong> <span>08AM - 11PM</span><br>
-                                    <strong>Sunday</strong>: <span>Closed</span>
-                                </p>
-                            </div>
-                        </div>
-
-
-                        <div class="col-lg-3 col-md-6">
-                            <h4>Follow Us</h4>
-                            <div class="social-links d-flex">
-                                <a href="#" class="twitter"><i class="bi bi-twitter-x"></i></a>
-                                <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-                                <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-                                <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
-                            </div>
-                        </div>
-
+            <!-- Footer (Sama seperti di kode dashboard) -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright © Your Website {{ date('Y') }}</span>
                     </div>
                 </div>
-
-                <div class="container copyright text-center mt-4">
-                    <p>© <span>Copyright</span> <strong class="px-1 sitename">Yummy</strong> <span>All Rights
-                            Reserved</span></p>
-                    <div class="credits">
-                        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a> Distributed by <a
-                            href="https://themewagon.com">ThemeWagon</a>
-                    </div>
-                </div>
-
             </footer>
             <!-- End of Footer -->
 
@@ -437,9 +394,12 @@
 
     <script>
         $(document).ready( function () {
-            $('#dataTable').DataTable({
-                responsive: true
-            });
+            if ( ! $.fn.DataTable.isDataTable( '#dataTable' ) ) {
+                $('#dataTable').DataTable({
+                    responsive: true,
+                    "ordering": false // Menonaktifkan fitur pengurutan
+                });
+            }
         } );
     </script>
 
