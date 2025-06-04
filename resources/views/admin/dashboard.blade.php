@@ -125,7 +125,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <a href="{{ route('admin.feedback') }}" class="stretched-link"></a>
+                                        <a href="{{ route('admin.feedback.index') }}" class="stretched-link"></a>
                                     </div>
                                 </div>
 

@@ -41,7 +41,7 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link" href="{{ route('admin.feedback') }}">
+                    <a class="nav-link" href="{{ route('admin.feedback.index') }}">
                         <i class="fas fa-fw fa-comment"></i>
                         <span>Manage Feedback</span>
                     </a>
