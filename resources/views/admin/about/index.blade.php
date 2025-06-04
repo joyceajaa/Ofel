@@ -84,7 +84,7 @@
                                                 <td>{{ Str::limit($about->description, 100) }}</td>
                                                 <td>
                                                     @if ($about->image_path)
-                                                        <img src="{{ asset('storage/' . $about->image_path) }}" alt="About Image" width="100">
+                                                        <img src="{{ Storage::url($about->image_path) }}" alt="About Image" width="100">
                                                     @else
                                                         Tidak Ada Gambar
                                                     @endif
