@@ -1,120 +1,124 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
+
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Create About Us - {{ config('app.name', 'Laravel') }}</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
 
-    <!-- Styles (Sesuaikan dengan setup Anda) -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Buat About Us Baru - {{ config('app.name', 'Laravel') }}</title>
 
-    <style>
-        body { font-family: sans-serif; margin: 0; background-color: #f4f6f9; color: #333; }
-        .admin-container { max-width: 1200px; margin: 20px auto; padding: 20px; background-color: #fff; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-        .success-message { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; padding: .75rem 1.25rem; margin-bottom: 1rem; border-radius: .25rem; }
-        .admin-content h1, .admin-content h2 { color: #444; }
-        .admin-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 20px; }
-        .admin-card { background-color: #e9ecef; padding: 20px; border-radius: 5px; text-align: center; }
-        .admin-card h3 { margin-top: 0; }
+    <!-- Custom fonts for this template-->
+    <link href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
 
-        .navmenu { background-color: #343a40; padding: 0; }
-        .navmenu ul { list-style: none; padding: 0 15px; margin: 0; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; min-height: 60px; }
-        .navmenu ul li { margin: 5px 10px; }
-        .navmenu ul li a { color: rgba(255, 255, 255, 0.75); text-decoration: none; padding: 10px 15px; display: block; border-radius: 4px; transition: background-color 0.3s, color 0.3s; }
-        .navmenu ul li a:hover { background-color: #495057; color: #fff; }
-        .navmenu ul li a.active { color: #fff; background-color: #007bff; }
-        .navmenu ul li span {
-            color: #adb5bd;
-            padding: 10px 15px;
-            display: block;
-        }
-        .navmenu ul li form a {
-             color: rgba(255, 255, 255, 0.75);
-        }
-         .navmenu ul li form a:hover {
-             background-color: #dc3545;
-             color: #fff;
-         }
-        .mobile-nav-toggle { display: none; color: white; font-size: 28px; cursor: pointer; padding: 0 15px; }
-        @media (max-width: 991px) {
-        }
-    </style>
+    <!-- Custom styles for this template-->
+    <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
+
 </head>
-<body class="antialiased">
 
-    <nav id="navmenu" class="navmenu">
-        <ul>
-            <li><a href="{{ route('welcome') }}" class="{{ request()->routeIs('welcome') ? 'active' : '' }}">Home</a></li>
-            <li><a href="{{ route('admin.abouts.index') }}" class="{{ request()->routeIs('admin.abouts.*') ? 'active' : '' }}">Manage About Us</a></li>
-            <li><a href="{{ route('about') }}" class="{{ request()->routeIs('about') ? 'active' : '' }}">About Us</a></li>
-            <li><a href="{{ route('location') }}" class="{{ request()->routeIs('location') ? 'active' : '' }}">Location</a></li>
-            <li><a href="{{ route('feedback') }}" class="{{ request()->routeIs('feedback') ? 'active' : '' }}">Feedback</a></li>
-            <li><a href="{{ route('contact') }}" class="{{ request()->routeIs('contact') ? 'active' : '' }}">Contact</a></li>
+<body id="page-top">
 
-            @guest
-                <li><a href="{{ route('login') }}" class="{{ request()->routeIs('login') ? 'active' : '' }}">Login</a></li>
-                <li><a href="{{ route('register') }}" class="{{ request()->routeIs('register') ? 'active' : '' }}">Registrasi</a></li>
-            @endguest
+    <!-- Page Wrapper -->
+    <div id="wrapper">
 
-            @auth
-                @if (Auth::user()->is_admin)
-                    <li><a href="{{ route('admin.dashboard') }}" class="{{ request()->routeIs('admin.*') ? 'active' : '' }}">Admin Dashboard</a></li>
-                @else
-                    <li><span>Halo, {{ Str::limit(Auth::user()->name, 15) }}</span></li>
-                @endif
+        <!-- Sidebar -->
+        @include('admin.sidebar')
+        <!-- End of Sidebar -->
 
-                <li>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                        @csrf
-                    </form>
-                    <a href="{{ route('logout') }}"
-                       onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                       Logout
-                    </a>
-                </li>
-            @endauth
-        </ul>
-        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
-    </nav>
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
 
-    <div class="admin-container">
-        <h1>Create About Us</h1>
+            <!-- Main Content -->
+            <div id="content">
 
-        <div class="admin-content">
-            <form action="{{ route('admin.abouts.store') }}" method="POST" enctype="multipart/form-data">
-                @csrf
+                <!-- Topbar -->
+                @include('admin.topbar')
+                <!-- End of Topbar -->
 
-                <div class="mb-3">
-                    <label for="title" class="form-label">Judul</label>
-                    <input type="text" class="form-control" id="title" name="title" value="{{ old('title') }}" required>
-                    @error('title')
-                        <div class="text-danger">{{ $message }}</div>
-                    @enderror
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <h1 class="h3 mb-2 text-gray-800">Buat About Us Baru</h1>
+
+                    <!-- Form untuk Menambah About Us -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Form Buat About Us</h6>
+                        </div>
+                        <div class="card-body">
+                            <form action="{{ route('admin.abouts.store') }}" method="POST" enctype="multipart/form-data">
+                                @csrf
+
+                                <div class="form-group">
+                                    <label for="title">Judul:</label>
+                                    <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title" value="{{ old('title') }}" required>
+                                    @error('title')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="description">Deskripsi:</label>
+                                    <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description" rows="5" required>{{ old('description') }}</textarea>
+                                    @error('description')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="image_path">Gambar:</label>
+                                    <input type="file" class="form-control @error('image_path') is-invalid @enderror" id="image_path" name="image_path">
+                                    @error('image_path')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <button type="submit" class="btn btn-primary">Simpan</button>
+                                <a href="{{ route('admin.abouts.index') }}" class="btn btn-secondary">Batal</a>
+                            </form>
+                        </div>
+                    </div>
+
                 </div>
+                <!-- /.container-fluid -->
 
-                <div class="mb-3">
-                    <label for="image" class="form-label">Gambar</label>
-                    <input type="file" class="form-control" id="image" name="image">
-                    @error('image')
-                        <div class="text-danger">{{ $message }}</div>
-                    @enderror
-                </div>
+            </div>
+            <!-- End of Main Content -->
 
-                <div class="mb-3">
-                    <label for="description" class="form-label">Deskripsi</label>
-                    <textarea class="form-control" id="description" name="description" rows="3">{{ old('description') }}</textarea>
-                    @error('description')
-                        <div class="text-danger">{{ $message }}</div>
-                    @enderror
-                </div>
+            <!-- Footer -->
+            @include('layouts.footer')
 
-                <button type="submit" class="btn btn-primary">Simpan</button>
-                <a href="{{ route('admin.abouts.index') }}" class="btn btn-secondary">Batal</a>
-            </form>
         </div>
-    </div>
+        <!-- End of Content Wrapper -->
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    @include('admin.modal.logout')
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="{{ asset('vendor/jquery-easing/jquery.easing.min.js') }}"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="{{ asset('js/sb-admin-2.min.js') }}"></script>
+
 </body>
+
 </html>
