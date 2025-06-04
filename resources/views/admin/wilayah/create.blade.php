@@ -127,46 +127,7 @@
 <body class="antialiased">
 
     <nav id="navmenu" class="navmenu">
-        <ul>
-            <li><a href="{{ route('welcome') }}" class="{{ request()->routeIs('welcome') ? 'active' : '' }}">Home</a>
-            </li>
-            <li><a href="{{ route('admin.menus.index') }}"
-                    class="{{ request()->routeIs('admin.menus.*') ? 'active' : '' }}">Manage Menus</a></li>
-            <li><a href="{{ route('about') }}" class="{{ request()->routeIs('about') ? 'active' : '' }}">About
-                    Us</a></li>
-            <li><a href="{{ route('location') }}"
-                    class="{{ request()->routeIs('location') ? 'active' : '' }}">Location</a></li>
-            <li><a href="{{ route('feedback') }}"
-                    class="{{ request()->routeIs('feedback') ? 'active' : '' }}">Feedback</a></li>
-            <li><a href="{{ route('contact') }}"
-                    class="{{ request()->routeIs('contact') ? 'active' : '' }}">Contact</a></li>
-
-            @guest
-                <li><a href="{{ route('login') }}"
-                        class="{{ request()->routeIs('login') ? 'active' : '' }}">Login</a></li>
-                <li><a href="{{ route('register') }}"
-                        class="{{ request()->routeIs('register') ? 'active' : '' }}">Registrasi</a></li>
-            @endguest
-
-            @auth
-                @if (Auth::user()->is_admin)
-                    <li><a href="{{ route('admin.dashboard') }}"
-                            class="{{ request()->routeIs('admin.*') ? 'active' : '' }}">Admin Dashboard</a></li>
-                @else
-                    <li><span>Halo, {{ Str::limit(Auth::user()->name, 15) }}</span></li>
-                @endif
-
-                <li>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                        @csrf
-                    </form>
-                    <a href="{{ route('logout') }}"
-                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                        Logout
-                    </a>
-                </li>
-            @endauth
-        </ul>
+        @include('admin.sidebar')
         <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
     </nav>
 
