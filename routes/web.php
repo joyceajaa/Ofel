@@ -60,12 +60,10 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::get('/contact', [AdminController::class, 'contact'])->name('contact');
 
     // Feedback
-    Route::get('/feedback', [FeedbackController::class, 'index'])->name('feedback.index');
-    Route::get('/feedback/create', [FeedbackController::class, 'create'])->name('feedback.create');
-    Route::post('/feedback', [FeedbackController::class, 'store'])->name('feedback.store');
-    Route::delete('/feedback/{feedback}', [FeedbackController::class, 'destroy'])->name('feedback.destroy');
+    Route::resource('feedback', FeedbackController::class);
 
     // CRUD Menu
+     Route::resource('menus', PublicMenuController::class)->except(['index', 'create', 'store', 'show', 'edit', 'update', 'destroy']);
     Route::get('/menus', [AdminMenuController::class, 'index'])->name('menus.index');
     Route::get('/menus/create', [PublicMenuController::class, 'create'])->name('menus.create');
     Route::post('/menus', [PublicMenuController::class, 'store'])->name('menus.store');
@@ -75,38 +73,18 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::delete('/menus/{menu}', [PublicMenuController::class, 'destroy'])->name('menus.destroy');
 
     // CRUD Lokasi
-    Route::get('/locations', [LocationController::class, 'index'])->name('locations.index');
-    Route::get('/locations/create', [LocationController::class, 'create'])->name('locations.create');
-    Route::post('/locations', [LocationController::class, 'store'])->name('locations.store');
-    Route::get('/locations/{location}', [LocationController::class, 'show'])->name('locations.show');
-    Route::get('/locations/{location}/edit', [LocationController::class, 'edit'])->name('locations.edit');
-    Route::put('/locations/{location}', [LocationController::class, 'update'])->name('locations.update');
-    Route::delete('/locations/{location}', [LocationController::class, 'destroy'])->name('locations.destroy');
+    Route::resource('locations', LocationController::class);
 
     // CRUD About
-    Route::get('/abouts', [AboutController::class, 'index'])->name('abouts.index');
-    Route::get('/abouts/create', [AboutController::class, 'create'])->name('abouts.create');
-    Route::post('/abouts', [AboutController::class, 'store'])->name('abouts.store');
-    Route::get('/abouts/{about}', [AboutController::class, 'show'])->name('abouts.show');
-    Route::get('/abouts/{about}/edit', [AboutController::class, 'edit'])->name('abouts.edit');
-    Route::put('/abouts/{about}', [AboutController::class, 'update'])->name('abouts.update');
-    Route::delete('/abouts/{about}', [AboutController::class, 'destroy'])->name('abouts.destroy');
+    Route::resource('abouts', AboutController::class);
 
     // CRUD Wilayah
-    Route::get('/wilayahs', [WilayahController::class, 'index'])->name('wilayahs.index');
-    Route::get('/wilayahs/create', [WilayahController::class, 'create'])->name('wilayahs.create');
-    Route::post('/wilayahs', [WilayahController::class, 'store'])->name('wilayahs.store');
-    Route::get('/wilayahs/{wilayah}', [WilayahController::class, 'show'])->name('wilayahs.show');
-    Route::get('/wilayahs/{wilayah}/edit', [WilayahController::class, 'edit'])->name('wilayahs.edit');
-    Route::put('/wilayahs/{wilayah}', [WilayahController::class, 'update'])->name('wilayahs.update');
-    Route::delete('/wilayahs/{wilayah}', [WilayahController::class, 'destroy'])->name('wilayahs.destroy');
+    Route::resource('wilayahs', WilayahController::class);
 
     // CRUD Contact
-    Route::get('/admin/contacts', [ContactController::class, 'index'])->name('contacts.index');
-    Route::get('/admin/contacts/create', [ContactController::class, 'create'])->name('contacts.create');
-    Route::post('/admin/contacts', [ContactController::class, 'store'])->name('contacts.store');
-    Route::get('/admin/contacts/{contact}', [ContactController::class, 'show'])->name('contacts.show');
-    Route::get('/admin/contacts/{contact}/edit', [ContactController::class, 'edit'])->name('contacts.edit');
-    Route::put('/admin/contacts/{contact}', [ContactController::class, 'update'])->name('contacts.update');
-    Route::delete('/admin/contacts/{contact}', [ContactController::class, 'destroy'])->name('contacts.destroy');
+    Route::resource('contacts', ContactController::class);
+    Route::prefix('admin')->group(function(){
+         Route::resource('contacts', ContactController::class);
+    });
+
 });

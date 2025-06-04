@@ -143,7 +143,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        {{-- <a href="{{ route('admin.about.index') }}" class="stretched-link"></a> --}}
+                                        <a href="{{ route('admin.abouts.index') }}" class="stretched-link"></a>
                                     </div>
                                 </div>
 

@@ -290,6 +290,11 @@
                                                     </td>
                                                     <td>{{ $feedback->created_at->format('d M Y, H:i') }}</td>
                                                     <td>
+                                                        <!-- Edit Button -->
+                                                        <a href="{{ route('admin.feedback.edit', $feedback->id) }}" class="btn btn-primary btn-sm">
+                                                            <i class="fas fa-edit"></i> Edit
+                                                        </a>
+
                                                         <!-- Tombol Hapus dengan Modal -->
                                                         <button type="button" class="btn btn-danger btn-sm"
                                                                 data-toggle="modal"
