@@ -6,7 +6,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
+    <meta name="description" content="Manage Wilayahs">
     <meta name="author" content="">
 
     <title>Manage Wilayahs - {{ config('app.name', 'Laravel') }}</title>
@@ -19,6 +19,7 @@
 
     <!-- Custom styles for this template-->
     <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
 
 </head>
 
@@ -30,10 +31,16 @@
         <!-- Sidebar (Sama seperti di kode dashboard, pastikan menu sudah sesuai)-->
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
+<<<<<<< Updated upstream
             {{-- <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('admin.dashboard') }}">
+=======
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center"
+                href="{{ route('admin.dashboard') }}">
+>>>>>>> Stashed changes
                 <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
+                    <i class="fas fa-map-marked-alt"></i>
                 </div>
                 <div class="sidebar-brand-text mx-3">{{ config('app.name', 'Laravel') }}</div>
             </a> --}}
@@ -75,7 +82,12 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Manage Wilayahs</h1>
+                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                        <h1 class="h3 mb-0 text-gray-800">Manage Wilayahs</h1>
+                        <a href="{{ route('admin.wilayahs.create') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
+                            <i class="fas fa-plus fa-sm text-white-50"></i> Tambah Wilayah Baru
+                        </a>
+                    </div>
                     <p class="mb-4">Kelola daftar wilayah Anda di sini.</p>
 
                     <!-- DataTales Example -->
@@ -91,9 +103,9 @@
                                 </div>
                             @endif
 
-                            <div class="mb-3">
+                            {{-- <div class="mb-3">
                                 <a href="{{ route('admin.wilayahs.create') }}" class="btn btn-primary">Tambah Wilayah Baru</a>
-                            </div>
+                            </div> --}}
 
                             <div class="table-responsive">
                                 @if ($wilayahs->isEmpty())
@@ -107,25 +119,24 @@
                                                 <th>Aksi</th>
                                             </tr>
                                         </thead>
-                                        <tfoot>
-                                            <tr>
-                                                <th>#</th>
-                                                <th>Nama</th>
-                                                <th>Aksi</th>
-                                            </tr>
-                                        </tfoot>
                                         <tbody>
                                             @foreach ($wilayahs as $wilayah)
                                                 <tr>
                                                     <td>{{ $loop->iteration }}</td>
                                                     <td>{{ $wilayah->nama }}</td>
                                                     <td>
-                                                        <a href="{{ route('admin.wilayahs.edit', $wilayah->id) }}" class="btn btn-sm btn-warning">Edit</a>
-                                                        <form action="{{ route('admin.wilayahs.destroy', $wilayah->id) }}" method="POST" style="display: inline-block;">
-                                                            @csrf
-                                                            @method('DELETE')
-                                                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Apakah Anda yakin ingin menghapus wilayah ini?')">Hapus</button>
-                                                        </form>
+                                                        <div class="d-flex">
+                                                            <a href="{{ route('admin.wilayahs.edit', $wilayah->id) }}"
+                                                                class="btn btn-sm btn-warning mr-1">Edit</a>
+                                                            <form
+                                                                action="{{ route('admin.wilayahs.destroy', $wilayah->id) }}"
+                                                                method="POST" style="display: inline-block;">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button type="submit" class="btn btn-sm btn-danger"
+                                                                    onclick="return confirm('Apakah Anda yakin ingin menghapus wilayah ini?')">Hapus</button>
+                                                            </form>
+                                                        </div>
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -177,11 +188,15 @@
     <script src="{{ asset('js/sb-admin-2.min.js') }}"></script>
 
     <!-- Page level plugins -->
-    <script src="{{ asset('vendor/datatables/jquery.dataTables.min.js') }}"></script>
-    <script src="{{ asset('vendor/datatables/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
 
     <!-- Page level custom scripts -->
-    <script src="{{ asset('js/demo/datatables-demo.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            $('#dataTable').DataTable();
+        });
+    </script>
 
 </body>
 
