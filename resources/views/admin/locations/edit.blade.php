@@ -28,46 +28,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-
-            <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('admin.dashboard') }}">
-                <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-laugh-wink"></i>
-                </div>
-                <div class="sidebar-brand-text mx-3">{{ config('app.name', 'Laravel') }}</div>
-            </a>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider my-0">
-
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('admin.dashboard') }}">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
-            </li>
-
-            <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Menu
-            </div>
-
-            <!-- Nav Items - Pages -->
-            @include('admin.sidebar')
-
-            <!-- Divider -->
-            <hr class="sidebar-divider d-none d-md-block">
-
-            <!-- Sidebar Toggler (Sidebar) -->
-            <div class="text-center d-none d-md-inline">
-                <button class="rounded-circle border-0" id="sidebarToggle"></button>
-            </div>
-
-        </ul>
+        @include('admin.sidebar')
         <!-- End of Sidebar -->
 
         <!-- Content Wrapper -->
@@ -85,29 +46,28 @@
 
                     <!-- Page Heading -->
                     <h1 class="h3 mb-2 text-gray-800">Edit Lokasi</h1>
-                    <p class="mb-4">Edit informasi lokasi Anda di sini.</p>
 
-                    <!-- DataTales Example -->
+                    <!-- Form untuk Edit Lokasi -->
                     <div class="card shadow mb-4">
                         <div class="card-header py-3">
                             <h6 class="m-0 font-weight-bold text-primary">Form Edit Lokasi</h6>
                         </div>
                         <div class="card-body">
-
                             <form action="{{ route('admin.locations.update', $location->id) }}" method="POST">
                                 @csrf
                                 @method('PUT')
 
                                 <div class="form-group">
-                                    <label for="name">Nama:</label>
-                                    <input type="text" class="form-control" id="name" name="name" value="{{ $location->name }}" required>
+                                    <label for="name">Nama Lokasi:</label>
+                                    <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name', $location->name) }}" required>
+                                    @error('name')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
                                 </div>
-                                <!-- Menghilangkan input field location karena tidak ada di database -->
 
                                 <button type="submit" class="btn btn-primary">Update</button>
                                 <a href="{{ route('admin.locations.index') }}" class="btn btn-secondary">Batal</a>
                             </form>
-
                         </div>
                     </div>
 

@@ -1,117 +1,147 @@
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
 <head>
+
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
     <title>Tambah Menu Baru - {{ config('app.name', 'Laravel') }}</title>
 
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom fonts for this template-->
+    <link href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
 
-     <style>
-        body { font-family: sans-serif; margin: 0; background-color: #f4f6f9; color: #333; }
-        .admin-container { max-width: 1200px; margin: 20px auto; padding: 20px; background-color: #fff; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
-        .success-message { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; padding: .75rem 1.25rem; margin-bottom: 1rem; border-radius: .25rem; }
-        .admin-content h1, .admin-content h2 { color: #444; }
-        .admin-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 20px; }
-        .admin-card { background-color: #e9ecef; padding: 20px; border-radius: 5px; text-align: center; }
-        .admin-card h3 { margin-top: 0; }
+    <!-- Custom styles for this template-->
+    <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
 
-        .navmenu { background-color: #343a40; padding: 0; }
-        .navmenu ul { list-style: none; padding: 0 15px; margin: 0; display: flex; flex-wrap: wrap; justify-content: center; align-items: center; min-height: 60px; }
-        .navmenu ul li { margin: 5px 10px; }
-        .navmenu ul li a { color: rgba(255, 255, 255, 0.75); text-decoration: none; padding: 10px 15px; display: block; border-radius: 4px; transition: background-color 0.3s, color: 0.3s; }
-        .navmenu ul li a:hover { background-color: #495057; color: #fff; }
-        .navmenu ul li a.active { color: #fff; background-color: #007bff; }
-        .navmenu ul li span {
-            color: #adb5bd;
-            padding: 10px 15px;
-            display: block;
-        }
-        .navmenu ul li form a {
-             color: rgba(255, 255, 255, 0.75);
-        }
-         .navmenu ul li form a:hover {
-             background-color: #dc3545;
-             color: #fff;
-         }
-        .mobile-nav-toggle { display: none; color: white; font-size: 28px; cursor: pointer; padding: 0 15px; }
-        @media (max-width: 991px) {
-        }
-    </style>
 </head>
-<body class="antialiased">
 
-    <nav id="navmenu" class="navmenu">
+<body id="page-top">
+
+    <!-- Page Wrapper -->
+    <div id="wrapper">
+
+        <!-- Sidebar -->
         @include('admin.sidebar')
-        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
-    </nav>
+        <!-- End of Sidebar -->
 
-    <div class="admin-container">
-        <h1>Tambah Menu Baru</h1>
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
 
-        <div class="admin-content">
-            <form action="{{ route('admin.menus.store') }}" method="POST" enctype="multipart/form-data">
-                @csrf
+            <!-- Main Content -->
+            <div id="content">
 
-                 <div class="mb-3">
-                    <label for="category" class="form-label">Kategori</label>
-                    <select name="category" id="category" class="form-control">
-                        <option value="BentoCake">BentoCake</option>
-                        <option value="Bouquet">Bouquet</option>
-                        <option value="CharacterCake">CharacterCake</option>
-                        <option value="FlowerBouquet">FlowerBouquet</option>
-                        <option value="FruitCake">FruitCake</option>
-                        <option value="FudyBrownies">FudyBrownies</option>
-                        <option value="KleponCake">KleponCake</option>
-                        <option value="PaintingCake">PaintingCake</option>
-                        <option value="Pudding">Pudding</option>
-                        <option value="RibbonCake">RibbonCake</option>
-                        <option value="TierCake">TierCake</option>
-                    </select>
-                    @error('category')
-                        <div class="text-danger">{{ $message }}</div>
-                    @enderror
+                <!-- Topbar -->
+                @include('admin.topbar')
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <h1 class="h3 mb-2 text-gray-800">Tambah Menu Baru</h1>
+
+                    <!-- Form untuk Menambah Menu -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Form Tambah Menu</h6>
+                        </div>
+                        <div class="card-body">
+                            <form action="{{ route('admin.menus.store') }}" method="POST" enctype="multipart/form-data">
+                                @csrf
+
+                                <div class="form-group">
+                                    <label for="name">Nama Menu:</label>
+                                    <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" value="{{ old('name') }}" required>
+                                    @error('name')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="category">Kategori:</label>
+                                    <input type="text" class="form-control @error('category') is-invalid @enderror" id="category" name="category" value="{{ old('category') }}" required>
+                                    @error('category')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="image">Gambar:</label>
+                                    <input type="file" class="form-control @error('image') is-invalid @enderror" id="image" name="image">
+                                    @error('image')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="price">Harga:</label>
+                                    <input type="number" class="form-control @error('price') is-invalid @enderror" id="price" name="price" value="{{ old('price') }}" required>
+                                    @error('price')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="description">Deskripsi:</label>
+                                    <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description" rows="3">{{ old('description') }}</textarea>
+                                    @error('description')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <button type="submit" class="btn btn-primary">Simpan</button>
+                                <a href="{{ route('admin.menus.index') }}" class="btn btn-secondary">Batal</a>
+                            </form>
+                        </div>
+                    </div>
+
                 </div>
+                <!-- /.container-fluid -->
 
-                <div class="mb-3">
-                    <label for="name" class="form-label">Nama Menu</label>
-                    <input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}" required>
-                    @error('name')
-                        <div class="text-danger">{{ $message }}</div>
-                    @enderror
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright © Your Website {{ date('Y') }}</span>
+                    </div>
                 </div>
+            </footer>
+            <!-- End of Footer -->
 
-                <div class="mb-3">
-                    <label for="image" class="form-label">Gambar Menu</label>
-                    <input type="file" class="form-control" id="image" name="image">
-                    @error('image')
-                        <div class="text-danger">{{ $message }}</div>
-                    @enderror
-                </div>
-
-                <div class="mb-3">
-                    <label for="price" class="form-label">Harga</label>
-                    <input type="number" class="form-control" id="price" name="price" value="{{ old('price') }}" required>
-                    @error('price')
-                        <div class="text-danger">{{ $message }}</div>
-                    @enderror
-                </div>
-
-                <div class="mb-3">
-                    <label for="description" class="form-label">Deskripsi</label>
-                    <textarea class="form-control" id="description" name="description" rows="3">{{ old('description') }}</textarea>
-                    @error('description')
-                        <div class="text-danger">{{ $message }}</div>
-                    @enderror
-                </div>
-
-                <button type="submit" class="btn btn-primary">Simpan</button>
-                <a href="{{ route('admin.menus.index') }}" class="btn btn-secondary">Batal</a>
-            </form>
         </div>
-    </div>
+        <!-- End of Content Wrapper -->
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    @include('admin.modal.logout')
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="{{ asset('vendor/jquery-easing/jquery.easing.min.js') }}"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="{{ asset('js/sb-admin-2.min.js') }}"></script>
+
 </body>
+
 </html>

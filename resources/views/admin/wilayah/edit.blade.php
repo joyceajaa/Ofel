@@ -2,199 +2,117 @@
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
+
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
     <title>Edit Wilayah - {{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Styles (Sesuaikan dengan setup Anda) -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom fonts for this template-->
+    <link href="{{ asset('vendor/fontawesome-free/css/all.min.css') }}" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
 
-    <style>
-        body {
-            font-family: sans-serif;
-            margin: 0;
-            background-color: #f4f6f9;
-            color: #333;
-        }
+    <!-- Custom styles for this template-->
+    <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
 
-        .admin-container {
-            max-width: 1200px;
-            margin: 20px auto;
-            padding: 20px;
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }
-
-        .success-message {
-            background-color: #d4edda;
-            color: #155724;
-            border: 1px solid #c3e6cb;
-            padding: .75rem 1.25rem;
-            margin-bottom: 1rem;
-            border-radius: .25rem;
-        }
-
-        .admin-content h1,
-        .admin-content h2 {
-            color: #444;
-        }
-
-        .admin-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 20px;
-            margin-top: 20px;
-        }
-
-        .admin-card {
-            background-color: #e9ecef;
-            padding: 20px;
-            border-radius: 5px;
-            text-align: center;
-        }
-
-        .admin-card h3 {
-            margin-top: 0;
-        }
-
-        .navmenu {
-            background-color: #343a40;
-            padding: 0;
-        }
-
-        .navmenu ul {
-            list-style: none;
-            padding: 0 15px;
-            margin: 0;
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            align-items: center;
-            min-height: 60px;
-        }
-
-        .navmenu ul li {
-            margin: 5px 10px;
-        }
-
-        .navmenu ul li a {
-            color: rgba(255, 255, 255, 0.75);
-            text-decoration: none;
-            padding: 10px 15px;
-            display: block;
-            border-radius: 4px;
-            transition: background-color 0.3s, color: 0.3s;
-        }
-
-        .navmenu ul li a:hover {
-            background-color: #495057;
-            color: #fff;
-        }
-
-        .navmenu ul li a.active {
-            color: #fff;
-            background-color: #007bff;
-        }
-
-        .navmenu ul li span {
-            color: #adb5bd;
-            padding: 10px 15px;
-            display: block;
-        }
-
-        .navmenu ul li form a {
-            color: rgba(255, 255, 255, 0.75);
-        }
-
-        .navmenu ul li form a:hover {
-            background-color: #dc3545;
-            color: #fff;
-        }
-
-        .mobile-nav-toggle {
-            display: none;
-            color: white;
-            font-size: 28px;
-            cursor: pointer;
-            padding: 0 15px;
-        }
-
-        @media (max-width: 991px) {}
-    </style>
 </head>
 
-<body class="antialiased">
+<body id="page-top">
 
-    <nav id="navmenu" class="navmenu">
-        <ul>
-            <li><a href="{{ route('welcome') }}" class="{{ request()->routeIs('welcome') ? 'active' : '' }}">Home</a>
-            </li>
-            <li><a href="{{ route('admin.menus.index') }}"
-                    class="{{ request()->routeIs('admin.menus.*') ? 'active' : '' }}">Manage Menus</a></li>
-            <li><a href="{{ route('about') }}" class="{{ request()->routeIs('about') ? 'active' : '' }}">About
-                    Us</a></li>
-            <li><a href="{{ route('location') }}"
-                    class="{{ request()->routeIs('location') ? 'active' : '' }}">Location</a></li>
-            <li><a href="{{ route('feedback') }}"
-                    class="{{ request()->routeIs('feedback') ? 'active' : '' }}">Feedback</a></li>
-            <li><a href="{{ route('contact') }}"
-                    class="{{ request()->routeIs('contact') ? 'active' : '' }}">Contact</a></li>
+    <!-- Page Wrapper -->
+    <div id="wrapper">
 
-            @guest
-                <li><a href="{{ route('login') }}"
-                        class="{{ request()->routeIs('login') ? 'active' : '' }}">Login</a></li>
-                <li><a href="{{ route('register') }}"
-                        class="{{ request()->routeIs('register') ? 'active' : '' }}">Registrasi</a></li>
-            @endguest
-
-            @auth
-                @if (Auth::user()->is_admin)
-                    <li><a href="{{ route('admin.dashboard') }}"
-                            class="{{ request()->routeIs('admin.*') ? 'active' : '' }}">Admin Dashboard</a></li>
-                @else
-                    <li><span>Halo, {{ Str::limit(Auth::user()->name, 15) }}</span></li>
-                @endif
-
-                <li>
-                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                        @csrf
-                    </form>
-                    <a href="{{ route('logout') }}"
-                        onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                        Logout
-                    </a>
-                </li>
-            @endauth
+        <!-- Sidebar (Sama seperti di halaman manage wilayah) -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+            @include('admin.sidebar')
         </ul>
-        <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
-    </nav>
+        <!-- End of Sidebar -->
 
-    <div class="admin-container">
-        <h1>Edit Wilayah</h1>
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
 
-        <div class="admin-content">
-            <form action="{{ route('admin.wilayahs.update', $wilayah->id) }}" method="POST">
-                @csrf
-                @method('PUT')
+            <!-- Main Content -->
+            <div id="content">
 
-                <div class="mb-3">
-                    <label for="nama" class="form-label">Nama Wilayah</label>
-                    <input type="text" class="form-control" id="nama" name="nama"
-                        value="{{ old('nama', $wilayah->nama) }}" required>
-                    @error('nama')
-                        <div class="text-danger">{{ $message }}</div>
-                    @enderror
+                <!-- Topbar (Sama seperti di halaman manage wilayah) -->
+                @include('admin.topbar')
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">
+
+                    <!-- Page Heading -->
+                    <h1 class="h3 mb-2 text-gray-800">Edit Wilayah</h1>
+
+                    <!-- Form untuk Edit Wilayah -->
+                    <div class="card shadow mb-4">
+                        <div class="card-header py-3">
+                            <h6 class="m-0 font-weight-bold text-primary">Form Edit Wilayah</h6>
+                        </div>
+                        <div class="card-body">
+                            <form action="{{ route('admin.wilayahs.update', $wilayah->id) }}" method="POST">
+                                @csrf
+                                @method('PUT')
+
+                                <div class="form-group">
+                                    <label for="nama">Nama Wilayah:</label>
+                                    <input type="text" class="form-control @error('nama') is-invalid @enderror" id="nama" name="nama" value="{{ old('nama', $wilayah->nama) }}" required>
+                                    @error('nama')
+                                        <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <button type="submit" class="btn btn-primary">Update</button>
+                                <a href="{{ route('admin.wilayahs.index') }}" class="btn btn-secondary">Batal</a>
+                            </form>
+                        </div>
+                    </div>
+
                 </div>
+                <!-- /.container-fluid -->
 
-                <button type="submit" class="btn btn-primary">Update</button>
-                <a href="{{ route('admin.wilayahs.index') }}" class="btn btn-secondary">Batal</a>
-            </form>
+            </div>
+            <!-- End of Main Content -->
+
+            <!-- Footer (Sama seperti di halaman manage wilayah) -->
+            <footer class="sticky-footer bg-white">
+                <div class="container my-auto">
+                    <div class="copyright text-center my-auto">
+                        <span>Copyright © Your Website {{ date('Y') }}</span>
+                    </div>
+                </div>
+            </footer>
+            <!-- End of Footer -->
+
         </div>
-    </div>
+        <!-- End of Content Wrapper -->
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    </div>
+    <!-- End of Page Wrapper -->
+
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+        <i class="fas fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal (Sama seperti di halaman manage wilayah) -->
+    @include('admin.modal.logout')
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="{{ asset('vendor/jquery/jquery.min.js') }}"></script>
+    <script src="{{ asset('vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="{{ asset('vendor/jquery-easing/jquery.easing.min.js') }}"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="{{ asset('js/sb-admin-2.min.js') }}"></script>
+
 </body>
 
 </html>
