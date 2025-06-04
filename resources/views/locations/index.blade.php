@@ -67,7 +67,7 @@
             <div class="container" data-aos="fade-up">
                 <div class="row">
                     <div class="col-lg-12">
-                        <p>Berikut adalah daftar wilayah yang terjangkau untuk pengantaran oleh Ofel Kitchen:</p>
+                        <p>Berikut adalah daftar wilayah yang dapat dijangkau untuk pengantaran oleh Ofel Kitchen:</p>
                         @if(isset($wilayahs) && count($wilayahs) > 0)
                         <ul>
                             @foreach($wilayahs as $wilayah)
@@ -75,7 +75,7 @@
                             @endforeach
                         </ul>
                         @else
-                        <p>Saat ini belum ada wilayah yang terjangkau.</p>
+                        <p>Saat ini belum ada wilayah yang dapat dijangkau.</p>
                         @endif
                     </div>
                 </div>

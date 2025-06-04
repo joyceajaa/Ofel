@@ -77,9 +77,7 @@ class LocationController extends Controller
         'name' => 'required|string|max:255',
     ]);
 
-    $location->name = $request->name; // Hanya update kolom 'name'
-    // Anda mungkin perlu menambahkan logika untuk memeriksa apakah user yang mengupdate
-    // memiliki izin untuk mengubah lokasi ini.
+    $location->name = $request->name;
     $location->save();
 
     return redirect()->route('admin.locations.index')
