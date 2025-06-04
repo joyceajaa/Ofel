@@ -27,7 +27,7 @@
                     @csrf
                 </form>
             </li>
-        @wendauth
+        @endauth  <!-- Add this line -->
     </ul>
     <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
 
