@@ -6,6 +6,7 @@ use App\Models\Feedback;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log; // Import Log facade
 
 class FeedbackController extends Controller
 {
@@ -26,35 +27,40 @@ class FeedbackController extends Controller
         return view('admin.feedback.create');
     }
 
-public function store(Request $request)
-{
-    $request->validate([
-        'name' => 'required|string|max:255',
-        'email' => 'required|email|max:255',
-        'message' => 'required|string',
-        'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:1024000',
-        'video' => 'nullable|mimetypes:video/mp4,video/avi,video/mpeg|max:1024000',
-    ]);
+    public function store(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'message' => 'required|string',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:1024', // Changed to KB
+            'video' => 'nullable|mimetypes:video/mp4,video/avi,video/mpeg|max:2000',  // Changed to KB
+        ]);
 
-    $data = $request->only('name', 'email', 'message', 'image', 'video');
+        $data = $request->only('name', 'email', 'message'); // Exclude image and video initially
 
-    // Simpan file image jika ada
-    if ($request->hasFile('image')) {
-        $data['image'] = $request->file('image')->store('feedback_images', 'public');
+        // Simpan file image jika ada
+        if ($request->hasFile('image')) {
+            $data['image'] = $request->file('image')->store('feedback_images', 'public');
+        }
+
+        // Simpan file video jika ada
+        if ($request->hasFile('video')) {
+            $data['video'] = $request->file('video')->store('feedback_videos', 'public');
+        }
+
+        // Tambahkan user_id ke data
+        $data['user_id'] = auth()->user()->id_users; // Dapatkan ID user yang sedang login, asumsikan kolomnya id_users
+
+        try {
+            Feedback::create($data);
+            return redirect()->route('admin.feedback.index')->with('success', 'Terima kasih atas feedback Anda!');
+        } catch (\Exception $e) {
+            Log::error('Gagal menyimpan feedback: ' . $e->getMessage());
+            return back()->with('error', 'Gagal menyimpan feedback. Silakan coba lagi.'); // Tambahkan pesan error ke view
+        }
+
     }
-
-    // Simpan file video jika ada
-    if ($request->hasFile('video')) {
-        $data['video'] = $request->file('video')->store('feedback_videos', 'public');
-    }
-
-    // Tambahkan user_id ke data
-    $data['user_id'] = auth()->user()->id_users; // Dapatkan ID user yang sedang login, asumsikan kolomnya id_users
-
-    Feedback::create($data);
-
-    return redirect()->route('admin.feedback.index')->with('success', 'Terima kasih atas feedback Anda!');
-}
 
 
     /**
@@ -65,11 +71,14 @@ public function store(Request $request)
      */
     public function destroy(Feedback $feedback)
     {
+        try {
             $feedback->delete();
+            return redirect()->route('admin.feedback.index')->with('success', 'Feedback berhasil dihapus.');
+        } catch (\Exception $e) {
+            Log::error('Gagal menghapus feedback (admin): ' . $e->getMessage());
+            return back()->with('error', 'Gagal menghapus feedback. Silakan coba lagi.'); // Tambahkan pesan error ke view
+        }
 
-            // Redirect dengan pesan sukses
-            return redirect()->route('admin.feedback') // Atau ke route yang sesuai
-                ->with('success', 'Feedback berhasil dihapus.');
     }
 
     /**
@@ -97,8 +106,7 @@ public function store(Request $request)
                              ->with('success', 'Feedback Anda berhasil dihapus.');
 
         } catch (\Exception $e) {
-            // Tangani error
-            \Log::error('Gagal menghapus feedback pengguna: ' . $e->getMessage());
+            Log::error('Gagal menghapus feedback pengguna: ' . $e->getMessage());
             return back()->with('error', 'Gagal menghapus feedback Anda. Silakan coba lagi.');
         }
     }
