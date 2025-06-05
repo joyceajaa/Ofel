@@ -8,8 +8,7 @@ use App\Http\Controllers\User\MenuController as UserMenuController;
 use App\Http\Controllers\Admin\MenuController as AdminMenuController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\MenuController as PublicMenuController;
-use App\Http\Controllers\FeedbackController as PublicFeedbackController; // Alias for public
-use App\Http\Controllers\Admin\FeedbackController; // Use the Admin Controller
+use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\LocationController;
 use App\Http\Controllers\Admin\AboutController;
 use App\Http\Controllers\WelcomeController;
@@ -28,7 +27,7 @@ Route::get('/menu', [PublicMenuController::class, 'indexPublic'])->name('menu');
 Route::get('/menu/{menu}', [PublicMenuController::class, 'showPublic'])->name('menu.show');
 Route::get('/about', [AboutController::class, 'indexPublic'])->name('about');
 Route::get('/locationpublic', [LocationController::class, 'indexPublic'])->name('locations.indexPublic');
-Route::get('/feedback', [PublicFeedbackController::class, 'indexPublic'])->name('feedback'); // Use the Public Controller
+Route::get('/feedback', [FeedbackController::class, 'indexPublic'])->name('feedback');
 Route::get('/contact', [ContactController::class, 'showPublic'])->name('contact');
 
 
@@ -61,18 +60,9 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::get('/contact', [AdminController::class, 'contact'])->name('contact');
 
     // Feedback
-    Route::resource('feedback', FeedbackController::class)->names([
-      'index' => 'feedback.index',
-      'create' => 'feedback.create',
-      'store' => 'feedback.store',
-      'show' => 'feedback.show',
-      'edit' => 'feedback.edit',
-      'update' => 'feedback.update',
-      'destroy' => 'feedback.destroy',
-    ]);
+    Route::resource('feedback', FeedbackController::class);
 
-    // CRUD Menu
-     Route::resource('menus', PublicMenuController::class)->except(['index', 'create', 'store', 'show', 'edit', 'update', 'destroy']);
+    // CRUD Menu - DEFINISIKAN ROUTE SECARA EXPLISIT
     Route::get('/menus', [AdminMenuController::class, 'index'])->name('menus.index');
     Route::get('/menus/create', [PublicMenuController::class, 'create'])->name('menus.create');
     Route::post('/menus', [PublicMenuController::class, 'store'])->name('menus.store');
@@ -80,6 +70,9 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::get('/menus/{menu}/edit', [PublicMenuController::class, 'edit'])->name('menus.edit');
     Route::put('/menus/{menu}', [PublicMenuController::class, 'update'])->name('menus.update');
     Route::delete('/menus/{menu}', [PublicMenuController::class, 'destroy'])->name('menus.destroy');
+
+    // HAPUS ROUTE RESOURCE YANG TIDAK DIPERLUKAN
+    // Route::resource('menus', PublicMenuController::class)->except(['index', 'create', 'store', 'show', 'edit', 'update', 'destroy']);
 
     // CRUD Lokasi
     Route::resource('locations', LocationController::class);
@@ -92,8 +85,8 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
 
     // CRUD Contact
     Route::resource('contacts', ContactController::class);
-    //Route::prefix('admin')->group(function(){ // REMOVE THIS. It creates duplicate route
-    //     Route::resource('contacts', ContactController::class);
-    //});
+    Route::prefix('admin')->group(function(){
+         Route::resource('contacts', ContactController::class);
+    });
 
 });
