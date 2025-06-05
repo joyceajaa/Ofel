@@ -21,6 +21,146 @@
     <link href="{{ asset('css/sb-admin-2.min.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
 
+    <!-- Styles -->
+    <style>
+        .footer.dark-background {
+            background-color: #343a40;
+            color: white;
+        }
+
+        .footer.dark-background a {
+            color: #aaa;
+        }
+
+        .footer.dark-background a:hover {
+            color: white;
+        }
+
+        .footer.dark-background .icon {
+            color: #5cb85c;
+        }
+
+        /* Custom CSS for improved look and responsiveness */
+        .dataTables_wrapper .row {
+            margin-bottom: 15px;
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+        }
+
+        .img-thumbnail {
+            max-width: 150px;
+            height: auto;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .img-thumbnail:hover {
+             transform: scale(1.1);
+             box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        /* Enhancement for Buttons */
+        .btn-primary, .btn-danger, .btn-warning, .btn-info {
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover, .btn-danger:hover, .btn-warning:hover, .btn-info:hover {
+            transform: scale(1.05);
+            box-shadow: 0 3px 7px rgba(0, 0, 0, 0.15);
+        }
+
+        /* Table Header Styling */
+        .card-header {
+            background-color: #f8f9fc;
+            border-bottom: 1px solid #e3e6f0;
+        }
+
+        /* Improve Modal Appearance */
+        .modal-content {
+            border-radius: 10px;
+        }
+
+        .modal-header {
+            border-bottom: none;
+        }
+
+        .modal-footer {
+            border-top: none;
+        }
+
+        /* Add a subtle background pattern */
+        body {
+            background-size: cover;
+            background-attachment: fixed;
+        }
+
+        /* Style links in the table for better visibility */
+        .table a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        .table a:hover {
+            text-decoration: underline;
+        }
+
+        /* Animation for the page title */
+        .page-title {
+            animation: fadeInUp 1s ease;
+        }
+
+        /* Animated gradient for the add button */
+        .btn-primary.add-button {
+            background: linear-gradient(to right, #4CAF50, #2E7D32);
+            color: white;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            transition: all 0.3s ease;
+            border: none;
+        }
+
+        .btn-primary.add-button:hover {
+            background: linear-gradient(to right, #2E7D32, #4CAF50);
+            transform: scale(1.05);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Add animation to the table rows */
+        .table tbody tr {
+            animation: fadeIn 0.7s ease-in-out forwards;
+            opacity: 0;
+        }
+
+        .table tbody tr:nth-child(odd) {
+            animation-delay: 0.1s;
+        }
+
+        .table tbody tr:nth-child(even) {
+            animation-delay: 0.2s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Keyframe animation for fadeInUp (using Animate.css) */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translate3d(0, 20px, 0);
+            }
+
+            to {
+                opacity: 1;
+                transform: translate3d(0, 0, 0);
+            }
+        }
+    </style>
+
 </head>
 
 <body id="page-top">
@@ -28,42 +168,8 @@
     <!-- Page Wrapper -->
     <div id="wrapper">
 
-        <!-- Sidebar (Sama seperti di kode dashboard, pastikan menu sudah sesuai)-->
+        <!-- Sidebar -->
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
-
-<<<<<<< Updated upstream
-            {{-- <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="{{ route('admin.dashboard') }}">
-=======
-            <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center"
-                href="{{ route('admin.dashboard') }}">
->>>>>>> Stashed changes
-                <div class="sidebar-brand-icon rotate-n-15">
-                    <i class="fas fa-map-marked-alt"></i>
-                </div>
-                <div class="sidebar-brand-text mx-3">{{ config('app.name', 'Laravel') }}</div>
-            </a> --}}
-
-            {{-- <!-- Divider -->
-            <hr class="sidebar-divider my-0">
-
-            <!-- Nav Item - Dashboard -->
-            <li class="nav-item">
-                <a class="nav-link" href="{{ route('admin.dashboard') }}">
-                    <i class="fas fa-fw fa-tachometer-alt"></i>
-                    <span>Dashboard</span></a>
-            </li> --}}
-
-            {{-- <!-- Divider -->
-            <hr class="sidebar-divider">
-
-            <!-- Heading -->
-            <div class="sidebar-heading">
-                Menu
-            </div> --}}
-
-            <!-- Nav Items - Pages -->
             @include('admin.sidebar')
         </ul>
         <!-- End of Sidebar -->
@@ -74,7 +180,7 @@
             <!-- Main Content -->
             <div id="content">
 
-                <!-- Topbar (Sama seperti di kode dashboard) -->
+                <!-- Topbar -->
                 @include('admin.topbar')
                 <!-- End of Topbar -->
 
@@ -82,13 +188,13 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <div class="d-sm-flex align-items-center justify-content-between mb-4">
-                        <h1 class="h3 mb-0 text-gray-800">Manage Wilayahs</h1>
-                        <a href="{{ route('admin.wilayahs.create') }}" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm">
-                            <i class="fas fa-plus fa-sm text-white-50"></i> Tambah Wilayah Baru
-                        </a>
-                    </div>
+                    <h1 class="h3 mb-2 text-gray-800">Manage Wilayahs</h1>
                     <p class="mb-4">Kelola daftar wilayah Anda di sini.</p>
+
+                    <!-- Tombol Tambah Wilayah Baru -->
+                    <div class="mb-3">
+                        <a href="{{ route('admin.wilayahs.create') }}" class="btn btn-primary">Tambah Wilayah Baru</a>
+                    </div>
 
                     <!-- DataTales Example -->
                     <div class="card shadow mb-4">
@@ -103,9 +209,6 @@
                                 </div>
                             @endif
 
-                            {{-- <div class="mb-3">
-                                <a href="{{ route('admin.wilayahs.create') }}" class="btn btn-primary">Tambah Wilayah Baru</a>
-                            </div> --}}
 
                             <div class="table-responsive">
                                 @if ($wilayahs->isEmpty())
@@ -125,18 +228,12 @@
                                                     <td>{{ $loop->iteration }}</td>
                                                     <td>{{ $wilayah->nama }}</td>
                                                     <td>
-                                                        <div class="d-flex">
-                                                            <a href="{{ route('admin.wilayahs.edit', $wilayah->id) }}"
-                                                                class="btn btn-sm btn-warning mr-1">Edit</a>
-                                                            <form
-                                                                action="{{ route('admin.wilayahs.destroy', $wilayah->id) }}"
-                                                                method="POST" style="display: inline-block;">
-                                                                @csrf
-                                                                @method('DELETE')
-                                                                <button type="submit" class="btn btn-sm btn-danger"
-                                                                    onclick="return confirm('Apakah Anda yakin ingin menghapus wilayah ini?')">Hapus</button>
-                                                            </form>
-                                                        </div>
+                                                        <a href="{{ route('admin.wilayahs.edit', $wilayah->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                                                        <form action="{{ route('admin.wilayahs.destroy', $wilayah->id) }}" method="POST" style="display: inline-block;">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Apakah Anda yakin ingin menghapus wilayah ini?')">Hapus</button>
+                                                        </form>
                                                     </td>
                                                 </tr>
                                             @endforeach
@@ -153,7 +250,7 @@
             </div>
             <!-- End of Main Content -->
 
-            <!-- Footer (Sama seperti di kode dashboard) -->
+            <!-- Footer -->
             <footer class="sticky-footer bg-white">
                 <div class="container my-auto">
                     <div class="copyright text-center my-auto">
@@ -174,7 +271,7 @@
         <i class="fas fa-angle-up"></i>
     </a>
 
-    <!-- Logout Modal (Sama seperti di kode dashboard) -->
+    <!-- Logout Modal -->
     @include('admin.modal.logout')
 
     <!-- Bootstrap core JavaScript-->
