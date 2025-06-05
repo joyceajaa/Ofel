@@ -90,7 +90,6 @@
                                                     @endif
                                                 </td>
                                                 <td>
-                                                    <a href="{{ route('admin.abouts.show', $about->id) }}" class="btn btn-sm btn-info">Lihat</a>
                                                     <a href="{{ route('admin.abouts.edit', $about->id) }}" class="btn btn-sm btn-warning">Edit</a>
                                                     <form action="{{ route('admin.abouts.destroy', $about->id) }}" method="POST" style="display: inline-block;">
                                                         @csrf

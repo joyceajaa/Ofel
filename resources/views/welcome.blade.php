@@ -289,7 +289,7 @@
                     <div class="col-lg-6 d-flex flex-column justify-content-center">
                         <h2>About Ofel Kitchen</h2>
                         @if ($about)
-                        <p>{{ $about->description }}</p>
+                        <p>{{!! $about->description !!}}</p>
                         @else
                         <p>No About Us content available.</p>
                         @endif

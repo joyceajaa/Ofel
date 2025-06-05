@@ -84,7 +84,7 @@
           <div class="col-lg-6">
             <h3>{{ $about->title }}</h3>
             <p class="fst-italic">
-              {{ $about->description }}
+              {!! $about->description !!}
             </p>
           </div>
 

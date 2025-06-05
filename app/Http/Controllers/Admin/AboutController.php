@@ -37,28 +37,31 @@ class AboutController extends Controller
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
-{
-    $request->validate([
-        'title' => 'required',
-        'description' => 'required',
-        'image_path' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-    ]);
+    {
+        $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'image_path' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
 
-    $imagePath = null;
+        $imagePath = null;
 
-    if ($request->hasFile('image_path')) {
-        $imagePath = $request->file('image_path')->store('about-images', 'public');
+        if ($request->hasFile('image_path')) {
+            $imagePath = $request->file('image_path')->store('about-images', 'public');
+        }
+
+        // Ganti newline dengan <br>
+        $description = str_replace("\n", '<br>', $request->description);
+
+        About::create([
+            'title' => $request->title,
+            'description' => $description,
+            'image_path' => $imagePath,
+            'user_id' => auth()->id(),
+        ]);
+
+        return redirect()->route('admin.abouts.index')->with('success', 'About Us berhasil ditambahkan.');
     }
-
-    About::create([
-        'title' => $request->title,
-        'description' => $request->description,
-        'image_path' => $imagePath, // <---- PASTIKAN INI DISIMPAN
-        'user_id' => auth()->id(),   // Atau sesuai dengan kebutuhan Anda
-    ]);
-
-    return redirect()->route('admin.abouts.index')->with('success', 'About Us berhasil ditambahkan.');
-}
 
     /**
      * Display the specified resource.
@@ -80,31 +83,33 @@ class AboutController extends Controller
      * Update the specified resource in storage.
      */
     public function update(Request $request, About $about)
-{
-    $request->validate([
-        'title' => 'required',
-        'description' => 'required',
-        'image_path' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-    ]);
+    {
+        $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'image_path' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
 
-    $imagePath = $about->image_path;  // Gunakan path gambar yang sudah ada sebagai default
+        $imagePath = $about->image_path;
 
-    if ($request->hasFile('image_path')) {
-        // Hapus gambar lama jika ada
-        if ($about->image_path) {
-            Storage::delete('public/' . $about->image_path);
+        if ($request->hasFile('image_path')) {
+            if ($about->image_path) {
+                Storage::delete('public/' . $about->image_path);
+            }
+            $imagePath = $request->file('image_path')->store('about-images', 'public');
         }
-        $imagePath = $request->file('image_path')->store('about-images', 'public');
+
+        // Ganti newline dengan <br>
+        $description = str_replace("\n", '<br>', $request->description);
+
+        $about->update([
+            'title' => $request->title,
+            'description' => $description,
+            'image_path' => $imagePath,
+        ]);
+
+        return redirect()->route('admin.abouts.index')->with('success', 'About Us berhasil diupdate.');
     }
-
-    $about->update([
-        'title' => $request->title,
-        'description' => $request->description,
-        'image_path' => $imagePath,  // <---- PASTIKAN INI DISIMPAN
-    ]);
-
-    return redirect()->route('admin.abouts.index')->with('success', 'About Us berhasil diupdate.');
-}
 
     /**
      * Remove the specified resource from storage.
