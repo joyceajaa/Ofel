@@ -42,8 +42,6 @@ Route::prefix('user')->middleware('auth')->group(function () {
 Route::middleware('guest')->group(function () {
     Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
     Route::post('/login', [AuthController::class, 'login'])->name('login.post');
-    Route::get('/registrasi', [AuthController::class, 'showRegisterForm'])->name('register');
-    Route::post('/registrasi', [AuthController::class, 'register'])->name('register.post');
 });
 
 // == RUTE AUTENTIKASI (Logout) ==
