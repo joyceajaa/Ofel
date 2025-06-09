@@ -30,9 +30,24 @@
     <link href="{{ URL::asset('assets/css/main.css') }}" rel="stylesheet">
 
     <style>
-        .location-section ul {
-            list-style-type: disc;
-            padding-left: 20px;
+        .location-section .card {
+            border: 1px solid #eee;
+            border-radius: 8px;
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+
+        .location-section .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .location-section .card-title {
+            font-size: 1.2rem;
+            color: #333;
+        }
+
+        .location-section i {
+            color: #ffb03b; /* Warna oranye khas Ofel Kitchen */
         }
     </style>
 
@@ -68,15 +83,21 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <p>Berikut adalah daftar wilayah yang dapat dijangkau untuk pengantaran oleh Ofel Kitchen:</p>
-                        @if(isset($wilayahs) && count($wilayahs) > 0)
-                        <ul>
-                            @foreach($wilayahs as $wilayah)
-                            <li>{{ $wilayah->nama }}</li>
-                            @endforeach
-                        </ul>
-                        @else
-                        <p>Saat ini belum ada wilayah yang dapat dijangkau.</p>
-                        @endif
+                        <div class="row">
+                            @if(isset($wilayahs) && count($wilayahs) > 0)
+                                @foreach($wilayahs as $wilayah)
+                                    <div class="col-md-6 col-lg-4 mb-4">
+                                        <div class="card h-100">
+                                            <div class="card-body">
+                                                <h5 class="card-title"><i class="bi bi-geo-alt-fill me-2"></i>{{ $wilayah->nama }}</h5>
+                                            </div>
+                                        </div>
+                                    </div>
+                                @endforeach
+                            @else
+                                <p>Saat ini belum ada wilayah yang dapat dijangkau.</p>
+                            @endif
+                        </div>
                     </div>
                 </div>
             </div>
