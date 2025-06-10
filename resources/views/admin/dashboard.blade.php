@@ -161,7 +161,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <a href="{{ route('admin.location') }}" class="stretched-link"></a>
+                                        <a href="{{ route('admin.wilayahs.index') }}" class="stretched-link"></a>
                                     </div>
                                 </div>
 
@@ -179,7 +179,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        <a href="{{ route('admin.contact') }}" class="stretched-link"></a>
+                                        <a href="{{ route('admin.contacts.index') }}" class="stretched-link"></a>
                                     </div>
                                 </div>
                             </div>

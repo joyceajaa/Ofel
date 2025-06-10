@@ -26,7 +26,8 @@ Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 Route::get('/menu', [PublicMenuController::class, 'indexPublic'])->name('menu');
 Route::get('/menu/{menu}', [PublicMenuController::class, 'showPublic'])->name('menu.show');
 Route::get('/about', [AboutController::class, 'indexPublic'])->name('about');
-Route::get('/locationpublic', [LocationController::class, 'indexPublic'])->name('locations.indexPublic');
+// Route::get('/locationpublic', [LocationController::class, 'indexPublic'])->name('locations.indexPublic');
+Route::get('/locationpublic', [WilayahController::class, 'indexPublic'])->name('locations.indexPublic');
 Route::get('/feedback', [FeedbackController::class, 'indexPublic'])->name('feedback');
 Route::get('/contact', [ContactController::class, 'showPublic'])->name('contact');
 

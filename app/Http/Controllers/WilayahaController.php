@@ -2,26 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Location;
 use App\Models\Wilayah;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class WilayahController extends Controller
 {
-
-    public function indexPublic()
-    {
-        $locations = Location::all(); // Mengambil semua data lokasi
-        $wilayahs = Wilayah::all(); // atau query sesuai kebutuhan Anda
-        return view('wilayahs.index', compact('wilayahs'));
-    }
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
         $wilayahs = Wilayah::all();
-        return view('admin.wilayah.index', compact('wilayahs')); // Menampilkan view index dengan data locations
+        return view('admin.wilayah.index', compact('wilayahs'));
     }
 
     /**
