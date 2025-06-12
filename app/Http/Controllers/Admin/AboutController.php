@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admin; // Ini lokasi file nya
 
 use App\Http\Controllers\Controller;
 use App\Models\About;
@@ -10,11 +10,6 @@ use Illuminate\Support\Facades\Auth;
 
 class AboutController extends Controller
 {
-    public function indexPublic()
-    {
-        $about = About::first();
-        return view('about.index', compact('about'));
-    }
 
     /**
      * Display a listing of the resource.

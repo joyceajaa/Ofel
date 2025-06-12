@@ -79,6 +79,14 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     // CRUD About
     Route::resource('abouts', AboutController::class);
 
+    Route::get('/abouts', [AboutController::class, 'index'])->name('abouts.index');
+    Route::get('/abouts/create', [AboutController::class, 'create'])->name('abouts.create');
+    Route::post('/abouts', [AboutController::class, 'store'])->name('abouts.store');
+    Route::get('/abouts/{about}', [AboutController::class, 'show'])->name('abouts.show');
+    Route::get('/abouts/{about}/edit', [AboutController::class, 'edit'])->name('abouts.edit');
+    Route::put('/abouts/{about}', [AboutController::class, 'update'])->name('abouts.update');  // atau bisa juga menggunakan Route::patch
+    Route::delete('/abouts/{about}', [AboutController::class, 'destroy'])->name('abouts.destroy');
+
     // CRUD Wilayah
     Route::resource('wilayahs', WilayahController::class);
 
