@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\Admin; // Ini lokasi file nya
+namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\About;
@@ -10,18 +10,29 @@ use Illuminate\Support\Facades\Auth;
 
 class AboutController extends Controller
 {
-
     /**
-     * Display a listing of the resource.
+     * Admin listing of the resource (admin panel).
      */
     public function index()
     {
-        $about = About::first();
-        return view('admin.about.index', compact('about'));
+        // Untuk admin: tampilkan view admin (daftar about yang ada)
+        // Ambil semua atau pertama sesuai kebutuhan admin
+        $abouts = About::all();
+        return view('admin.about.index', compact('abouts'));
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Public facing about page.
+     */
+    public function indexPublic()
+    {
+        // Ambil satu konten about (misal pertama)
+        $about = About::first();
+        return view('about.index', compact('about'));
+    }
+
+    /**
+     * Show the form for creating a new resource (admin).
      */
     public function create()
     {
@@ -29,7 +40,7 @@ class AboutController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created resource in storage (admin).
      */
     public function store(Request $request)
     {
@@ -59,7 +70,7 @@ class AboutController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified resource (admin).
      */
     public function show(About $about)
     {
@@ -67,7 +78,7 @@ class AboutController extends Controller
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Show the form for editing the specified resource (admin).
      */
     public function edit(About $about)
     {
@@ -75,7 +86,7 @@ class AboutController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified resource in storage (admin).
      */
     public function update(Request $request, About $about)
     {
@@ -88,8 +99,9 @@ class AboutController extends Controller
         $imagePath = $about->image_path;
 
         if ($request->hasFile('image_path')) {
-            if ($about->image_path) {
-                Storage::delete('public/' . $about->image_path);
+            // hapus file lama (disk public)
+            if ($about->image_path && Storage::disk('public')->exists($about->image_path)) {
+                Storage::disk('public')->delete($about->image_path);
             }
             $imagePath = $request->file('image_path')->store('about-images', 'public');
         }
@@ -107,7 +119,7 @@ class AboutController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified resource from storage (admin).
      */
     public function destroy(About $about)
     {

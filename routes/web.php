@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\User\MenuController as UserMenuController;
@@ -14,54 +13,71 @@ use App\Http\Controllers\Admin\AboutController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\WilayahController;
 
-
 /*
 |--------------------------------------------------------------------------
 | Web Routes
 |--------------------------------------------------------------------------
 */
 
-// == RUTE PUBLIK ==
+/* ===========================
+   RUTE PUBLIK
+=========================== */
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
+
 Route::get('/menu', [PublicMenuController::class, 'indexPublic'])->name('menu');
 Route::get('/menu/{menu}', [PublicMenuController::class, 'showPublic'])->name('menu.show');
-Route::get('/about', [AboutController::class, 'indexPublic'])->name('about');
-// Route::get('/locationpublic', [LocationController::class, 'indexPublic'])->name('locations.indexPublic');
+
+// FIXED — gunakan method index (bukan indexPublic)
+Route::get('/about', [AboutController::class, 'index'])->name('about');
+
 Route::get('/locationpublic', [WilayahController::class, 'indexPublic'])->name('locations.indexPublic');
 Route::get('/feedback', [FeedbackController::class, 'indexPublic'])->name('feedback');
 Route::get('/contact', [ContactController::class, 'showPublic'])->name('contact');
 
 
-// == RUTE KHUSUS USER (Login) ==
+/* ===========================
+   RUTE USER (BUTUH LOGIN)
+=========================== */
 Route::prefix('user')->middleware('auth')->group(function () {
+
     Route::get('/menu', [UserMenuController::class, 'index'])->name('user.menu.index');
+
     Route::get('/contact', [ContactController::class, 'index'])->name('contact.user');
     Route::post('/contact', [ContactController::class, 'store']);
 });
 
-// == RUTE AUTENTIKASI (Untuk Guest / Tamu) ==
+
+/* ===========================
+   RUTE AUTENTIKASI (GUEST)
+=========================== */
 Route::middleware('guest')->group(function () {
     Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
     Route::post('/login', [AuthController::class, 'login'])->name('login.post');
 });
 
-// == RUTE AUTENTIKASI (Logout) ==
+
+/* ===========================
+   LOGOUT
+=========================== */
 Route::middleware('auth')->post('/logout', [AuthController::class, 'logout'])->name('logout');
 
 
-// == RUTE ADMIN ==
+/* ===========================
+   RUTE ADMIN
+=========================== */
 Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(function () {
 
-    // Halaman admin umum
+    // Dashboard admin
     Route::get('/dashboard', fn () => view('admin.dashboard'))->name('dashboard');
+
     Route::get('/about', [AdminController::class, 'about'])->name('about');
     Route::get('/location', [LocationController::class, 'index'])->name('location');
     Route::get('/contact', [AdminController::class, 'contact'])->name('contact');
 
-    // Feedback
+    // Feedback (CRUD)
     Route::resource('feedback', FeedbackController::class);
 
-    // CRUD Menu - DEFINISIKAN ROUTE SECARA EXPLISIT
+    // Menu CRUD
     Route::get('/menus', [AdminMenuController::class, 'index'])->name('menus.index');
     Route::get('/menus/create', [PublicMenuController::class, 'create'])->name('menus.create');
     Route::post('/menus', [PublicMenuController::class, 'store'])->name('menus.store');
@@ -70,30 +86,17 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::put('/menus/{menu}', [PublicMenuController::class, 'update'])->name('menus.update');
     Route::delete('/menus/{menu}', [PublicMenuController::class, 'destroy'])->name('menus.destroy');
 
-    // HAPUS ROUTE RESOURCE YANG TIDAK DIPERLUKAN
-    // Route::resource('menus', PublicMenuController::class)->except(['index', 'create', 'store', 'show', 'edit', 'update', 'destroy']);
-
-    // CRUD Lokasi
+    // Lokasi
     Route::resource('locations', LocationController::class);
 
-    // CRUD About
+    /* About (CRUD admin)
+       Resource ini otomatis menyediakan index, create, store, show, edit, update, destroy
+    */
     Route::resource('abouts', AboutController::class);
 
-    Route::get('/abouts', [AboutController::class, 'index'])->name('abouts.index');
-    Route::get('/abouts/create', [AboutController::class, 'create'])->name('abouts.create');
-    Route::post('/abouts', [AboutController::class, 'store'])->name('abouts.store');
-    Route::get('/abouts/{about}', [AboutController::class, 'show'])->name('abouts.show');
-    Route::get('/abouts/{about}/edit', [AboutController::class, 'edit'])->name('abouts.edit');
-    Route::put('/abouts/{about}', [AboutController::class, 'update'])->name('abouts.update');  // atau bisa juga menggunakan Route::patch
-    Route::delete('/abouts/{about}', [AboutController::class, 'destroy'])->name('abouts.destroy');
-
-    // CRUD Wilayah
+    // Wilayah
     Route::resource('wilayahs', WilayahController::class);
 
-    // CRUD Contact
+    // Contact Admin
     Route::resource('contacts', ContactController::class);
-    Route::prefix('admin')->group(function(){
-         Route::resource('contacts', ContactController::class);
-    });
-
 });
