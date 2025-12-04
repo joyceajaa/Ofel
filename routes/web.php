@@ -28,8 +28,7 @@ Route::get('/menu', [PublicMenuController::class, 'indexPublic'])->name('menu');
 Route::get('/menu/{menu}', [PublicMenuController::class, 'showPublic'])->name('menu.show');
 
 // FIXED — gunakan method index (bukan indexPublic)
-Route::get('/about', [AboutController::class, 'index'])->name('about');
-
+Route::get('/about', [AboutController::class, 'indexPublic'])->name('about');
 Route::get('/locationpublic', [WilayahController::class, 'indexPublic'])->name('locations.indexPublic');
 Route::get('/feedback', [FeedbackController::class, 'indexPublic'])->name('feedback');
 Route::get('/contact', [ContactController::class, 'showPublic'])->name('contact');

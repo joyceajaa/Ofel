@@ -14,12 +14,15 @@ class AboutController extends Controller
      * Admin listing of the resource (admin panel).
      */
     public function index()
-    {
-        // Untuk admin: tampilkan view admin (daftar about yang ada)
-        // Ambil semua atau pertama sesuai kebutuhan admin
-        $abouts = About::all();
-        return view('admin.about.index', compact('abouts'));
-    }
+{
+    // Ambil semua records untuk ditampilkan di table admin
+    $abouts = About::all();
+
+    // Ambil satu record utama (misal first) untuk keperluan view yang mencari $about
+    $about = About::first();
+
+    return view('admin.about.index', compact('abouts', 'about'));
+}
 
     /**
      * Public facing about page.
